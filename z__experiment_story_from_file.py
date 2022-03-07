@@ -80,7 +80,7 @@ with open('ascii_batman.txt','r') as file:
             s = line[line.find('=')+1:].strip()
             #print(s)
             m_drops = [ l.split(':') for l in s.split(',') if l ]
-            #print(m_drops)
+            print(m_drops)
 
 
 print(m_face)
@@ -92,7 +92,7 @@ answer = get_player_answer('af',10,5,warn+'\n')
 
 if answer == 'failed':
    # print("You failed to attack in time, so the monster did quick work of you. You're dead.")
-   text = "You failed to attack in time, so the monster did quick work of you. You're dead."
+   text = "You failed to attack in time, so the monster made quick work of you. You're dead."
    typewriter(text)
 
 elif answer=='f':
@@ -105,7 +105,7 @@ elif answer=='a':
     typewriter(text)
 
     #print("With a quick woosh, then and bam, you did flop and then a zap. The creature lies motionless at you feet. Congrats!")
-    text = "With a quick woosh, then and bam, you did flop and then a zap. The creature lies motionless at you feet. \nCongrats!"
+    text = "With a quick woosh, then bam, you did a flop and then a zap. The creature lies motionless at your feet. \nCongrats!"
     typewriter(text)
 
     # get random loot based on chances shuriken:8 -> 8 out of 10 to drop shuriken

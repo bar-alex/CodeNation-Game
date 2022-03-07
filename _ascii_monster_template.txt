@@ -18,8 +18,15 @@
 ##                **             *              **                ## 
 ####################################################################
 
-story=You are attacked by a strange creature that looks like a man resembling a mutated humanoid bat .. in spandex. \nHe spews some strange "goham" noises.
-warn=Luckly he tripped, so that gave you a minute, time to pull out the old fly swatter.
-atk=3
-def=4
-drops=bedroll:2,shuriken:8
+name = batman                                                   # the name, used in code - monster name
+encounter = You notice a strange person blah blah blah          # the encounter description 
+warn = Luckily he tripped,                                      # the warning text you get if you don't take action soon
+winning = You defeated the beast                                # text display when you killed the monster 
+loosing = The beast killed you                                  # text displaied when you were killed
+
+hp = 10                          # base hp for the monster
+atk = 3                          # base attack for the monster
+def = 4                          # base defence fro the monster
+chance = 5                       # chance of encountering the monster (out of 10)
+score = 3                        # the score you get for defeting him
+drops = bedroll:2, shuriken:8    # list of loot items it drops with what chance for each to drop (out of 10) - ex: 2 of 10 for shuriken to drop

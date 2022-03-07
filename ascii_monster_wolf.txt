@@ -27,3 +27,9 @@
 ##                                ;                     ##
 ##                                                      ##
 ##########################################################
+
+name = Wolf
+encounter =  "You encounter a wolf howling at the moonlight"
+warn = "the wolf growls at you as you try to get closer"
+winning = ' the wolf lets out piercing cry and dies '
+losing = ' the wolf tears at your throat and you bleed out in seconds '

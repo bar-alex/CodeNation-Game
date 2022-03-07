@@ -32,3 +32,18 @@
 ##   @@@@@@@@@@@@@@@@@@@@@@@@@@@;    |     ;@@@@@@@@@@@@@@@@@@@@@@@@@@       ##
 ##                                                                           ##
 ###############################################################################
+
+# plays random dialog string from list of dialog strings
+
+name = Vampire
+encounter = "You encounter a group of bats that turn into a vampire" 
+warn = "the vampire tries to lure you into a false sense of security"
+winning = "You chop off it's head and stuff it with salted garlic"
+losing = "the vampire starts sucking your blood and sending you into a trance"
+
+hp = 25                         
+atk = 5                    
+def = 5                         
+chance = 3                     
+score = 3                        
+drops = RustyCoin, 

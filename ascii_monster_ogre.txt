@@ -1,0 +1,44 @@
+#########################################################
+##                       _____                         ##
+##                    ,-'     `._                      ##
+##                  ,'           `.        ,-.         ##
+##                ,'               \       ),.\        ##
+##      ,.       /                  \     /(  \;       ##
+##     /'\\     ,o.        ,ooooo.   \  ,'  `-')       ##
+##     )) )`. d8P"Y8.    ,8P"""""Y8.  `'  .--"'        ##
+##    (`-'   `Y'  `Y8    dP       `'     /             ##
+##     `----.(   __ `    ,' ,---.       (              ##
+##            ),--.`.   (  ;,---.        )             ##
+##           / \O_,' )   \  \O_,'        |             ##
+##          ;  `-- ,'       `---'        |             ##
+##          |    -'         `.           |             ##
+##         _;    ,            )          :             ##
+##      _.'|     `.:._   ,.::" `..       |             ##
+##   --'   |   .'     """         `      |`.           ##
+##         |  :;      :   :     _.       |`.`.-'--.    ##
+##         |  ' .     :   :__.,'|/       |  \          ##
+##         `     \--.__.-'|_|_|-/        /   )         ##
+##          \     \_   `--^"__,'        ,    |         ##
+##    -hrr- ;  `    `--^---'          ,'     |         ##
+##           \  `                    /      /          ##
+##            \   `    _ _          /                  ##
+##             \           `       /                   ##
+##              \           '    ,'                    ##
+##               `.       ,   _,'                      ##
+##                 `-.___.---'                         ##
+##                                                     ##
+#########################################################
+
+name = ogre
+title = The deceptively friendly Ogre
+encounter = "The smiling ogre lazily sits on the ground"
+# plays random dialog string from list of dialog strings
+winning = "the snake lunges at you, and you slice it in half and chop off it's head"
+losing = "the snake eats you whole"
+
+hp = 10
+atk = 3
+def = 3
+chance =
+score =
+drops = 

@@ -1,25 +1,248 @@
 
- 
-# print("hello")
 
-# print("hello")
-# print("olleh")
-# print("hello")
+# The Warrior King of Tristram is very old & close to death. He has instructed all warriors to prove their strength by bringing back the head of each monster including that of the largest Dragon in the Tristram Kingdom, if you complete this task you will become the new King of Tristram.
+# "Your name" has defeated all of the monsters in the land of Tristram!
+# The First King of Tristram celebrates your victory in front of the Tristram Castle in a special Coronation Ceremony! You are now the new King!
 
-# player = {
-#     "name": "enter name",
-#     'life': 10,
-#     'weapon': "none"
-# }
-# enemy = {
-#     "goblin",
-#     "troll",
-#     "dragon",
-# }
+# template for the monster entity
+# monster = {
+#     'name' : 'Ogre',
+#     'description' : 'ogre description',
+#     'text_encounter' : 'you see a huge looking mean monster',
+#     'text_warn' : 'the ogre turns around and sees you. he rushes to eat you', 
+#     'hp' : 10,
+#     'atk' : 3,
+#     'def' : 4,
+#     'chance_to_spwn' : 6,
+#     'drop_list' : [],
+#     }
+
+from hashlib import new
 
 
-# if 'x' in 'abxcd': print('yes')
-# else: print('no')
+def warrior_king_of_tristram():
 
-# if 27 in [34,65,67,27]: print('yes')
-# else: print('no')
+    monster_file_stem = 'ascii_monster_'
+    event_file_stem   = 'ascii_event_'
+
+    player_data = {
+        'name' : "",
+        'hp' : 0,
+        'atk' : 5,
+        'def' : 5,
+        'lives' : 1,                # potions of revival
+        'weapon' : 0,
+        'armor' : 0,
+        'items' : [],               # list of owned items
+        'killed_monsters' : [],     # list of killed monsters
+        'score' : 0,                # keeps score of the player
+    }
+
+    monsters = []   # list of dictionaries
+    events = []     # list of events
+    loot_items = []
+
+
+    # reads a keypress from the buffer if theres one there, otherwise returns 0
+    def inkey():
+        import msvcrt
+        if not msvcrt.kbhit(): return 0         # nothing in beyboard buffer to be read
+        key = msvcrt.getch()
+        if ord(key) == 0: key = msvcrt.getch()  # special chars
+        if ord(key) == 3: exit()                # because getch prevents normal ctrl+c
+        return ord(key)
+
+
+    # delay can be changed, can have 3 x delay on space, can have random (1 in 5) 3 x delay while writing the text
+    # unsing inkey, i could implement a printall with space/esc (after space clear buffer)
+    def typewriter( text, delay=0.01, newline=True, space_breaks=True, random_breaks=True, rush_on_enter_or_space=True ):
+        from time import sleep
+        from random import randint
+        should_break = False
+        rush_through = False
+        for char in text:
+            print(char, end='', flush=True)
+            if rush_on_enter_or_space and inkey() in [32,13]: 
+                rush_through = True
+            if not rush_through:
+                sleep(delay)
+                if random_breaks:
+                    should_break = randint(1,5)==3
+                if (char==' ' and space_breaks) or should_break: 
+                    for _ in range(4): sleep(delay)
+        if newline: print(flush=True)
+
+    
+    # rolls a dice and returns a value between 1 and faces (defaults to 6)
+    def dice_roll(faces = 6):
+        from random import randint
+        return randint(1,faces)
+
+
+    # answer must be from answer_list, will return 'failed' if no answer was given
+    def get_answer(answer_list, answer_time=0, warn_time=0, warn_text=''):
+        tick = 0.1
+        tick_answer = answer_time/tick
+        tick_warn = warn_time/tick
+        tick_count = 0
+        from time import sleep 
+        while answer_time==0 or tick_count<tick_answer:
+            sleep(0.1)
+            tick_count += 1
+            answer = inkey()    
+            #if o got allowed answer the return char
+            if chr(answer) in answer_list:
+                return chr(answer)
+            elif warn_time and warn_text and tick_count == tick_warn:
+                typewriter(warn_text,delay=0.01)
+            elif answer_time and tick_count == tick_answer:
+                return 'failed'
+# player has 10 seconds to choose an action before something happens.
+
+    # will load the monstrs from the text files into the monsters[] list
+    def load_files(file_stem,calable_func,dest_list):
+        from os import listdir, getcwd
+        from os.path import isfile, join
+
+        #file_stem = monster_file_stem
+        curent_dir = getcwd()
+        #print( listdir(curent_dir) )
+        onlyfiles = [f for f in listdir(curent_dir) if isfile(join(curent_dir, f)) and f[:len(file_stem)].lower()==file_stem]
+        #print(onlyfiles)
+        for file in onlyfiles:
+            # print(file)
+            calable_func(file, dest_list)  # load_monster_ascii or load_event_ascii
+
+
+    # validates the monster read from file, that has all the necesary fields
+    # todo: create the validation method
+    def validate_monster_item( monster_dict, display_message = True ):
+        #print('todo: validate_monster_item()')
+        #if monster_dict['name']
+        return True 
+
+
+    # goes through the lines of an ascii file (ascii_monster_<>.txt or ascii_event_<>.txt) and
+    # creates a dictionary with everything inside (ascii, list of drops, key/value pairs)
+    # and that dictionary is validated and added tot the list passed as parameter (monsters or events)
+    def process_ascii(file_name, dest_list):
+        print(f"dbg:process_ascii ~ file_name = '{file_name}'")
+        with open(file_name,'r') as file:
+            item_read = {}     # =dict()
+            ascii_img = ""
+            for line in file.readlines():
+                line = line.rstrip()        # removes \n
+
+                if line[:2] == '##':        # collects the lines for the ascii image
+                    ascii_img += line + '\n'
+
+                elif line[:1] == '#':       # the line is a comment, ignore it
+                    None
+
+                elif line.find('='):            # if the line is a key = value pair
+                    dict_key = line[:line.find('=')].strip().lower()
+                    
+                    if dict_key == 'drops':     # if it's the 'drops' line, builds a list of lists'
+                        s = line[line.find('=')+1:].strip()
+                        dict_value = [ l.split(':') for l in s.split(',') if l ]
+                    
+                    else:                       # just the normal value for it
+                        dict_value = line[line.find('=')+1:].strip()
+
+                        if dict_key in ('hp','atk','def','score_point','modifier','cooldown'):
+                            if dict_value.strip():
+                                dict_value = int( dict_value.strip() )
+                            else:
+                                dict_value = 0
+
+                    #print(f'dict key : value = {dict_key} : {dict_value}')   # debug
+                    item_read[dict_key] = dict_value                        # adds the new key/value to dictionary
+
+                else:
+                    if line: print('err in process_ascii: shouldnt run, line is "{line}"')
+                
+            # for debug purposes
+            item_read['dbg_filename'] = file_name
+
+            # validate the required fields are in there
+            if validate_monster_item(item_read):
+                dest_list.append(item_read)
+            
+
+
+
+
+
+
+
+
+    ## loads everything from files
+    def game_setup():
+
+        # load monsters from files
+        load_files(monster_file_stem, process_ascii, monsters)
+        # load events from files
+        load_files(event_file_stem, process_ascii, events)
+        # load items in list
+        # todo: load items in a list
+        # load flavor strings (foud youself into a clearing, departing the lcerang, etc)
+        # todo: load flavor string
+
+        print(f'\n\n\nMonsters: {monsters}')
+        #print(f'\n\n\nEvents: {events}')
+
+
+
+    ## the game starts, initializes the player
+    ## on restart it won't ask for name anymore     //# todo: the restart game feature
+    def game_start( restart = False ):
+        # reset plpaer data
+        player_data = {
+            'name' : "",
+            'hp' : 0,
+            'atk' : 5,
+            'def' : 5,
+            'lives' : 1,                # potions of revival
+            'weapon' : 0,
+            'armor' : 0,
+            'items' : [],               # list of owned items - list of dictionaries
+            'killed_monsters' : [],     # list of killed monsters (just their names)
+            'score' : 0,                # keeps score of the player
+        }
+
+
+
+    ######################################################################
+    ##  here, the application starts
+    ######################################################################
+
+    game_setup()
+
+    #game_start()
+
+    #my_list = []
+    #process_ascii('ascii_monster_wolf.txt',my_list)
+    #print( my_list )
+    #print( my_list[0].get('name',None) )
+
+
+
+
+
+
+# monster = {
+#     'name' : 'Ogre',
+#     'description' : 'ogre description',
+#     'text_encounter' : 'you see a huge looking mean monster',
+#     'text_warn' : 'the ogre turns around and sees you. he rushes to eat you', 
+#     'hp' : 10,
+#     'atk' : 3,
+#     'def' : 4,
+#     'chance_to_spwn' : 6,
+#     'drop_list' : [],
+#     }
+
+    # dragon 1 spawn.. 1 in 10 chance.
+
+
+warrior_king_of_tristram()

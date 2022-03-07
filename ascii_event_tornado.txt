@@ -1,0 +1,10 @@
+story = "You have been whipped up high into the heavens above by a random Tornado. A"
+chance_event = 3 
+action1 = "Climb down the well"
+action2 = "there is no second choice for this, you have to wait out the storm"
+chance_effect = 8
+affected_stat = HP
+modifier = 10
+drops = Rusty Coin:2, 
+drop_text1 = "At the bottom of the well you have found a Lucky Charm"
+drop_text2 = "???"

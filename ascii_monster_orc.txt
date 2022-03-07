@@ -1,0 +1,12 @@
+name = Orc
+encounter =  
+warn = 
+winning = 
+losing = 
+
+hp =                          
+atk =                     
+def =                          
+chance =                      
+score =                         
+drops = 

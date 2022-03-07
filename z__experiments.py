@@ -67,15 +67,15 @@ def blink(number,progressive_wait=False,random=False):
          elif progressive_wait: blink_once(x+1)
          else: blink_once()
 
-print('\033[?25l', end="")  # try to hide blinking cursor // works
-print('\nthree blinks:')
-blink(3)
-print('\ndegrading blink:')
-blink(5,True)
-print('\nrandom blink:')
-blink(5,10,True)
-print('\033[?25h', end="")  # curn cursor back on
-print('\n')
+# print('\033[?25l', end="")  # try to hide blinking cursor // works
+# print('\nthree blinks:')
+# blink(3)
+# print('\ndegrading blink:')
+# blink(5,True)
+# print('\nrandom blink:')
+# blink(5,10,True)
+# print('\033[?25h', end="")  # curn cursor back on
+# print('\n')
 
 
 
@@ -224,8 +224,8 @@ def loading(bar=False):
             print(f"\r[{ '🌸'*(x) }{ '🍀'*(20-x) } {i+1}%]", end='', flush=True)
     print()
     
-loading()
-loading(True)
+# loading()
+# loading(True)
 
 
 
@@ -315,6 +315,10 @@ print('\n')
 
 with open('ascii_wolf.txt','r') as file:
     for line in file.readlines():
-        print(line, end='')
+        #text_line = '\033[1;9;0m' + line + '\033[0;0m'
+        #text_line = line.replace( '\\033[', '\033[' )
+        #print( text_line , end='')
+        #text_line = r+line
+        print( rf'{line}' , end='' )
 
 print('\n')
