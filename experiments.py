@@ -155,6 +155,14 @@ print(f"\n# 7  {'='*50}\n")
 # delay can be changed, can have 3 x delay on space, can have random (1 in 5) 3 x delay while writing the text
 # unsing inkey, i could implement a printall with space/esc (after space clear buffer)
 def typewriter( text, delay=0.01, newline=True, space_breaks=True, random_breaks=True, rush_on_enter_or_space=True ):
+    def inkey():
+        import msvcrt
+        if not msvcrt.kbhit(): return 0         # nothing in beyboard buffer to be read
+        key = msvcrt.getch()
+        if ord(key) == 0: key = msvcrt.getch()  # special chars
+        if ord(key) == 3: exit()                # because getch prevents normal ctrl+c
+        return ord(key)
+    
     from time import sleep
     from random import randint
     should_break = False
