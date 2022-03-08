@@ -28,8 +28,15 @@
 ##                                                      ##
 ##########################################################
 
-name = Wolf
-encounter =  "You encounter a wolf howling at the moonlight"
-warn = "the wolf growls at you as you try to get closer"
-winning = ' the wolf lets out piercing cry and dies '
-losing = ' the wolf tears at your throat and you bleed out in seconds '
+id            = mountain_wolf
+name          = Giant Mountain Wolf
+
+encounter     = You encounter a wolf howling at the moonlight
+warn          = The wolf growls at you as you try to get closer
+chance_event  = 
+drops         = tough_hide:3, dragon_scale:2, rusty_coin:10
+
+winning       = the wolf lets out a piercing cry then dies
+losing        = the wolf tears at your throat and you bleed out in seconds
+
+drops      = potion:2, steel_armor:3, steel_sword:3, medusa_head:2, teleporter:2, rusty_coin:8, dusty_lamp:8

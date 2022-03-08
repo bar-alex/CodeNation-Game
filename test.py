@@ -1,3 +1,89 @@
+player_data = {
+        'name' : "",
+        'hp' : 0,
+        'atk' : 5,
+        'def' : 5,
+        'lives' : 1,                # potions of revival
+        'weapon' : {},              # the weapon it has
+        'armor' : {},               # the armor it has
+        'items' : [],               # list of owned items (list of dicts)
+        'killed_monsters' : {},     # killed monsters { monster : count, }
+        'score' : 0,                # keeps score of the player
+        'flag_guarantee' : False,   # when True, next monster will be one you don't have
+}
+
+
+
+monster = {
+        'id' : "goblin",
+        'name' : "Goblin",
+        'encounter' : "You encounter a slimy green goblin",
+        'warn' : "The goblin sneaks over to you and steals one of your rusty coins! The fiend, not my coins!",
+        'winning' : "you slice the goblin in half and reclaim your lost item",
+        'losing' : "the goblin laughs as he steals all your items, and knocks you unconscious",
+        'hp' : 10,
+        'atk' : 3,
+        'def' : 3,
+        'chance' : 3,
+        'score' : 1,
+        'drops' : [],
+}
+
+
+
+# rolls a dice and returns a value between 1 and faces (defaults to 6)
+def dice_roll(faces = 6):
+        from random import randint
+        new_dice = randint(1,faces)
+        return new_dice
+# need to have return to store value of new_dice in new_dice
+# pass value/result from a function to a variable?
+# 
+
+# get player atk base + player weapon + dice
+# get monster def base + dice
+# compare player_atk > mon_def
+# monster hp = ( player_atk - monster dif )
+
+def player_attack(monster):
+        
+        dice = dice_roll(faces = 6)
+        player_atk = player_data['atk'] + dice 
+        if player_data['weapon'] and 'modifier' in player_data['weapon']: 
+                player_atk + player_data['weapon']['modifier']
+        
+        dice = dice_roll(faces = 6)
+        monster_def = monster['def'] + dice
+
+        monster_hit = player_atk - monster_def
+        
+        if monster_hit > 0: monster['hp'] -= monster_hit
+        if monster['hp'] < 0: monster['hp'] = 0
+
+        # what should we return?
+        return player_atk
+        # so the weapon adds to base atk
+        
+
+def monster_attack():
+        dice_roll(faces = 6),
+        monster_atk = monster['atk'],
+        player_def = player_data['def'],
+        monster_atk = monster_atk - player_def,
+        return monster_atk(),
+# player defense changes (dice roll) when monster rolls for his attack
+
+player_attack()
+
+print(monster_attack)
+        
+
+
+
+
+
+
+
 
 # print( "key=value"[:2] )
 
@@ -44,7 +130,7 @@
 # my_dict.update( {key: value} )
 
 # key = 'new_name'
-# value = 'Mathew'
+# value = 'Matthew'
 
 # my_dict.update( {key: value} )
 
@@ -94,13 +180,13 @@
 #     # if newline: print(flush=True)
 
 
-# typewriter('', 0.01)
+#pewriter('', 0.01)
 
 # typewriter()
 
         #   8_ball =  ["As I see it, yes.",
         #              "Ask again later.", 
-        #              "Better not tell you now.", 
+        #              "Better not tell youcounter now.", 
         #              "Cannot predict now.", 
         #              "Concentrate and ask again.",
         #              "Don’t count on it.", 
@@ -121,3 +207,13 @@
         #              "You may rely on it."]
 
 #typewriter( 5 , 0.01)
+
+
+dict_1 = {'A':1, 'B':2, 'C':3} # Values from dictionary 1
+dict_2 = {'B':4, 'C':5, 'D':6} # Values from dictionary 2
+a_counter = Counter(dict_1) # Dictionary 1 
+b_counter = Counter(dict_2) 
+add_dict = a_counter + b_counter
+dict_3 = dict(add_dict)
+print(dict_3)
+

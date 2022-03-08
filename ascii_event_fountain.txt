@@ -28,7 +28,7 @@
 id            = fountain
 name          = Exquisite Fountain
 
-story         = You have arrived on the land of a rich family, there is an attractive water fountain with suspiciously glinting objects
+story         = You have arrived on the land of a rich family, there is an attractive water fountain with suspiciously glinting objects.
 action        = Investigate the suspicious objects
 chance_event  = 3 
 
@@ -36,7 +36,7 @@ chance_effect =
 affected_stat = 
 modifier      = 
 
-drops         = 8ball:2, rusty coin:8
+drops         = 8ball:2, rusty_coin:8
 drop_text     = You opened the small shining box and received a @@.
 
 

@@ -1,7 +1,7 @@
 #========================================  this is an explanation
 # id =                # an id name, used in code, ex: magic_flute
 # name =              # nice name to be displaied at times, like: Magical Flute
-# description =       # descriotion that will be shown, ex: An extremly intricate flute that plays with tunes out of this world 
+# description =       # description that will be shown, ex: An extremly intricate flute that plays with tunes out of this world 
 # type =              # special, used in code, one of these: weapon, armor, potion, loot, junk
 # stat_effect =       # the stat that it will affect, if it affects a stat: HP, ATK, DEF
 # modifier =          # the amount it will increase/decrease teh stat with: 10, +3, -1
@@ -9,9 +9,13 @@
 # action_prompt =     # the text that the user will see and choose to execute the objects effect: Take a moment and play the flute
 # action_text =       # text to be displaied when the effect is succesfull: The birds have heard your song and gather around you
 # action_chance =     # what chance out of 10 will the effect have to go through: 3
-# action_failed =     # a list of funy text to be chosen from when the item fails to do its action - for the 8ball, separate texts by "|"
+# action_failed =     # a list of funny text to be chosen from when the item fails to do its action - for the 8ball, separate texts by "|"
 # cooldown =          # how often can it be used? once every how many clearings? ex: 3 - can be used again after the third clearing
 #========================================
+# list of IDs for monsters 
+# magic_flute, potion, steel_armor, steel_sword, medusa_head, teleporter, rusty_coin, dusty_lamp
+# list of IDs that are exclusive to events:
+# 8ball, bedroll, luckycharm
 
 #========================================  this is an example
 # id            = magic_flute
@@ -49,7 +53,7 @@ cooldown      =
 
 
 #========================================
-id            = 8bal
+id            = 8ball
 name          = Magical 8-ball
 description   = Strange energies converge around this magical 8-ball, it holds great power you're sure, but somehow you feel cheated.
 type          = loot
@@ -82,7 +86,7 @@ modifier      = +3
 #========================================
 id            = steel_sword
 name          = Steel Sword
-description   = The cod sensestion of this glorified butter knife gives you confidence like no other.
+description   = The cold sensestion of this glorified butter knife gives you confidence like no other.
 type          = weapon
 stat_effect   = ATK
 modifier      = +2
@@ -91,13 +95,13 @@ modifier      = +2
 #========================================
 id            = medusa_head
 name          = Gorgon's Head
-description   = This grotesque simbol of your masters achivements, might save your life someday. But boy, does it stink!
-type          = item
+description   = This grotesque symbol of your masters achivements, might save your life someday. But boy, does it stink!
+type          = loot
 stat_effect   = 
 modifier      = 
 action_chance = 10
 action_func   = apply_petrify
-action_prompt = You lift the head into the air and wistle the monster for attention.
+action_prompt = You lift the head into the air and whistle the monster for attention.
 action_text   = The creature's disgusted grimace will spoil the scenery forever.
 action_failed = I will not fail! (it never fails, chance is 10)
 cooldown      = 3
@@ -107,7 +111,7 @@ cooldown      = 3
 id            = teleporter
 name          = 'Porter Cube
 description   = A strange looking cube-shaped object. It's got some writing on the sides. Strangely enough, you can read it.
-type          = item
+type          = loot
 stat_effect   = 
 modifier      = 
 action_chance = 8
@@ -120,14 +124,14 @@ cooldown      = 2
 
 #========================================
 id            = bedroll
-name          = Bed Roll
+name          = Sleeping Bag
 description   = Sleeping arrangements on the go. At least it was, about 10 years ago.
-type          = item
+type          = loot
 stat_effect   = 
 modifier      = 
 action_chance = 5
 action_func   = apply_sleep
-action_prompt = You roll out your bet roll and make yourself confortable. \nIf the mosquitos will let you, you'll have some sleep tonight.
+action_prompt = You roll out your sleeping bag and make yourself confortable. \nIf the mosquitos will let you, you'll have some sleep tonight.
 action_text   = You are well rested and your heath is full. What else can you ask for?
 action_failed = A noise in the bushes awake you. You are attaked, get ready!
 cooldown      = 0

@@ -21,10 +21,8 @@
 ## some ascii art links
 ## https://textart.io/art/tag/house/1
 ## https://www.asciiart.eu/buildings-and-places/houses
+## https://textart.io/#
 
-
-from asyncore import loop
-from hashlib import new
 
 
 def warrior_king_of_tristram():
@@ -49,8 +47,8 @@ def warrior_king_of_tristram():
         'flag_guarantee' : False,   # when True, next monster will be one you don't have
     }
 
-    monsters = []   # list of dictionaries
-    events = []     # list of events
+    monsters   = []   # list of dictionaries
+    events     = []     # list of events
     loot_items = []
 
 

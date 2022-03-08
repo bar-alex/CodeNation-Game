@@ -25,10 +25,10 @@
 
 
 id            = lightning_storm
-name          = Menacing Lightning Storm
+name          = Electrifying Lightning Storm
 
-story         = Your journey has been interrupted by a lightning storm. Luckly, there's a well nearby.
-action        = Climb down the well. There is no second choice for this, you have to wait out the storm
+story         = Your journey has been interrupted by a lightning storm. Fortunately there is a well nearby.
+action        = Climb down the well.
 chance_event  = 3 
 
 chance_effect = 

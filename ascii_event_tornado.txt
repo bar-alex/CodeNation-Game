@@ -28,15 +28,15 @@
 id            = tornado
 name          = Serious Tornado
 
-story         = You have been whipped up high into the heavens above by a random Tornado.
-chance_event  = 3 
-action        = Brace for impact Dorothy!
+story         = You have been whipped up high into the heavens above by a random Tornado. \nYou have landed on the edge of a cliff. Unfortunately the cliff edge is unable to support your weight and you plunge to your death.
+chance_event  = 1 
+action        = 
 
-chance_effect = 8
+chance_effect = 1
 affected_stat = HP
-modifier      = -5
+modifier      = -100
 
-action_func   = apply_teleport
+# action_func   = apply_teleport
 
 drops         = 
 drop_text     = 

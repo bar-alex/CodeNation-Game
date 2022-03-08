@@ -24,15 +24,21 @@
 ##    \( `   <.,../`                                                   ##
 ##                                                                     ##
 #########################################################################
-name = Dragon
-encounter =  
-warn = 5
-winning = 
-losing = 
 
-hp = 25                         
-atk = 10                    
-def = 20                         
-chance = 1/10                     
-score = 9                         
-drops = 
+
+id           = dragon
+name         = Dragon
+
+encounter    = You have arrived at the base of a large volcano, a fire breathing dragon descends upon you.
+warn         = The dragon sees you and move in for the kill
+winning      = 
+loosing      = 
+
+hp           = 25
+atk          = 10
+def          = 20
+
+chance       = 1
+score        = 9
+
+drops        = dragon_head:10

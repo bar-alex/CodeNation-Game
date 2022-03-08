@@ -23,4 +23,4 @@ atk =
 def =
 chance =
 score =
-drops = 
+drops      = potion:2, steel_armor:3, steel_sword:3, medusa_head:2, teleporter:2, rusty_coin:8, dusty_lamp:8

@@ -16,6 +16,9 @@ encounter = ()
 # sleeping bag
 # lucky charm
 # 8ball
+# Loot that drops 
+
+# tough_hide, dragon_scale
 
 # teleport, 
 
@@ -57,7 +60,7 @@ item = {
 '8-Ball': 'Increase your chance of receiving loot & escaping.',
 'Lazer Gun': '???',
 'Monsters Head': 'One of the heads of the slain monsters',
-'Crown of Tristram': "The villiage chief/'s crown"
+'Crown of Tristram': "The village chief/'s crown"
 }
 
 # The Warrior King of Tristram is very old & close to death. He has instructed all warriors to prove their strength by bringing back the head of each monster including that of the largest Dragon in the Kingdom, if you complete this task you will become the new King of Tristram.
@@ -70,7 +73,7 @@ item = {
 # Possible dialogue lines for {monsters} and {character}
 
 # I'm a big scary monster, i'm going to eat you because you have awoken me from my slumber!
-# So you think you're tough then?, we'll soon see about that... {commence battle}
+# So you think you're tough then?, we'll soon see about that... {commence_battle}
 # Puny Human, You have ventured too far into my territory now you shall pay with your life!
 # Filthy man, i will drown you in the lake and wait until the bubbles stop! {inspect_backpack}
 # Futile creature, tearing your spine out will be no trouble for me...
@@ -83,13 +86,13 @@ item = {
 
 # First King of Tristram:
 # I am impressed with your combat skills, you truly are the strongest Warrior in all of Tristram".
-# It is time for me to bequeath my throne to you.
+# It's time to bequeath my throne to you.
 # First King of Tristram: You kneel down in front of the First King of Tristram and he transfers the crown and the title of king onto you.
 
 # Dialogue line for end battle {dragon_boss}
 
 # {character} knock, knock, hello is a dragon here, i wish to kill you and claim my prize!
-# {dragon_boss} who is the foolish man to disturb me {blows_fire} that is your first and only warning
+# {dragon_boss} who is the man foolish enough to disturb me, {blows_fire} that is your first and only warning
 # {character} You won't keep me from what i need to accomplish, enters door {start_battle}
 
 
