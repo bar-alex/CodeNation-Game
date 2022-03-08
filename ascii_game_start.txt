@@ -1,28 +1,30 @@
-   .......::::::::::::)..           .......................(::::::........
-      .:::::;;;;;;;;):::::::.... .           .......:::::::::::::<......
-          <  >>>                   ,.
-  .::..  ;   I;L\  /L\.  ..::..   /iL.           |         ..::::::::::::..
-        ;    II;L\/LLLL;         / I;L\    \     |     / /\_   
-             II;..LLLLLL\    _._/ I;:.L\     \   |   / _/J; \    
-      :     IIIIi;..LLLLL\__/   IIII:..L\____  \###/  /JJI:  \
-    ,;     ILIi;;;:...:LLL;\      IIIII;.LLLLL\#####/JJ II;   \
-   ;     I LLii;;;.:.. :LLL;\     III;;;::LLLLL\###/JJ IIII;   \_.
-  :     IIILiii;;::.... :LLL;|      ;;I;;::.:LLLLLL:;IJ IIIII;:   \__.
-           IIIII IIii;;::;..;\          ;;:::...LLLL;IJIII;;    :::   \
-:    ;    IIIIIIIIIii;;::.;..      _==|      ;..  :;IJIII;:::    ::    \
-    ;    ::::::::::::;;::..;  _==|   )__)  |                            \
- '  '"  "  ""'""'""  ""'"  '"    )_)  )___) ))  ""''"   ""'"  "'" "'"'"'  "'""
-        '""   ""^^       ^~   )___) )____))_)   ~~         ""^^^""  '  "  "~"
-' ^^            ^        _    )____)_____))__)\      ~^~~^           ^^"
-     '^^          ^~      \---__|____/|___|___-\\--        "~"~         "~"
-   ''    '^          ~"~   \   oo oo oo oo     /      ~"      '~       ""~"
-        ____   ^^^"~   ~~^^^^^^^^^^^^^^^^^^^^^^    ^~^            ^~^^^
-      /  o   \     ""'"  __          __ "'"''     '   ''~     ~""~"`    ""''
-    < ____     \"'"    /    \   "' /    \       _          _    "~    _
-          |     |     |  __  |    |  __  |    /   \      /   \       / |
-    '''   |_____|  '  |__||__| '' |__||__| ' |_____| '' |_____| ""  /_/
-         '''     ~^^^^      '"""^^'''''^        '''''''""        '''''^^""
-   ''          '^^           ~^^~          ~^ '      ~~      '  ^   ^^^^^^^^
+#########################################################################################
+##      .......::::::::::::)..           .......................(::::::........        ##
+##         .:::::;;;;;;;;):::::::.... .           .......:::::::::::::<......          ##
+##             <  >>>                   ,.                                             ##
+##     .::..  ;   I;L\  /L\.  ..::..   /iL.           |         ..::::::::::::..       ##
+##           ;    II;L\/LLLL;         / I;L\    \     |     / /\_                      ##
+##                II;..LLLLLL\    _._/ I;:.L\     \   |   / _/J; \                     ##
+##         :     IIIIi;..LLLLL\__/   IIII:..L\____  \###/  /JJI:  \                    ##
+##       ,;     ILIi;;;:...:LLL;\      IIIII;.LLLLL\#####/JJ II;   \                   ##
+##      ;     I LLii;;;.:.. :LLL;\     III;;;::LLLLL\###/JJ IIII;   \_.                ##
+##     :     IIILiii;;::.... :LLL;|      ;;I;;::.:LLLLLL:;IJ IIIII;:   \__.            ##
+##              IIIII IIii;;::;..;\          ;;:::...LLLL;IJIII;;    :::   \           ##
+##   :    ;    IIIIIIIIIii;;::.;..      _==|      ;..  :;IJIII;:::    ::    \          ##
+##       ;    ::::::::::::;;::..;  _==|   )__)  |                            \         ##
+##    '  '"  "  ""'""'""  ""'"  '"    )_)  )___) ))  ""''"   ""'"  "'" "'"'"'  "'""    ##
+##           '""   ""^^       ^~   )___) )____))_)   ~~         ""^^^""  '  "  "~"     ##
+##   ' ^^            ^        _    )____)_____))__)\      ~^~~^           ^^"          ##
+##        '^^          ^~      \---__|____/|___|___-\\--        "~"~         "~"       ##
+##      ''    '^          ~"~   \   oo oo oo oo     /      ~"      '~       ""~"       ##
+##           ____   ^^^"~   ~~^^^^^^^^^^^^^^^^^^^^^^    ^~^            ^~^^^           ##
+##         /  o   \     ""'"  __          __ "'"''     '   ''~     ~""~"`    ""''      ##
+##       < ____     \"'"    /    \   "' /    \       _          _    "~    _           ##
+##             |     |     |  __  |    |  __  |    /   \      /   \       / |          ##
+##       '''   |_____|  '  |__||__| '' |__||__| ' |_____| '' |_____| ""  /_/           ##
+##            '''     ~^^^^      '"""^^'''''^        '''''''""        '''''^^""        ##
+##      ''          '^^           ~^^~          ~^ '      ~~      '  ^   ^^^^^^^^      ##
+##                                                                                     ##
+#########################################################################################
 
-story_start = The First Warrior King of Tristram is very old & close to death. He has instructed all warriors in Tristram Kingdom to prove their strength by bringing back the head of each monster including that of the largest Dragon in the Kingdom, if you complete this task you will become the new King of Tristram.
-
+story = The First Warrior King of Tristram is very old & close to death. He has instructed all warriors in Tristram Kingdom to prove their strength by bringing back the head of each monster including that of the largest Dragon in the Kingdom, if you complete this task you will become the new King of Tristram.

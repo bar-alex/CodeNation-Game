@@ -34,22 +34,24 @@ def warrior_king_of_tristram():
 
     # the player record - hods everything about the player
     player_data = {
-        'name' : "",
-        'hp' : 0,
-        'atk' : 5,
-        'def' : 5,
-        'lives' : 1,                # potions of revival
-        'weapon' : {},              # the weapon it has
-        'armor' : {},               # the armor it has
-        'items' : [],               # list of owned items (list of dicts)
+        'name'      : "",
+        'hp'        : 30,
+        'atk'       : 5,
+        'def'       : 5,
+        'lives'     : 1,            # potions of revival
+        'weapon'    : {},           # the weapon it has - has the 'modifier' key
+        'armor'     : {},           # the armor it has - has the 'modifier' key
+        'items'     : [],           # list of owned items (list of dicts)
         'killed_monsters' : {},     # killed monsters { monster : count, }
-        'score' : 0,                # keeps score of the player
-        'flag_guarantee' : False,   # when True, next monster will be one you don't have
+        'score'     : 0,            # keeps score of the player
+        'flag_guarantee'  : False,  # when True, next monster will be one you don't have
     }
 
-    monsters   = []   # list of dictionaries
-    events     = []     # list of events
-    loot_items = []
+    monsters   = []     # list of dictionaries (dicts)
+    events     = []     # list of events (dicts)
+    loot_items = []     # list of items (dics)
+
+    highscore = []      # list of highscore (dicts) { name, value, date }
 
 
     # reads a keypress from the buffer if theres one there, otherwise returns 0
@@ -182,7 +184,7 @@ def warrior_king_of_tristram():
             # validate the required fields are in there
             if validate_monster_item(item_read):
                 dest_list.append(item_read)
-            
+
 
     # reads the ascii_loot_items.txt and build a list of dictionaries for every item, with its properties
     def process_ascii_loot(file_name,dest_list):
@@ -222,6 +224,35 @@ def warrior_king_of_tristram():
 
                 item_read[ dict_key ] = dict_value
 
+    
+    # prints ascii text given as a parameter - might use a typewriter or not // or maybe something even cooler
+    def print_ascii( text ):
+        #typewriter( text, )
+        print( text )
+
+
+    # prints the story text given as a parameter - used for all stories, most likely with a typewritter
+    def print_story( text ): 
+        typewriter( text, )
+
+    
+    # will print the game start ascii and the story
+    def print_game_start():
+        print("dbg: print_game_start()")
+        # todo: print game start story
+        # read from text file
+        # print ascii using "print_ascii(text)" and print the story using "print_story(text)" instead of  notmal print
+        
+
+
+    # will print the game end ascii and the story // difere
+    def print_game_end( player_won = False ):
+        print("dbg: print_game_end()")
+        # todo: print game over story
+        # read from text file -- depending on player_won variable you check read differemt files
+        # print ascii using "print_ascii(text)" and print the story using "print_story(text)" instead of notmal print
+
+
 
 
     ## loads everything from files
@@ -239,6 +270,7 @@ def warrior_king_of_tristram():
         # load flavor strings (foud youself into a clearing, departing the lcerang, etc)
         # todo: load flavor strings
 
+        # for debug
         from pprint import pprint
         print(f'\n\n\nItems: '+'='*70)
         pprint(loot_items)
@@ -251,30 +283,71 @@ def warrior_king_of_tristram():
 
     ## the game starts, initializes the player
     ## on restart it won't ask for name anymore     //# todo: the restart game feature
-    def game_start( restart = False ):
-        # reset plpaer data
+    def game_reset_player( player_name = 'Player' ):
+        # reset player data
         player_data = {
-            'name' : "",
-            'hp' : 0,
-            'atk' : 5,
-            'def' : 5,
-            'lives' : 1,                # potions of revival
-            'weapon' : 0,
-            'armor' : 0,
-            'items' : [],               # list of owned items - list of dictionaries
-            'killed_monsters' : [],     # list of killed monsters (just their names)
-            'score' : 0,                # keeps score of the player
+            'name'   : player_name,
+            'hp'     : 30,
+            'atk'    : 5,
+            'def'    : 5,
+            'lives'  : 1,             # potions of revival
+            'weapon' : {},
+            'armor'  : {},
+            'items'  : [],            # list of owned items - list of dictionaries
+            'killed_monsters' : [],   # list of killed monsters (just their names)
+            'score'  : 0,             # keeps score of the player
         }
 
+
+
+
+    def game_start_tile( monster_or_event = True ):
+        print("debug: game_start_tile()")
+        # todo: everythign happens here
+        # print ascii? and story (random?) for scenery
+        # if monster_or_event roll for a monster or for event, 
+        # then roll for which monster or which event to use
+        # action teh event or the monster
+        # afer that, if player HP > 0 then check options after the fight
+        # action option after the fight if any 
+        # exit function after the player cjose which way to go 
+        # (it goes back to the loop where it will run another game_start_tile)
+
+
+
+    # starts the game, prints the story and get on with the next tile in a loop
+    def game_start():
+        print('dbg: game_start()')
+
+        # todo: get player name
+        player_name = ''
+
+        # reste player data - the plaer record with items, stats and score
+        game_reset_player( player_name )
+
+        # print game start ascii and story
+        print_game_start()
+
+        # throw tiles at the player in a loop
+        while player_data['HP'] > 0 and player_data['lives'] > 0:
+            game_start_tile()
+        
+        # print game over ascii and story
+        print_game_end()
+
+        # todo asks the user if he'd like to start again ?
+        # it should be in a loop only for this purpose
 
 
     ######################################################################
     ##  here, the application starts
     ######################################################################
 
+    # loads all the data from the ascii files
     game_setup()
 
-    #game_start()
+    # starts the game
+    game_start()
 
     #my_list = []
     #process_ascii('ascii_monster_wolf.txt',my_list)

@@ -18,9 +18,9 @@ warn = "He just lays still and stares at you menacingly"
 winning = " the snake lunges at you, and you slice it in half and chop off it's head "
 losing = " the snake eats you whole "
 
-hp =  
-atk =
-def =
-chance =
-score =
+hp =  20
+atk = 4
+def = 7
+chance = 4
+score = 3
 drops      = potion:2, steel_armor:3, steel_sword:3, medusa_head:2, teleporter:2, rusty_coin:8, dusty_lamp:8

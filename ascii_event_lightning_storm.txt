@@ -35,5 +35,5 @@ chance_effect =
 affected_stat = 
 modifier      = 
 
-drops         = Rusty Coin:2, LuckyCharm:8
+drops         = rusty_coin:2, magic_flute:8
 drop_text     = At the bottom of the well you have found a @@

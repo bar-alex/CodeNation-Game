@@ -20,7 +20,7 @@
 ##                     \ ======================= /                         ##
 ##                         \SSSSSSSSSSSSSSSSS/                             ##
 ##                      ________\       /________                          ##
-##                     (=+=+ Whitney Dinsmore =+=)                         ##
+##                     (=+=+                  =+=)                         ##
 ##                      ~~~~~~~~~~~~~~~~~~~~~~~~~                          ##
 ##                                                                         ##
 #############################################################################
@@ -36,7 +36,7 @@ chance_effect =
 affected_stat = 
 modifier      = 
 
-drops         = 8ball:2, rusty_coin:8
+drops         = 8ball:8, rusty_coin:8
 drop_text     = You opened the small shining box and received a @@.
 
 

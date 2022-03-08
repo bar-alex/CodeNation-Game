@@ -1,10 +1,10 @@
 #========================================  this is an explanation
 # id =                # an id name, used in code, ex: magic_flute
-# name =              # nice name to be displaied at times, like: Magical Flute
-# description =       # description that will be shown, ex: An extremly intricate flute that plays with tunes out of this world 
+# name =              # nice name to be displayed at times, like: Magical Flute
+# description =       # description that will be shown, ex: An extremly intricate flute that plays tunes out of this world 
 # type =              # special, used in code, one of these: weapon, armor, potion, loot, junk
 # stat_effect =       # the stat that it will affect, if it affects a stat: HP, ATK, DEF
-# modifier =          # the amount it will increase/decrease teh stat with: 10, +3, -1
+# modifier =          # the amount it will increase/decrease the stat with: 10, +3, -1
 # action_func =       # used in code, the special action function that will be called with the item: sleep, teleport
 # action_prompt =     # the text that the user will see and choose to execute the objects effect: Take a moment and play the flute
 # action_text =       # text to be displaied when the effect is succesfull: The birds have heard your song and gather around you
@@ -12,23 +12,23 @@
 # action_failed =     # a list of funny text to be chosen from when the item fails to do its action - for the 8ball, separate texts by "|"
 # cooldown =          # how often can it be used? once every how many clearings? ex: 3 - can be used again after the third clearing
 #========================================
-# list of IDs for monsters 
+# list of loot IDs for monsters 
 # magic_flute, potion, steel_armor, steel_sword, medusa_head, teleporter, rusty_coin, dusty_lamp
-# list of IDs that are exclusive to events:
+# list of loot IDs that are exclusive to events:
 # 8ball, bedroll, luckycharm
 
 #========================================  this is an example
 # id            = magic_flute
 # name          = Magical Flute
-# description   = An extremly intricate flute that plays with tunes out of this world 
+# description   = An extremly intricate flute that plays otherworldly melodies. 
 # type          = loot
 # stat_effect   = 
 # modifier      = 
 # action_func   = play_flute
-# action_prompt = Take a moment and play the flute
-# action_text   = The birds have heard your song and gather around you
+# action_prompt = Take a moment and play the flute.
+# action_text   = The birds have heard your song and gather around you.
 # action_chance = 3
-# action_failed = Your tongue gets stuck into the flute | You play, but the sounds are screem of terror | There was an attempt, but you don't want to talk about it
+# action_failed = Your tongue has stuck to the flute. | You play nothing but discordant notes. | There was an attempt, but you don't want to talk about it.
 # cooldown      = 2
 #========================================
 
@@ -55,7 +55,7 @@ cooldown      =
 #========================================
 id            = 8ball
 name          = Magical 8-ball
-description   = Strange energies converge around this magical 8-ball, it holds great power you're sure, but somehow you feel cheated.
+description   = Strange energies converge around this magical 8-ball, you're sure that it holds great power but somehow you feel cheated.
 type          = loot
 stat_effect   = 
 modifier      = 
@@ -63,21 +63,21 @@ action_chance = 2
 action_func   = apply_guarantee
 action_prompt = You rub the 8-ball and make a wish.
 action_text   = An image comes into your mind, you know for sure that fortune is with you.
-action_failed = You hear a voice into your head, but you don't understand it | That's for magical lamps you dummy, you think to yourself | There was an attempt, but you don't want to talk about it
+action_failed = You hear a voice into your head but you don't understand it. | That's for magical lamps you dummy, you think to yourself. | There was an attempt, but you don't want to talk about it.
 cooldown      = 2
 
 
 #========================================
 id            = potion
-name          = Potion of revival
-description   = The vial golds a clear fluid that shines with a hue of blue. This will come in handy. 
+name          = Angel's Tears (One Extra Life)
+description   = The vial holds a clear fluid that shines with a blue hue. This will come in handy. 
 type          = potion
 
 
 #========================================
 id            = steel_armor
-name          = Steel Armor
-description   = You feel reasured by the weight of this metal armor. If only it wouldn't squeak so much.
+name          = Steel Armour
+description   = You feel reassured by the weight of this metal armor. If only it wouldn't squeak so much.
 type          = armor
 stat_effect   = DEF
 modifier      = +3
@@ -86,7 +86,7 @@ modifier      = +3
 #========================================
 id            = steel_sword
 name          = Steel Sword
-description   = The cold sensestion of this glorified butter knife gives you confidence like no other.
+description   = The cold sensastion of this glorified butter knife gives you confidence like no other.
 type          = weapon
 stat_effect   = ATK
 modifier      = +2
@@ -95,7 +95,7 @@ modifier      = +2
 #========================================
 id            = medusa_head
 name          = Gorgon's Head
-description   = This grotesque symbol of your masters achivements, might save your life someday. But boy, does it stink!
+description   = This grotesque symbol of your masters achievements, might save your life someday. But boy, does it stink!
 type          = loot
 stat_effect   = 
 modifier      = 

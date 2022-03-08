@@ -38,7 +38,6 @@ def dice_roll(faces = 6):
         return new_dice
 # need to have return to store value of new_dice in new_dice
 # pass value/result from a function to a variable?
-# 
 
 # get player atk base + player weapon + dice
 # get monster def base + dice
@@ -60,8 +59,9 @@ def player_attack(monster):
         if monster_hit > 0: monster['hp'] -= monster_hit
         if monster['hp'] < 0: monster['hp'] = 0
 
+
         # what should we return?
-        return player_atk
+        return monster_hit()
         # so the weapon adds to base atk
         
 
