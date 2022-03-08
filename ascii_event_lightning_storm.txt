@@ -1,10 +1,39 @@
-story = "Your journey has been interrupted by a lightning storm."
-chance_event = 3 
-action1 = "Climb down the well"
-action2 = "there is no second choice for this, you have to wait out the storm"
-chance_effect = 8
-affected_stat = HP
-modifier = 10
-drops = Rusty Coin:2, LuckyCharm:8
-drop_text1 = "At the bottom of the well you have found a Lucky Charm"
-drop_text2 = "???"
+########################################################################
+##                                   GOD                              ##
+##              *      .            dZZZZZ,       .          *        ##
+##                                 dZZZZ  ZZ,                         ##
+##     *         .         ,AZZZZZZZZZZZ  `ZZ,_          *            ##
+##                    ,ZZZZZZV'      ZZZZ   `Z,`\                     ##
+##                  ,ZZZ    ZZ   .    ZZZZ   `V                       ##
+##        *      ZZZZV'     ZZ         ZZZZ    \_              .      ##
+##.              V   l   .   ZZ        ZZZZZZ          .              ##
+##               l    \       ZZ,     ZZZ  ZZZZZZ,                    ##
+##   .          /            ZZ l    ZZZ    ZZZ `Z,                   ##
+##                          ZZ  l   ZZZ     Z Z, `Z,            *     ##
+##                .        ZZ      ZZZ      Z  Z, `l                  ##
+##                         Z        ZZ      V  `Z   \                 ##
+##                         V        ZZC     l   V                     ##
+##           Z             l        V ZR        l      .              ##
+##            \             \       l  ZA                             ##
+##                            \         C          C                  ##
+##                                  \   K   /    /             K      ##
+##                          A    \   \  |  /  /              /        ##
+##                           \        \\|/ /  /                       ##
+##   __________________________________\|/_________________________   ##
+##                                                                    ##
+########################################################################
+
+
+id            = lightning_storm
+name          = Menacing Lightning Storm
+
+story         = Your journey has been interrupted by a lightning storm. Luckly, there's a well nearby.
+action        = Climb down the well. There is no second choice for this, you have to wait out the storm
+chance_event  = 3 
+
+chance_effect = 
+affected_stat = 
+modifier      = 
+
+drops         = Rusty Coin:2, LuckyCharm:8
+drop_text     = At the bottom of the well you have found a @@

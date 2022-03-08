@@ -17,25 +17,36 @@
 #     'drop_list' : [],
 #     }
 
+
+## some ascii art links
+## https://textart.io/art/tag/house/1
+## https://www.asciiart.eu/buildings-and-places/houses
+
+
+from asyncore import loop
 from hashlib import new
 
 
 def warrior_king_of_tristram():
 
-    monster_file_stem = 'ascii_monster_'
-    event_file_stem   = 'ascii_event_'
+    # some config data
+    monster_file_stem = 'ascii_monster_'        # how all the moster files start
+    event_file_stem   = 'ascii_event_'          # how all the events files start
+    items_ascii_file  = 'ascii_loot_items.txt'  # holds all the items
 
+    # the player record - hods everything about the player
     player_data = {
         'name' : "",
         'hp' : 0,
         'atk' : 5,
         'def' : 5,
         'lives' : 1,                # potions of revival
-        'weapon' : 0,
-        'armor' : 0,
-        'items' : [],               # list of owned items
-        'killed_monsters' : [],     # list of killed monsters
+        'weapon' : {},              # the weapon it has
+        'armor' : {},               # the armor it has
+        'items' : [],               # list of owned items (list of dicts)
+        'killed_monsters' : {},     # killed monsters { monster : count, }
         'score' : 0,                # keeps score of the player
+        'flag_guarantee' : False,   # when True, next monster will be one you don't have
     }
 
     monsters = []   # list of dictionaries
@@ -97,7 +108,7 @@ def warrior_king_of_tristram():
                 typewriter(warn_text,delay=0.01)
             elif answer_time and tick_count == tick_answer:
                 return 'failed'
-# player has 10 seconds to choose an action before something happens.
+
 
     # will load the monstrs from the text files into the monsters[] list
     def load_files(file_stem,calable_func,dest_list):
@@ -122,6 +133,12 @@ def warrior_king_of_tristram():
         return True 
 
 
+    # validates if the item to be added has the required properties to work with the game
+    def validate_loot_item( items_dict, display_message = True ):
+        #print('todo: validate_monster_item()')
+        return True
+
+
     # goes through the lines of an ascii file (ascii_monster_<>.txt or ascii_event_<>.txt) and
     # creates a dictionary with everything inside (ascii, list of drops, key/value pairs)
     # and that dictionary is validated and added tot the list passed as parameter (monsters or events)
@@ -137,7 +154,7 @@ def warrior_king_of_tristram():
                     ascii_img += line + '\n'
 
                 elif line[:1] == '#':       # the line is a comment, ignore it
-                    None
+                    continue
 
                 elif line.find('='):            # if the line is a key = value pair
                     dict_key = line[:line.find('=')].strip().lower()
@@ -169,27 +186,68 @@ def warrior_king_of_tristram():
                 dest_list.append(item_read)
             
 
+    # reads the ascii_loot_items.txt and build a list of dictionaries for every item, with its properties
+    def process_ascii_loot(file_name,dest_list):
+        with open(file_name,'r') as file:
+            # will go line by line, when it encounters 'id' (its a new object) it will add the 'item_read' dict to the 'dest_list' 
+            # if item_read['id'] its not empty, then creates a new 'item_read' and adds the 'id' property to it
+            item_read = {}     # =dict()
+            for line in file.readlines():
+                line = line.strip()        # removes \n
 
+                if line[:1] == '#': continue        # skip over comments
 
+                # get the key / value pair
+                dict_key    = line[:line.find('=')].strip().lower()
+                dict_value  = line[line.find('=')+1:].strip()
 
+                # if dict_key is 'id' and previous 'item_read[id]' has value, 
+                # it means 'item_read' is complete, so adds it to the list
+                if dict_key == 'id' and 'id' in item_read and item_read['id']:   # if 1st or 2nd are False it won't eval the 3rd
+                    # validates that all required fields are there
+                    if validate_loot_item(item_read): 
+                        dest_list.append(item_read)
+                    item_read = {}
 
+                if not dict_value: continue         # skipt the rest if value is empty
+
+                # some values (with strings) needs to be turned into lists
+                if '|' in dict_value:
+                    dict_value = [l.strip() for l in dict_value.split('|') if l]
+
+                # needs numbers for these
+                if dict_key in ('modifier','action_chance','cooldown'):
+                    if dict_value.strip():
+                        dict_value = int( dict_value.strip() )
+                    else:
+                        dict_value = 0
+
+                item_read[ dict_key ] = dict_value
 
 
 
     ## loads everything from files
     def game_setup():
 
+        # load items in list -- validate_monster will check the items are in the list
+        process_ascii_loot(items_ascii_file, loot_items)
+
         # load monsters from files
         load_files(monster_file_stem, process_ascii, monsters)
+
         # load events from files
         load_files(event_file_stem, process_ascii, events)
-        # load items in list
-        # todo: load items in a list
-        # load flavor strings (foud youself into a clearing, departing the lcerang, etc)
-        # todo: load flavor string
 
-        print(f'\n\n\nMonsters: {monsters}')
-        #print(f'\n\n\nEvents: {events}')
+        # load flavor strings (foud youself into a clearing, departing the lcerang, etc)
+        # todo: load flavor strings
+
+        from pprint import pprint
+        print(f'\n\n\nItems: '+'='*70)
+        pprint(loot_items)
+        print(f'\n\n\nMonsters: '+'='*70)
+        pprint(monsters)
+        print(f'\n\n\nEvents: '+'='*70)
+        pprint(events)
 
 
 
@@ -227,22 +285,6 @@ def warrior_king_of_tristram():
 
 
 
-
-
-
-# monster = {
-#     'name' : 'Ogre',
-#     'description' : 'ogre description',
-#     'text_encounter' : 'you see a huge looking mean monster',
-#     'text_warn' : 'the ogre turns around and sees you. he rushes to eat you', 
-#     'hp' : 10,
-#     'atk' : 3,
-#     'def' : 4,
-#     'chance_to_spwn' : 6,
-#     'drop_list' : [],
-#     }
-
-    # dragon 1 spawn.. 1 in 10 chance.
 
 
 warrior_king_of_tristram()

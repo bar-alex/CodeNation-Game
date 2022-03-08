@@ -1,12 +1,33 @@
-# Abandoned Log Cabin
+###################################################################
+##                                                               ##
+##                                                   /\          ##
+##                              [ ]                 /  \  /\     ##
+##                      ________[_]________      /\/    \/  \    ##
+##             /\      /\        ______    \    /   /\/\  /\/\   ##
+##            /  \    //_\       \    /\    \  /\/\/    \/    \  ##
+##     /\    / /\/\  //___\       \__/  \    \/                  ##
+##    /  \  /\/    \//_____\       \ |[]|     \                  ##
+##   /\/\/\/       //_______\       \|__|      \                 ##
+##  /      \      /XXXXXXXXXX\                  \                ##
+##          \    /_I_II  I__I_\__________________\               ##
+##                 I_I|  I__I_____[]_|_[]_____I                  ##
+##                 I_II  I__I_____[]_|_[]_____I                  ##
+##                 I II__I  I     XXXXXXX     I                  ##
+##              ~~~~~"   "~~~~~~~~~~~~~~~~~~~~~~~~               ##
+##                                                               ##
+###################################################################
 
-story = "You have arrived at an abandoned log cabin"
-chance_event = 3 
-action1 = "Relax inside the abandoned log cabin"
-action2 = "Leave the area"
-chance_effect = 8
-affected_stat = HP
-modifier = 10
-drops = ???:2, ???:8
-drop_text1 = "You have decided to take a sleeping bag from the abandoned log cabin."
-drop_text2 = "You have opened the small shining box and received a rusty coin."
+
+id            = log_cabin
+name          = Abandoned Log Cabin
+
+story         = You have arrived at an abandoned log cabin
+chance_event  = 3 
+action        = Relax inside the abandoned log cabin
+
+chance_effect = 
+affected_stat = 
+modifier      = 
+
+drops         = bedroll:5
+drop_text     = You have decided to take a sleeping bag from the abandoned log cabin.

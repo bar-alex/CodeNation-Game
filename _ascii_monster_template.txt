@@ -18,7 +18,8 @@
 ##                **             *              **                ## 
 ####################################################################
 
-name = batman                                                   # the name, used in code - monster name
+id = batman                                                     # used in code, one word (could use snake_case)
+name = The Batman                                               # the name, used in code - monster name
 encounter = You notice a strange person blah blah blah          # the encounter description 
 warn = Luckily he tripped,                                      # the warning text you get if you don't take action soon
 winning = You defeated the beast                                # text display when you killed the monster 

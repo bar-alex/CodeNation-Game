@@ -1,15 +1,48 @@
-##
-##  a nice picture of the fountain
-##
+#############################################################################
+##                                                                         ##
+##                       .      .       .       .                          ##
+##   .   .       .          .      . .      .         .          .    .    ##
+##          .       .         .    .   .         .         .            .  ##
+##     .   .    .       .         . . .        .        .     .    .       ##
+##  .          .   .       .       . .      .        .  .              .   ##
+##       .  .    .  .       .     . .    .       . .      .   .        .   ##
+##  .   .       .    . .      .    . .   .      .     .          .     .   ##
+##     .            .    .     .   . .  .     .   .               .        ##
+##      .               .  .    .  . . .    .  .                 .         ##
+##                         . .  .  . . .  . .                              ##
+##                             . . . . . .                                 ##
+##                               . . . .                                   ##
+##                                I . I                                    ##
+##                  _______________III_______________                      ##
+##                 /    .       .       .       .    \                     ##
+##                ( ~~~ .  ~~~  .  ~~~  .  ~~~  . ~~~ )                    ##
+##                  \SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS/                      ##
+##                     \ ======================= /                         ##
+##                         \SSSSSSSSSSSSSSSSS/                             ##
+##                      ________\       /________                          ##
+##                     (=+=+ Whitney Dinsmore =+=)                         ##
+##                      ~~~~~~~~~~~~~~~~~~~~~~~~~                          ##
+##                                                                         ##
+#############################################################################
 
-story = "You have arrived on the land of a rich family, there is an attractive water fountain with suspiciously glinting objects"
-chance_event = 3 
-action = "Investigate the suspicious objects"
+
+id            = fountain
+name          = Exquisite Fountain
+
+story         = You have arrived on the land of a rich family, there is an attractive water fountain with suspiciously glinting objects
+chance_event  = 3 
+action        = Investigate the suspicious objects
+
 chance_effect = 8
 affected_stat = HP
-modifier = 10
-drops = 8ball:2, rusty coin:8
-drop_text1 = "You opened the small shining box and received a magic 8-ball."
-drop_text2 = "You opened the small shining box and received a rusty coin."
+modifier      = 10
+action_func   = apply_<func>
+
+drops         = 8ball:2, rusty coin:8
+drop_text     = You opened the small shining box and received: @@.
 
 
+
+# Some Notes: 
+@@ will be reaplced in code with the item's name
+resolution text ? -- for affecting the stat?

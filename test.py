@@ -1,6 +1,5 @@
 
-
-print( dict() )
+# print( "key=value"[:2] )
 
 #print( int('') )
 
@@ -69,6 +68,9 @@ print( dict() )
 # # sleep(2)
 # # print('luigi')
 
+# my_dict = {}
+# if False and my_dict['id']: print('yay') 
+# else: print('nay')
 
 # # delay can be changed, can have 3 x delay on space, can have random (1 in 5) 3 x delay while writing the text
 # # unsing inkey, i could implement a printall with space/esc (after space clear buffer)
@@ -96,26 +98,26 @@ print( dict() )
 
 # typewriter()
 
-          8_ball =  ["As I see it, yes.",
-                     "Ask again later.", 
-                     "Better not tell you now.", 
-                     "Cannot predict now.", 
-                     "Concentrate and ask again.",
-                     "Don’t count on it.", 
-                     "It is certain.", 
-                     "It is decidedly so.", 
-                     "Most likely.", 
-                     "My reply is no.", 
-                     "My sources say no.", 
-                     "Outlook not so good.", 
-                     "Outlook good.", 
-                     "Reply hazy", 
-                     "try again.", 
-                     "Signs point to yes.", 
-                     "Very doubtful.", 
-                     "Without a doubt.",
-                     "Yes", 
-                     "Yes definitely.", 
-                     "You may rely on it."]
+        #   8_ball =  ["As I see it, yes.",
+        #              "Ask again later.", 
+        #              "Better not tell you now.", 
+        #              "Cannot predict now.", 
+        #              "Concentrate and ask again.",
+        #              "Don’t count on it.", 
+        #              "It is certain.", 
+        #              "It is decidedly so.", 
+        #              "Most likely.", 
+        #              "My reply is no.", 
+        #              "My sources say no.", 
+        #              "Outlook not so good.", 
+        #              "Outlook good.", 
+        #              "Reply hazy", 
+        #              "try again.", 
+        #              "Signs point to yes.", 
+        #              "Very doubtful.", 
+        #              "Without a doubt.",
+        #              "Yes", 
+        #              "Yes definitely.", 
+        #              "You may rely on it."]
 
 #typewriter( 5 , 0.01)
