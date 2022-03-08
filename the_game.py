@@ -25,12 +25,19 @@
 
 
 
+
+
 def warrior_king_of_tristram():
 
     # some config data
-    monster_file_stem = 'ascii_monster_'        # how all the moster files start
-    event_file_stem   = 'ascii_event_'          # how all the events files start
-    items_ascii_file  = 'ascii_loot_items.txt'  # holds all the items
+    monster_file_stem  = 'ascii_monster_'        # how all the moster files start
+    event_file_stem    = 'ascii_event_'          # how all the events files start
+    items_ascii_file   = 'ascii_loot_items.txt'  # holds all the items
+    strings_ascii_file = 'ascii_strings.txt'     # holds the strings for encounters
+
+    chance_encounter_monster = 7        # 7 out of 10 to fight a monster
+    chance_encounter_event   = 5        # 5 out of 10 to have an event
+    chance_encounter_monster = 2        # 2 out of 2 to have nothing special in the encounter
 
     # the player record - hods everything about the player
     player_data = {
@@ -47,11 +54,12 @@ def warrior_king_of_tristram():
         'flag_guarantee'  : False,  # when True, next monster will be one you don't have
     }
 
-    monsters   = []     # list of dictionaries (dicts)
-    events     = []     # list of events (dicts)
-    loot_items = []     # list of items (dics)
+    monsters    = []     # list of dictionaries (dicts)
+    events      = []     # list of events (dicts)
+    loot_items  = []     # list of items (dics)
+    encounters  = []     # list of encounters strings 
 
-    highscore = []      # list of highscore (dicts) { name, value, date }
+    highscore   = []     # list of highscore (dicts) { name, value, date }
 
 
     # reads a keypress from the buffer if theres one there, otherwise returns 0
@@ -127,15 +135,21 @@ def warrior_king_of_tristram():
 
     # validates the monster read from file, that has all the necesary fields
     # todo: create the validation method
-    def validate_monster_item( monster_dict, display_message = True ):
+    def validate_monster_event_item( monster_event_dict, display_message = True ):
         #print('todo: validate_monster_item()')
         #if monster_dict['name']
+        # if its empty, you'll not add it
+        if not monster_event_dict: return False
+
         return True 
 
 
     # validates if the item to be added has the required properties to work with the game
+    # todo: validates the loot item before adding it to the list
     def validate_loot_item( items_dict, display_message = True ):
         #print('todo: validate_monster_item()')
+        if not items_dict: return False
+
         return True
 
 
@@ -148,15 +162,19 @@ def warrior_king_of_tristram():
             item_read = {}     # =dict()
             ascii_img = ""
             for line in file.readlines():
-                line = line.rstrip()        # removes \n
+                #line = line.strip()        # removes \n -- i do it lower where i read the key/value pair
 
-                if line[:2] == '##':        # collects the lines for the ascii image
-                    ascii_img += line + '\n'
+                if not line.strip(): 
+                    continue
 
                 elif line[:1] == '#':       # the line is a comment, ignore it
                     continue
 
-                elif line.find('='):            # if the line is a key = value pair
+                elif line[:2] == '##':        # collects the lines for the ascii image
+                    ascii_img += line
+
+                elif line.find('=') > 0:            # if the line is a key = value pair
+                    line = line.strip()
                     dict_key = line[:line.find('=')].strip().lower()
                     
                     if dict_key == 'drops':     # if it's the 'drops' line, builds a list of lists'
@@ -164,25 +182,30 @@ def warrior_king_of_tristram():
                         dict_value = [ l.split(':') for l in s.split(',') if l ]
                     
                     else:                       # just the normal value for it
-                        dict_value = line[line.find('=')+1:].strip()
+                        dict_value = line[line.find('=')+1:].strip().replace('\\n','\n')
 
                         if dict_key in ('hp','atk','def','score_point','modifier','cooldown'):
                             if dict_value.strip():
                                 dict_value = int( dict_value.strip() )
                             else:
                                 dict_value = 0
+                    
+                    # if not dict_key:
+                    #     print(f'hey, dict_key is empty {line}')
 
+                    #if not dict_key: breakpoint
                     #print(f'dict key : value = {dict_key} : {dict_value}')   # debug
                     item_read[dict_key] = dict_value                        # adds the new key/value to dictionary
-
+                # elif not line: continue
                 else:
-                    if line: print('err in process_ascii: shouldnt run, line is "{line}"')
+                    if line: print(f'err in process_ascii: shouldnt run, line is "{line}" ')
                 
+            # todo: remove this when everything works fine
             # for debug purposes
             item_read['dbg_filename'] = file_name
 
             # validate the required fields are in there
-            if validate_monster_item(item_read):
+            if validate_monster_event_item(item_read):
                 dest_list.append(item_read)
 
 
@@ -196,10 +219,11 @@ def warrior_king_of_tristram():
                 line = line.strip()        # removes \n
 
                 if line[:1] == '#': continue        # skip over comments
+                if line.find('=') <= 0: continue    # skip if not  key / value pair
 
                 # get the key / value pair
                 dict_key    = line[:line.find('=')].strip().lower()
-                dict_value  = line[line.find('=')+1:].strip()
+                dict_value  = line[line.find('=')+1:].strip().replace('\\n','\n')
 
                 # if dict_key is 'id' and previous 'item_read[id]' has value, 
                 # it means 'item_read' is complete, so adds it to the list
@@ -224,6 +248,32 @@ def warrior_king_of_tristram():
 
                 item_read[ dict_key ] = dict_value
 
+
+    # will lload all the strings from ascii_strings.txt into encounters
+    def process_ascii_strings( file_name ):
+        print("dbg: process_Ascii_loot")
+        # open the file
+        with open(file_name,'r') as file:
+            # read from the file line by line in a for loop
+            for line in file.readlines():
+                # if starts with '#' you don't need it, its a comment
+                if line[:1] == '#':       # the line is a comment, ignore it
+                    continue
+                elif not line:  # line==''
+                    continue
+                # encounter = a test that you want
+                elif line.find('=') > 0:
+                    # you're gonna strip the line - so you get rid of all end of flies and spaces from it
+                    line.strip()
+                    # break it into a key and value
+                    #dict_key = line[:line.find('=')].strip().lower()
+                    dict_value = line[line.find('=')+1:].strip().lower()
+                    # test you actualy have a string and is not empty
+                    if dict_value:
+                        # you're gonna add 'a text that you want' to th encounters[] list
+                        encounters.append( dict_value )
+
+
     
     # prints ascii text given as a parameter - might use a typewriter or not // or maybe something even cooler
     def print_ascii( text ):
@@ -236,22 +286,56 @@ def warrior_king_of_tristram():
         typewriter( text, )
 
     
+    # it will scan a file for an ascii afrt and a "story = value" 
+    # and then it will print the ascii art and the story
+    def print_ascii_and_story_from_file( file_name ):
+        #file_name = 'ascii_game_start.txt'
+        # todo: test file exists
+        ascii_text = ''
+        story = ''
+        with open(file_name,'r') as file:
+            for line in file.readlines():
+                line.strip()
+                if line[:2] == '##':        # collects the lines for the ascii image
+                    ascii_text += line 
+                elif line[:1] == '#':       # the line is a comment, ignore it
+                    continue
+                elif line.find('=') > 0:
+                    story = line[ line.find('=')+1:]        # everything after the '='
+                    story = story.strip()                   # strip leading and trailing spaces and new lines
+                    story = story.replace("\\n",'\n')       # unescapes new lines in the story string
+                else:
+                    if line: print(f'err in process_ascii: shouldnt run, line is "{line}"')
+
+        # print the ascii image
+        print_ascii( ascii_text )
+        
+        # print the story - typewritter
+        print_story( story )
+
+
+
     # will print the game start ascii and the story
     def print_game_start():
         print("dbg: print_game_start()")
-        # todo: print game start story
         # read from text file
         # print ascii using "print_ascii(text)" and print the story using "print_story(text)" instead of  notmal print
-        
+        print_ascii_and_story_from_file( 'ascii_game_start.txt' ) 
 
 
     # will print the game end ascii and the story // difere
     def print_game_end( player_won = False ):
         print("dbg: print_game_end()")
-        # todo: print game over story
         # read from text file -- depending on player_won variable you check read differemt files
         # print ascii using "print_ascii(text)" and print the story using "print_story(text)" instead of notmal print
+        if player_won: print_ascii_and_story_from_file( 'ascii_game_win.txt' ) 
+        else: print_ascii_and_story_from_file( 'ascii_game_loose.txt' ) 
 
+
+    def print_game_encounter():
+        print("dbg: print_game_enocunter()")
+        # todo: print the game encounter stroy (and ascii? maybe not)
+        # draw a chance string from encounters and print it using 'print_story()' instead of print()
 
 
 
@@ -268,8 +352,8 @@ def warrior_king_of_tristram():
         load_files(event_file_stem, process_ascii, events)
 
         # load flavor strings (foud youself into a clearing, departing the lcerang, etc)
-        # todo: load flavor strings
-
+        process_ascii_strings( strings_ascii_file )
+        
         # for debug
         from pprint import pprint
         print(f'\n\n\nItems: '+'='*70)
@@ -299,13 +383,37 @@ def warrior_king_of_tristram():
         }
 
 
+    # the player encounters a monster
+    def game_encounter_monster( monster_attack_first = False ):
+        print("dbg: game_encounter_monster()")
+        # todo: build the function
 
 
-    def game_start_tile( monster_or_event = True ):
+    # player encounters encounters a new event
+    def game_encouonter_event():
+        print("dbg: game_encouonter_event()")
+        # todo: build the function
+
+
+    # if theres no event or monster to encounter on this tile
+    def game_encounter_none():
+        print("dbg: game_encounter_none")
+        # todo: build the function
+
+
+    # player travel to a new tile (or teleported to a new tile)
+    def game_new_tile( monster_or_event = True ):
         print("debug: game_start_tile()")
         # todo: everythign happens here
         # print ascii? and story (random?) for scenery
+        print_game_encounter()
         # if monster_or_event roll for a monster or for event, 
+        if chance_encounter_monster >= dice_roll(10):
+            game_encounter_monster()
+        elif chance_encounter_event >= dice_roll(10): 
+            game_encouonter_event()
+        else: 
+            game_encounter_none()
         # then roll for which monster or which event to use
         # action teh event or the monster
         # afer that, if player HP > 0 then check options after the fight
@@ -327,10 +435,10 @@ def warrior_king_of_tristram():
 
         # print game start ascii and story
         print_game_start()
-
+        return 
         # throw tiles at the player in a loop
-        while player_data['HP'] > 0 and player_data['lives'] > 0:
-            game_start_tile()
+        while player_data['hp'] > 0 and player_data['lives'] > 0:
+            game_new_tile()
         
         # print game over ascii and story
         print_game_end()

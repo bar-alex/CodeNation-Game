@@ -19,9 +19,5 @@
 ##                                                          ##
 ##############################################################
 
-story_end = 
 # Dialog lines for coronation ceremony at the end of the game.
-
-First King of Tristram: I am impressed with your combat skills, you truly are the strongest Warrior in all of Tristram.
-First King of Tristram: It's time to bequeath my throne to you.
-your_character_name kneels down in front of the First King of Tristram and he transfers the crown and the title of king onto your_character_name.
+story = First King of Tristram: I am impressed with your combat skills, you truly are the strongest Warrior in all of Tristram.\nFirst King of Tristram: It's time to bequeath my throne to you. You kneel down in front of the First King of Tristram and he transfers the crown and the title of king onto you.

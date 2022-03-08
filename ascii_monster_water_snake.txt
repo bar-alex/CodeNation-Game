@@ -10,15 +10,15 @@
 ##                                                                               ##
 ###################################################################################
 
-name = water_snake
-title = The Ominous Water Snake
-encounter = "You come across a water snake, it hisses violently at you"
-warn = "He just lays still and stares at you menacingly"
+id = water_snake
+name = The Water Snake of considerable length.
+encounter = "You come across a water snake, it hisses violently at you."
+warn = "He just lays still and stares at you menacingly."
 # plays random dialog string from list of dialog strings
-winning = " the snake lunges at you, and you slice it in half and chop off it's head "
-losing = " the snake eats you whole "
+winning = "The water snake lunges at you. You slice it in half and then chop off its head just to make sure."
+losing = "The water snake completely wraps itself around you and slowly eats you for dinner."
 
-hp =  20
+hp =  15
 atk = 4
 def = 7
 chance = 4

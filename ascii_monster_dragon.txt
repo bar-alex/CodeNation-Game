@@ -25,14 +25,13 @@
 ##                                                                     ##
 #########################################################################
 
-
 id           = dragon
-name         = Dragon
+name         = The strongest dragon in all of Tristram.
 
 encounter    = You have arrived at the base of a large volcano, a fire breathing dragon descends upon you.
-warn         = The dragon sees you and move in for the kill
-winning      = 
-loosing      = 
+warn         = The Dragon sees you and move in for the kill.
+winning      = You thrust the blade of your Steel Sword completely inside the chest of the Dragon.
+loosing      = The Dragon grips you inside his mouth and exhales instantaneously transforming your body to ashes.
 
 hp           = 25
 atk          = 10

@@ -125,22 +125,22 @@ cooldown      = 2
 #========================================
 id            = bedroll
 name          = Sleeping Bag
-description   = Sleeping arrangements on the go. At least it was, about 10 years ago.
+description   = Fresh sleeping bag. At least it would have been fresh, about 10 years ago.
 type          = loot
 stat_effect   = 
 modifier      = 
 action_chance = 5
 action_func   = apply_sleep
-action_prompt = You roll out your sleeping bag and make yourself confortable. \nIf the mosquitos will let you, you'll have some sleep tonight.
-action_text   = You are well rested and your heath is full. What else can you ask for?
-action_failed = A noise in the bushes awake you. You are attaked, get ready!
+action_prompt = You roll out your sleeping bag and make yourself confortable. \nYou'll be able to sleep tonight but only if the mosquitos let you.
+action_text   = You are well rested and your heath is full. What else could you ask for?
+action_failed = A noise in the bushes wakes you. You have been ambushed, get ready!
 cooldown      = 0
 
 
 #========================================
 id            = rusty_coin
 name          = rusty coin
-description   = You got a few of these so far, in civilisation these would make you rich, probably.
+description   = You got a few of these so far, in you can find civilization you will be rich.
 type          = junk
 
 

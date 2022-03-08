@@ -65,13 +65,14 @@ def player_attack(monster):
         # so the weapon adds to base atk
         
 
-def monster_attack():
-        dice_roll(faces = 6),
-        monster_atk = monster['atk'],
-        player_def = player_data['def'],
-        monster_atk = monster_atk - player_def,
-        return monster_atk(),
-# player defense changes (dice roll) when monster rolls for his attack
+
+# def monster_attack():
+#         dice_roll(),
+#         monster_atk = monster['atk'],
+#         player_def = player_data['def'],
+#         monster_atk = monster_atk - player_def,
+#         return monster_atk(),
+# # player defense changes (dice roll) when monster rolls for his attack
 
 player_attack()
 

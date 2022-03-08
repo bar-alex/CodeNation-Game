@@ -28,4 +28,4 @@
 ##                                                ##
 ####################################################
 
-story_gameover = Game Over. Try again?
+story = Game Over. Try again?

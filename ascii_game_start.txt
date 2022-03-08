@@ -27,4 +27,4 @@
 ##                                                                                     ##
 #########################################################################################
 
-story = The First Warrior King of Tristram is very old & close to death. He has instructed all warriors in Tristram Kingdom to prove their strength by bringing back the head of each monster including that of the largest Dragon in the Kingdom, if you complete this task you will become the new King of Tristram.
+story = The First Warrior King of Tristram is very old & close to death. \nHe has instructed all warriors in Tristram Kingdom to prove their strength by bringing back the head of each monster including that of the largest Dragon in the Kingdom, if you complete this task you will become the new King of Tristram.

@@ -32,11 +32,12 @@
 ##                                                                                 ##
 #####################################################################################
 
+id         = goblin
 name       = Goblin
 encounter  = You encounter a slimy green goblin.
 warn       = The goblin sneaks over to you and steals one of your rusty coins. The fiend, it'll pay for that!
 winning    = You slice the goblin in half and reclaim your rusty coin.
-losing     = The goblin laughs as he steals all your items, and knocks you unconscious.
+losing     = The goblin laughs as he steals all of your items and knocks you unconscious.
 
 hp         = 10
 atk        = 3

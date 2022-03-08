@@ -1,5 +1,5 @@
-
 # Print random string when arriving at new map tile.
+
 encounter = You have arrived next to an abandoned log cabin.
 encounter = You have arrived inside a forest fire
 encounter = You have arrived at the entrance to a cave
@@ -8,5 +8,4 @@ encounter = You have arrived at a thunderstorm deep inside the forest.
 encounter = You have arrived at the edge of a cliff
 encounter = You have been lifted by a hurricane and then dropped into a muddy swamp
 encounter = You have arrived at a lake, a monster crawls out & rapidly approaches you
-
 
