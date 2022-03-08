@@ -209,11 +209,11 @@ print(monster_attack)
 #typewriter( 5 , 0.01)
 
 
-dict_1 = {'A':1, 'B':2, 'C':3} # Values from dictionary 1
-dict_2 = {'B':4, 'C':5, 'D':6} # Values from dictionary 2
-a_counter = Counter(dict_1) # Dictionary 1 
-b_counter = Counter(dict_2) 
-add_dict = a_counter + b_counter
-dict_3 = dict(add_dict)
-print(dict_3)
+# dict_1 = {'A':1, 'B':2, 'C':3} # Values from dictionary 1
+# dict_2 = {'B':4, 'C':5, 'D':6} # Values from dictionary 2
+# a_counter = Counter(dict_1) # Dictionary 1 
+# b_counter = Counter(dict_2) 
+# add_dict = a_counter + b_counter
+# dict_3 = dict(add_dict)
+# print(dict_3)
 
