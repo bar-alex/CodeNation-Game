@@ -29,17 +29,18 @@
 ##                                                     ##
 #########################################################
 
-id = ogre
-name = The deceptively friendly Ogre that you think you have seen before somewhere, in a dream perhaps.
-encounter = The smiling ogre lazily sits lazily a large haystack whilst eating a pile of meat.
-# plays random dialog string from list of dialog strings.
-winning = You have somehow penetrated the Ogre's enourmous stomach.8P
-losing = The ogre burps and a noxious gas envelopes you causing you to lose consciousness.
+id          = ogre
+name        = The deceptively friendly Ogre that you think you have seen before somewhere, in a dream perhaps.
 
-hp = 10
-atk = 3
-def = 3
+encounter   = The smiling ogre lazily sits lazily a large haystack whilst eating a pile of meat.
+warn        = 
+winning     = You have somehow penetrated the Ogre's enourmous stomach.8P
+losing      = The ogre burps and a noxious gas envelopes you causing you to lose consciousness.
 
-chance = 6
-score = 5
-drops      = potion:2, steel_armor:3, steel_sword:3, medusa_head:2, teleporter:2, rusty_coin:8, dusty_lamp:8
+hp          = 10
+atk         = 3
+def         = 3
+
+chance      = 6
+score       = 5
+drops       = potion:2, steel_armor:3, steel_sword:3, medusa_head:2, teleporter:2, rusty_coin:8, dusty_lamp:8

@@ -28,4 +28,4 @@
 ##                                                ##
 ####################################################
 
-story = Game Over. Try again?
+story = You're dead, you're dead, you're dead \nYou're dead and outta this world \n\nGame Over.

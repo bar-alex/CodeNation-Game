@@ -10,17 +10,19 @@
 ##                                                                               ##
 ###################################################################################
 
-id = water_snake
-name = The Water Snake of considerable length.
-encounter = "You come across a water snake, it hisses violently at you."
-warn = "He just lays still and stares at you menacingly."
-# plays random dialog string from list of dialog strings
-winning = "The water snake lunges at you. You slice it in half and then chop off its head just to make sure."
-losing = "The water snake completely wraps itself around you and slowly eats you for dinner."
+id          = water_snake
+name        = The Water Snake of considerable length.
+encounter   = "You come across a water snake, it hisses violently at you."
+warn        = He just lays still and stares at you menacingly.
 
-hp =  15
-atk = 4
-def = 7
-chance = 4
-score = 3
-drops      = potion:2, steel_armor:3, steel_sword:3, medusa_head:2, teleporter:2, rusty_coin:8, dusty_lamp:8
+# plays random dialog string from list of dialog strings?
+winning     = The water snake lunges at you. You slice it in half and then chop off its head just to make sure.
+losing      = The water snake completely wraps itself around you and slowly eats you for dinner.
+
+hp          = 15
+atk         = 4
+def         = 7
+
+chance      = 4
+score       = 3
+drops       = potion:2, steel_armor:3, steel_sword:3, medusa_head:2, teleporter:2, rusty_coin:8, dusty_lamp:8

@@ -27,18 +27,18 @@
 ##                                                                  ##
 ######################################################################                              
 
-id         = pyrojack
-name       = Pyro Jack
-encounter  = You have encountered a levitating possessed pumpkin, magical flames emanate from it and envelope its entire form.
-warn       = I'm going to roast you alive and consume your soul.
-winning    = Large chunks of spicy warm pumpkin fly out everywere & stick to your face & clothing.
-\n You sense that this would be good enough to make a delicious pumpkin pie!
-losing     = You scream loudly in pain because you're now being cooked alive.
+id          = pyrojack
+name        = Pyro Jack
 
-hp         = 10
-atk        = 3
-def        = 3
+encounter   = You have encountered a levitating possessed pumpkin, magical flames emanate from it and envelope its entire form.
+warn        = I'm going to roast you alive and consume your soul.
+winning     = Large chunks of spicy warm pumpkin fly out everywere & stick to your face & clothing.\nYou sense that this would be good enough to make a delicious pumpkin pie!
+losing      = You scream loudly in pain because you're now being cooked alive.
 
-chance     = 3
-score      = 1
-drops      = potion:2, steel_armor:3, steel_sword:3, medusa_head:2, teleporter:2, rusty_coin:8, dusty_lamp:8
+hp          = 10
+atk         = 3
+def         = 3
+
+chance      = 3
+score       = 2
+drops       = potion:2, steel_armor:3, steel_sword:3, medusa_head:2, teleporter:2, rusty_coin:8, dusty_lamp:8

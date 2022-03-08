@@ -39,5 +39,4 @@ def          = 20
 
 chance       = 1
 score        = 9
-
 drops        = dragon_head:10

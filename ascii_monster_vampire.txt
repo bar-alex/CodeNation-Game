@@ -35,17 +35,18 @@
 
 # plays random dialog string from list of dialog strings
 
+id          = vampire
+name        = The Bloodthirsty Vampire
 
-id = vampire
-name = The Bloodthirsty Vampire
-encounter = You encounter a swarm of bats that transform into a blood thirsty Vampire."
-warn = The Vampire tries to lure you into a false sense of security.
-winning = You chop off it's head and thrust salted garlic deep inside it's stomach.
-losing = The Vampire's fangs sink deep into your neck, your blood is rapidly drained and you lose consciousness.
+encounter   = You encounter a swarm of bats that transform into a blood thirsty Vampire."
+warn        = The Vampire tries to lure you into a false sense of security.
+winning     = You chop off it's head and thrust salted garlic deep inside it's stomach.
+losing      = The Vampire's fangs sink deep into your neck, your blood is rapidly drained and you lose consciousness.
 
-hp = 15                         
-atk = 5                    
-def = 5                         
-chance = 3                     
-score = 3                        
-drops      = potion:2, steel_armor:3, steel_sword:3, medusa_head:2, teleporter:2, rusty_coin:8, dusty_lamp:8
+hp          = 15                         
+atk         = 5                    
+def         = 7                         
+
+chance      = 3                     
+score       = 5                        
+drops       = potion:2, steel_armor:3, steel_sword:3, medusa_head:2, teleporter:2, rusty_coin:8, dusty_lamp:8

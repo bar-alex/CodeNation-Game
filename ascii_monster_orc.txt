@@ -80,17 +80,18 @@
 
 
 
-id = orc
-name = The Muscular Orc
+id        = orc
+name      = The Muscular Orc
+
 encounter = The Muscular Orc flexes his rippling muscles as he glances in your direction. 
-warn = 
-winning = As The Muscular Orc swings his giant hammer you duck underneath it and lunge towards him, the entire blade of your steel sword is embedded into the Orc's chest and he dies. 
-losing = The Muscular Orc swings his giant hammer and knocks your unconscious body to the ground. 
+warn      = 
+winning   = As The Muscular Orc swings his giant hammer you duck underneath it and lunge towards him, the entire blade of your steel sword is embedded into the Orc's chest and he dies. 
+losing    = The Muscular Orc swings his giant hammer and knocks your unconscious body to the ground. 
 
-hp = 10
-atk = 3
-def = 3
+hp        = 10
+atk       = 5
+def       = 4
 
-chance = 6
-score = 5
-drops = potion:2, steel_armor:3, steel_sword:3, medusa_head:2, teleporter:2, rusty_coin:8, dusty_lamp:8
+chance    = 6
+score     = 5
+drops     = potion:2, steel_armor:3, steel_sword:3, medusa_head:2, teleporter:2, rusty_coin:8, dusty_lamp:8
