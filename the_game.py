@@ -27,13 +27,25 @@
 
 
 
+
+
+from posixpath import split
+import string
+from turtle import delay
+
+
 def warrior_king_of_tristram():
 
     # some config data
-    monster_file_stem  = 'ascii_monster_'        # how all the moster files start
-    event_file_stem    = 'ascii_event_'          # how all the events files start
-    items_ascii_file   = 'ascii_loot_items.txt'  # holds all the items
-    strings_ascii_file = 'ascii_strings.txt'     # holds the strings for encounters
+    ascii_file_stem_monster  = 'ascii_monster_'        # how all the moster files start
+    ascii_file_stem_event    = 'ascii_event_'          # how all the events files start
+
+    ascii_file_items         = 'ascii_loot_items.txt'  # holds all the items
+    ascii_file_strings       = 'ascii_strings.txt'     # holds the strings for encounters
+    
+    ascii_file_game_start    = 'ascii_game_start.txt'
+    ascii_file_game_win      = 'ascii_game_win.txt'
+    ascii_file_game_loose    = 'ascii_game_loose.txt'
 
     chance_encounter_monster = 7        # 7 out of 10 to fight a monster
     chance_encounter_event   = 5        # 5 out of 10 to have an event
@@ -61,6 +73,12 @@ def warrior_king_of_tristram():
 
     highscore   = []     # list of highscore (dicts) { name, value, date }
 
+    
+    # useful in debug, tells the name of the calling function
+    def whoami():
+        import sys
+        return sys._getframe(1).f_code.co_name
+
 
     # reads a keypress from the buffer if theres one there, otherwise returns 0
     def inkey():
@@ -72,9 +90,29 @@ def warrior_king_of_tristram():
         return ord(key)
 
 
+    # play a beeping sound, if list is provided must be a list of tuples/list of (tone,duration)
+    # they will be played in succession
+    def beep( duration = 100, frequency = 2500):
+        # Set Frequency To 2500 Hertz
+        # Set Duration To 1000 ms == 1 second
+        import winsound
+        winsound.Beep(frequency, duration)
+
+
+    # will play the list of bees provided, can be stoped with space/enter, like the typewritter
+    # list_of_beeps must be a list of (tone,duraction)
+    def beep_from_list( list_of_beeps = [], stop_on_enter_space = True ):
+        # will use beep to play 
+        for beep_pair in list_of_beeps:
+            tone     = beep_pair[0]
+            duration = beep_pair[1]
+            beep( duration, tone )
+            if stop_on_enter_space and inkey() in [32,13]: break
+
+
     # delay can be changed, can have 3 x delay on space, can have random (1 in 5) 3 x delay while writing the text
     # unsing inkey, i could implement a printall with space/esc (after space clear buffer)
-    def typewriter( text, delay=0.01, newline=True, space_breaks=True, random_breaks=True, rush_on_enter_or_space=True ):
+    def typewriter( text:str, delay=0.02, newline=True, space_breaks=False, random_breaks=True, rush_on_enter_or_space=True ):
         from time import sleep
         from random import randint
         should_break = False
@@ -86,9 +124,9 @@ def warrior_king_of_tristram():
             if not rush_through:
                 sleep(delay)
                 if random_breaks:
-                    should_break = randint(1,5)==3
+                    should_break = ( randint(1,3)==2 )
                 if (char==' ' and space_breaks) or should_break: 
-                    for _ in range(4): sleep(delay)
+                    for _ in range(5): sleep(delay)
         if newline: print(flush=True)
 
     
@@ -118,12 +156,14 @@ def warrior_king_of_tristram():
                 return 'failed'
 
 
-    # will load the monstrs from the text files into the monsters[] list
+    # will scan all the files that start with a specified string, like "ascii_monster_"
+    # then it will pass them to a parsing function received in callable_func 
+    # which will parse the file into a dictionary that will be aded to a list
     def load_files(file_stem,calable_func,dest_list):
         from os import listdir, getcwd
         from os.path import isfile, join
 
-        #file_stem = monster_file_stem
+        #file_stem = ascii_file_stem_monster
         curent_dir = getcwd()
         #print( listdir(curent_dir) )
         onlyfiles = [f for f in listdir(curent_dir) if isfile(join(curent_dir, f)) and f[:len(file_stem)].lower()==file_stem]
@@ -157,7 +197,7 @@ def warrior_king_of_tristram():
     # creates a dictionary with everything inside (ascii, list of drops, key/value pairs)
     # and that dictionary is validated and added tot the list passed as parameter (monsters or events)
     def process_ascii(file_name, dest_list):
-        print(f"dbg:process_ascii ~ file_name = '{file_name}'")
+        print(f"dbg: {whoami()} ~ file_name = '{file_name}'")
         with open(file_name,'r') as file:
             item_read = {}     # =dict()
             ascii_img = ""
@@ -198,10 +238,10 @@ def warrior_king_of_tristram():
                     item_read[dict_key] = dict_value                        # adds the new key/value to dictionary
                 # elif not line: continue
                 else:
-                    if line: print(f'err in process_ascii: shouldnt run, line is "{line}" ')
+                    if line: print(f'err=> {whoami()}: shouldnt run, line is "{line}" ')
                 
             # todo: remove this when everything works fine
-            # for debug purposes
+            # for debug purposes, adds a dbg_filename property to the dictionary, in case theres an issue to find the source
             item_read['dbg_filename'] = file_name
 
             # validate the required fields are in there
@@ -251,7 +291,7 @@ def warrior_king_of_tristram():
 
     # will lload all the strings from ascii_strings.txt into encounters
     def process_ascii_strings( file_name ):
-        print("dbg: process_Ascii_loot")
+        print(f"dbg: {whoami()}")
         # open the file
         with open(file_name,'r') as file:
             # read from the file line by line in a for loop
@@ -283,14 +323,14 @@ def warrior_king_of_tristram():
 
     # prints the story text given as a parameter - used for all stories, most likely with a typewritter
     def print_story( text ): 
-        typewriter( text, )
+        typewriter( text, delay=0.01 )
 
     
-    # it will scan a file for an ascii afrt and a "story = value" 
+    # it will scan a file for an ascii art and a "story = ", extract them 
     # and then it will print the ascii art and the story
     def print_ascii_and_story_from_file( file_name ):
         #file_name = 'ascii_game_start.txt'
-        # todo: test file exists
+        flag_record_story = False   # once True, all next lines will be added to the story, provided they are not comments
         ascii_text = ''
         story = ''
         with open(file_name,'r') as file:
@@ -300,12 +340,18 @@ def warrior_king_of_tristram():
                     ascii_text += line 
                 elif line[:1] == '#':       # the line is a comment, ignore it
                     continue
-                elif line.find('=') > 0:
+                # if it was flagged to record the story it will just add every new line to the story, including empty lines
+                elif flag_record_story:
+                    story += line   #.rstrip()  # .replace("\\n",'\n')
+                # when it finds the 'story = ', then it will start recording the story from that point
+                elif line.find('=') > 0 and line[ :line.find('='):].lower().strip() == 'story' :
+                    flag_record_story = True                # flag to say that from here all lines read that are nit comments will be added to the story
                     story = line[ line.find('=')+1:]        # everything after the '='
                     story = story.strip()                   # strip leading and trailing spaces and new lines
                     story = story.replace("\\n",'\n')       # unescapes new lines in the story string
+                elif not line.strip(): None         # ignore empty lines bfore the 'story= ' fragment
                 else:
-                    if line: print(f'err in process_ascii: shouldnt run, line is "{line}"')
+                    if line: print(f'err=> {whoami()}: shouldnt run, line is "{line}"')
 
         # print the ascii image
         print_ascii( ascii_text )
@@ -317,7 +363,7 @@ def warrior_king_of_tristram():
 
     # will print the game start ascii and the story
     def print_game_start():
-        print("dbg: print_game_start()")
+        print(f"dbg: {whoami()}")
         # read from text file
         # print ascii using "print_ascii(text)" and print the story using "print_story(text)" instead of  notmal print
         print_ascii_and_story_from_file( 'ascii_game_start.txt' ) 
@@ -325,7 +371,7 @@ def warrior_king_of_tristram():
 
     # will print the game end ascii and the story // difere
     def print_game_end( player_won = False ):
-        print("dbg: print_game_end()")
+        print(f"dbg: {whoami()}")
         # read from text file -- depending on player_won variable you check read differemt files
         # print ascii using "print_ascii(text)" and print the story using "print_story(text)" instead of notmal print
         if player_won: print_ascii_and_story_from_file( 'ascii_game_win.txt' ) 
@@ -333,7 +379,7 @@ def warrior_king_of_tristram():
 
 
     def print_game_encounter():
-        print("dbg: print_game_enocunter()")
+        print(f"dbg: {whoami()}")
         # todo: print the game encounter stroy (and ascii? maybe not)
         # draw a chance string from encounters and print it using 'print_story()' instead of print()
 
@@ -341,18 +387,36 @@ def warrior_king_of_tristram():
 
     ## loads everything from files
     def game_setup():
+        
+        # sanity check - make sure all the files exist 
+        from os.path import exists as file_exists
+        if not file_exists(ascii_file_items) \
+            or not file_exists(ascii_file_strings) \
+            or not file_exists(ascii_file_game_start) \
+            or not file_exists(ascii_file_game_win) \
+            or not file_exists(ascii_file_game_loose):
+                print("Unfortunately you're missing some data files (ascii text files) required by the game. \nPlease consult the developers of the application")
+                exit()
+        # check theres at least a monster and an event file
+        from os import listdir, getcwd
+        from os.path import isfile, join
+        curent_dir = getcwd()
+        if not [f for f in listdir(curent_dir) if f[:len(ascii_file_stem_monster)].lower()==ascii_file_stem_monster] \
+            or not [f for f in listdir(curent_dir) if f[:len(ascii_file_stem_event)].lower()==ascii_file_stem_event]:
+                print("Unfortunately you're missing some data files (ascii text files) required by the game. \nPlease consult the developers of the application")
+                exit()
 
         # load items in list -- validate_monster will check the items are in the list
-        process_ascii_loot(items_ascii_file, loot_items)
+        process_ascii_loot(ascii_file_items, loot_items)
 
         # load monsters from files
-        load_files(monster_file_stem, process_ascii, monsters)
+        load_files(ascii_file_stem_monster, process_ascii, monsters)
 
         # load events from files
-        load_files(event_file_stem, process_ascii, events)
+        load_files(ascii_file_stem_event, process_ascii, events)
 
         # load flavor strings (foud youself into a clearing, departing the lcerang, etc)
-        process_ascii_strings( strings_ascii_file )
+        process_ascii_strings( ascii_file_strings )
         
         # for debug
         from pprint import pprint
@@ -385,25 +449,25 @@ def warrior_king_of_tristram():
 
     # the player encounters a monster
     def game_encounter_monster( monster_attack_first = False ):
-        print("dbg: game_encounter_monster()")
+        print(f"dbg: {whoami()}")
         # todo: build the function
 
 
     # player encounters encounters a new event
     def game_encouonter_event():
-        print("dbg: game_encouonter_event()")
+        print(f"dbg: {whoami()}")
         # todo: build the function
 
 
     # if theres no event or monster to encounter on this tile
     def game_encounter_none():
-        print("dbg: game_encounter_none")
+        print(f"dbg: {whoami()}")
         # todo: build the function
 
 
     # player travel to a new tile (or teleported to a new tile)
     def game_new_tile( monster_or_event = True ):
-        print("debug: game_start_tile()")
+        print(f"dbg: {whoami()}")
         # todo: everythign happens here
         # print ascii? and story (random?) for scenery
         print_game_encounter()
@@ -422,10 +486,17 @@ def warrior_king_of_tristram():
         # (it goes back to the loop where it will run another game_start_tile)
 
 
+    # checks if player can jump to a new tile // make sure he's still alive for one
+    def player_can_do_new_tile():
+        player_still_alive = \
+                player_data['hp']    > 0   \
+            and player_data['lives'] > 0
+        return player_still_alive
+
 
     # starts the game, prints the story and get on with the next tile in a loop
     def game_start():
-        print('dbg: game_start()')
+        print(f'dbg: {whoami()}')
 
         # todo: get player name
         player_name = ''
@@ -435,10 +506,12 @@ def warrior_king_of_tristram():
 
         # print game start ascii and story
         print_game_start()
-        return 
+        
         # throw tiles at the player in a loop
-        while player_data['hp'] > 0 and player_data['lives'] > 0:
+        while player_can_do_new_tile():
             game_new_tile()
+            # debug: kill player
+            player_data['hp'] = 0
         
         # print game over ascii and story
         print_game_end()
@@ -451,19 +524,14 @@ def warrior_king_of_tristram():
     ##  here, the application starts
     ######################################################################
 
-    # loads all the data from the ascii files
+    # loads all the data from the ascii files // if missing required files it should kill the app
     game_setup()
-
     # starts the game
     game_start()
 
-    #my_list = []
-    #process_ascii('ascii_monster_wolf.txt',my_list)
-    #print( my_list )
-    #print( my_list[0].get('name',None) )
 
 
 
 
-
+# entry point into the app
 warrior_king_of_tristram()

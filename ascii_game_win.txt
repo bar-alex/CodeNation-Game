@@ -20,4 +20,13 @@
 ##############################################################
 
 # Dialog lines for coronation ceremony at the end of the game.
-story = First King of Tristram: I am impressed with your combat skills, you truly are the strongest Warrior in all of Tristram.\nFirst King of Tristram: It's time to bequeath my throne to you. You kneel down in front of the First King of Tristram and he transfers the crown and the title of king onto you.
+
+story = 
+First King of Tristram: I am impressed with your combat skills, you truly are the strongest Warrior in all of Tristram.
+First King of Tristram: It's time to bequeath my throne to you. 
+
+You kneel down in front of the First King of Tristram and he transfers the crown and the title of king onto you, 
+while the trumpets signal the change far and wide into the kingdom. Cheers can be heard outside, where the people
+sing praises and raise ovations to the heavens, happy to have another stong ruler to call their king.
+
+You won. The End.

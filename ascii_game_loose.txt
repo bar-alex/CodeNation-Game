@@ -28,4 +28,14 @@
 ##                                                ##
 ####################################################
 
-story = You're dead, you're dead, you're dead \nYou're dead and outta this world \n\nGame Over.
+story = 
+"
+Don't sing if you want to live long
+They have no use for your song
+You're dead, you're dead, you're dead 
+You're dead and outta this world 
+                               ... "
+               You're Dead 
+                 ~ by Norma Tanega 
+
+Game Over. You loose.

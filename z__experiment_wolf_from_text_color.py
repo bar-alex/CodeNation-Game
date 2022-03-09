@@ -5,13 +5,22 @@
 #\033[2;9m
 #\033[0;0m
 
+#\033[31m
+#\033[0m
+
+print("This is my \033[31mchurch\033[0m. ")
+
+print('The wolf \033[31mgrowls\033[0m at you as you try to get closer')
+winning = 'The wolf lets out a \033[34mpiercing\033[0m cry, then falls to the ground'
+print(winning)
+
+
 #with open('ascii_wolf.txt','r', encoding="latin-1") as file:       "unicode_escape"
-from distutils import text_file
 
 
 with open('ascii_monster_wolf.txt','r') as file:        # , encoding="unicode_escape"
 #with open('ascii_wolf.txt','r') as file:
-    import  codecs
+    
     for line in file.readlines() :
         #text_line = '\033[1;9;0m' + line + '\033[0;0m'
         #text_line = line.replace( '\\u001b[', '\u001b[' )
@@ -26,3 +35,9 @@ with open('ascii_monster_wolf.txt','r') as file:        # , encoding="unicode_es
         print( text_line , end='' )
 
 print('\n')
+
+
+# with open('ascii_art_with_color.txt','r') as file: 
+#     for line in file.readlines() :
+#         text_line = line
+#         print( text_line , end='' )

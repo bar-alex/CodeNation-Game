@@ -27,4 +27,16 @@
 ##                                                                                     ##
 #########################################################################################
 
-story = The First Warrior King of Tristram is very old & close to death. \nHe has instructed all warriors in Tristram Kingdom to prove their strength by bringing back the head of each monster including that of the largest Dragon in the Kingdom, if you complete this task you will become the new King of Tristram.
+
+# I've changed how we handle the game_start/game_win/game_loose file, because there is more text involves, 
+# so mimght as well have it properly formated. Everything after "story=" untill the end of file will be printed as is
+# including empty lines, with the exception of commented line (starting with '#', like this one)
+
+story = 
+The First Warrior King of Tristram is very old and close to death. 
+Having no male heirs, he has instructed all warriors in Tristram Kingdom to prove their strength by bringing back 
+the head of each type of monster in the Kingdom, including that of the infamous black dragon Drogo The Terrible. 
+
+If you complete this task you will become the new King of Tristram. 
+
+You reluctantly leave your village and your friends, but are excited at the thought of this new adventure.

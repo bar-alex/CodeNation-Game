@@ -31,7 +31,7 @@
 id           = mountain_wolf
 name         = Giant Mountain Wolf
 
-encounter    = You encounter a wolf howling at the moonlight
+encounter    = You \033[31mencounter\033[0m a wolf howling at the moonlight
 warn         = The wolf growls at you as you try to get closer
 winning      = The wolf lets out a piercing cry then dies
 losing       = The wolf tears at your throat and you bleed out in seconds
