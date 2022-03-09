@@ -29,5 +29,5 @@ chance_effect =
 affected_stat = 
 modifier      = 
 
-drops         = bedroll:8
-drop_text     = You have found a fresh sleeping bag inside the log cabin & decide to take it with you.
+drops               = bedroll:8
+drop_text_success   = You have found a fresh sleeping bag inside the log cabin & decide to take it with you.

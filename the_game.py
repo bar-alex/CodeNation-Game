@@ -25,16 +25,12 @@
 
 
 
+from distutils.dep_util import newer_group
+from lib2to3.pytree import type_repr
+from multiprocessing.connection import answer_challenge
 
 
-
-
-from posixpath import split
-import string
-from turtle import delay
-
-
-def warrior_king_of_tristram():
+def the_game():
 
     # some config data
     ascii_file_stem_monster  = 'ascii_monster_'        # how all the moster files start
@@ -49,7 +45,11 @@ def warrior_king_of_tristram():
 
     chance_encounter_monster = 7        # 7 out of 10 to fight a monster
     chance_encounter_event   = 5        # 5 out of 10 to have an event
-    chance_encounter_monster = 2        # 2 out of 2 to have nothing special in the encounter
+    #chance_encounter_none = 2          # 2 out of 2 to have nothing special in the encounter
+
+    monster_fight_warn_time  = 5        # time to answer untill waring
+    monster_fight_total_time = 10       # time to answer untill failed
+
 
     # the player record - hods everything about the player
     player_data = {
@@ -75,9 +75,22 @@ def warrior_king_of_tristram():
 
     
     # useful in debug, tells the name of the calling function
-    def whoami():
+    def whoami( lvl=0 ):
         import sys
-        return sys._getframe(1).f_code.co_name
+        return sys._getframe(1+lvl).f_code.co_name
+
+
+    # prints an problem  message in red and includes the function where the error hapened
+    def print_err( message ):
+        text_to_print = f'\033[1;31merr=>{whoami(1)}: '+message+'\033[0m'
+        print(text_to_print)
+
+
+    # clears the terminal screen (not the history tho)
+    def clear_screen():
+        import os
+        clear = lambda: os.system('cls')
+        clear()
 
 
     # reads a keypress from the buffer if theres one there, otherwise returns 0
@@ -137,7 +150,7 @@ def warrior_king_of_tristram():
 
 
     # answer must be from answer_list, will return 'failed' if no answer was given
-    def get_answer(answer_list, answer_time=0, warn_time=0, warn_text=''):
+    def get_answer(answer_list, answer_time=0, warn_time=0, warn_text='', print_the_answer = True):
         tick = 0.1
         tick_answer = answer_time/tick
         tick_warn = warn_time/tick
@@ -149,9 +162,11 @@ def warrior_king_of_tristram():
             answer = inkey()    
             #if o got allowed answer the return char
             if chr(answer) in answer_list:
+                if print_the_answer: 
+                    print( chr(answer), end='' )
                 return chr(answer)
             elif warn_time and warn_text and tick_count == tick_warn:
-                typewriter(warn_text,delay=0.01)
+                typewriter(warn_text,)      # delay=0.01
             elif answer_time and tick_count == tick_answer:
                 return 'failed'
 
@@ -362,7 +377,7 @@ def warrior_king_of_tristram():
 
 
     # will print the game start ascii and the story
-    def print_game_start():
+    def game_print_start():
         print(f"dbg: {whoami()}")
         # read from text file
         # print ascii using "print_ascii(text)" and print the story using "print_story(text)" instead of  notmal print
@@ -370,19 +385,25 @@ def warrior_king_of_tristram():
 
 
     # will print the game end ascii and the story // difere
-    def print_game_end( player_won = False ):
+    def game_print_end( player_won = False ):
         print(f"dbg: {whoami()}")
         # read from text file -- depending on player_won variable you check read differemt files
         # print ascii using "print_ascii(text)" and print the story using "print_story(text)" instead of notmal print
-        if player_won: print_ascii_and_story_from_file( 'ascii_game_win.txt' ) 
-        else: print_ascii_and_story_from_file( 'ascii_game_loose.txt' ) 
+        if player_won: 
+            print_ascii_and_story_from_file( 'ascii_game_win.txt' ) 
+        else: 
+            print_ascii_and_story_from_file( 'ascii_game_loose.txt' ) 
 
 
+    # prints the text for the encounter, the first things after enters a new map tile
     def print_game_encounter():
         print(f"dbg: {whoami()}")
-        # todo: print the game encounter stroy (and ascii? maybe not)
+        # clear screen to start from the top
+        clear_screen()
         # draw a chance string from encounters and print it using 'print_story()' instead of print()
-
+        from random import choice
+        text = choice( encounters )
+        print_story(text)
 
 
     ## loads everything from files
@@ -431,7 +452,7 @@ def warrior_king_of_tristram():
 
     ## the game starts, initializes the player
     ## on restart it won't ask for name anymore     //# todo: the restart game feature
-    def game_reset_player( player_name = 'Player' ):
+    def game_player_reset( player_name = 'Player' ):
         # reset player data
         player_data = {
             'name'   : player_name,
@@ -447,6 +468,101 @@ def warrior_king_of_tristram():
         }
 
 
+    # displays a list of choices for the user to pick from
+    # will build a list of player choices from the encounter (monster/event), items, etc
+    # but will display only those appropriate for the stage
+    # situation: none, monster, situation
+    # moster_event: is the actual mosnter or event teh player has to deal with (dict)
+    # stage: before, after // the 'before' with monster will develop into a warning, then a fight
+    def game_player_show_choices( situation, monster_event, stage ):
+        # dbg: sanity check
+        if situation in ['monster','event'] and not monster_event:
+            print_err(f'situation={situation}, stage={stage}, monster_event={monster_event}')
+            #print(f'err=> {whoami()}: situation={situation}, stage={stage}, monster_event={monster_event}')
+            #exit()
+
+        player_choices = []
+        no_ord = 0
+        # add the situation choices - fight
+        if situation == 'monster' and stage == 'before':
+            no_ord=+1
+            option = {}
+            option['prompt']    = f'{no_ord}. Fight'
+            option['key']       = f'{no_ord}'
+            option['call']      = 'game_action_fight'
+            option['param']     = monster_event
+            player_choices.append(option)
+        # add the event choices
+        if situation == 'event' and monster_event.action:
+            no_ord=+1
+            option = {}
+            option['prompt']    = f'{no_ord}. '+monster_event.action
+            option['key']       = f'{no_ord}'
+            option['call']      = 'game_action_event'
+            option['param']     = monster_event
+            player_choices.append(option)
+        # add the item choices - teleport, petrify, sleep, 8-ball
+        for item in player_data.items: 
+            # checks if the item has action_prompt, has the same stage (before/after fight) and is  not on cooldown
+            if 'action_prompt'      in item \
+            and (not 'action_stage' in item or item('action_stage') == stage) \
+            and (not 'cooldown'     in item or item['cooldown']==0):
+                no_ord=+1
+                option = {}
+                option['prompt']    = f'{no_ord}. '+item['action_prompt']
+                option['key']       = f'{no_ord}'
+                option['call']      = 'game_action_item'
+                option['param']     = item
+                player_choices.append(option)
+        # add the leave map tile choices
+        no_ord=+1
+        option = {}
+        option['prompt']    = f'{no_ord}. Go back into the forest and continue your exploration'
+        option['key']       = f'{no_ord}'
+        option['call']      = 'game_new_tile'
+        option['param']     = {}
+        player_choices.append(option)
+        
+        # dbg: sanity check - if no_ord >= 10 then its gonna have problems, 10 is basically 2 symbols 1 and 0, if needed you might use letters, like [F]ight
+        if no_ord >= 10: print_err( f'no_ord is more tha 9. this will create problems. {nr_ord}' )
+
+        # display the choices for the user to select
+        allowed_answers = ''
+        for option in player_choices:
+            #print( '\t'+option['prompt'] )
+            typewriter( '\t'+option['prompt'] )
+            allowed_answers += option['prompt']
+        
+
+        if situation == 'monster' and stage == 'before': 
+            answer_time = monster_fight_total_time
+            warn_time   = monster_fight_warn_time
+            if 'warn' in monster_event and monster_event['warn']:
+                warn_text   = monster_event['warn']
+            else:
+                warn_text   = "The creature noticed you and is hurrying towards you. \nYou should really do something, or you're toast"
+        else:
+            answer_time, warn_time, warn_text = 0, 0, ''
+
+        # ask for an answer, then get answer
+        typewriter( '\n\033[1;35mWhat do you choose? :\033[0m ' )
+        answer = get_answer( allowed_answers, answer_time, warn_time, warn_text )
+
+        # if the player didn't aswer in time and it got shreded
+        # update its hp with 0 and will be handled later on
+        if answer == 'failed': 
+            if situation == 'monster' \
+            and 'losing' in monster_event \
+            and monster_event['losing']:
+                typewriter( monster_event['losing'] )
+
+            # display you got killed message if any
+            player_data['hp'] = 0
+
+
+
+
+
     # the player encounters a monster
     def game_encounter_monster( monster_attack_first = False ):
         print(f"dbg: {whoami()}")
@@ -454,7 +570,7 @@ def warrior_king_of_tristram():
 
 
     # player encounters encounters a new event
-    def game_encouonter_event():
+    def game_encounter_event():
         print(f"dbg: {whoami()}")
         # todo: build the function
 
@@ -463,19 +579,30 @@ def warrior_king_of_tristram():
     def game_encounter_none():
         print(f"dbg: {whoami()}")
         # todo: build the function
+        # nothng to do, empty clearing, show choices to user
+        game_player_show_choices( situation = 'none' )
+
+
+    # will loopt through the items in players inventory and decrement their cooldown value
+    def player_decrement_items_cooldown():
+        for item in player_data.items:
+            if 'cooldown' in item and item['cooldown'] > 0: 
+                item['cooldown'] -= 1
 
 
     # player travel to a new tile (or teleported to a new tile)
     def game_new_tile( monster_or_event = True ):
         print(f"dbg: {whoami()}")
-        # todo: everythign happens here
+        # todo: everything happens here
         # print ascii? and story (random?) for scenery
         print_game_encounter()
+        # all items in inventory are checked and their cooldown are decremented
+        player_decrement_items_cooldown()
         # if monster_or_event roll for a monster or for event, 
         if chance_encounter_monster >= dice_roll(10):
             game_encounter_monster()
         elif chance_encounter_event >= dice_roll(10): 
-            game_encouonter_event()
+            game_encounter_event()    
         else: 
             game_encounter_none()
         # then roll for which monster or which event to use
@@ -502,10 +629,10 @@ def warrior_king_of_tristram():
         player_name = ''
 
         # reste player data - the plaer record with items, stats and score
-        game_reset_player( player_name )
+        game_player_reset( player_name )
 
         # print game start ascii and story
-        print_game_start()
+        game_print_start()
         
         # throw tiles at the player in a loop
         while player_can_do_new_tile():
@@ -514,7 +641,7 @@ def warrior_king_of_tristram():
             player_data['hp'] = 0
         
         # print game over ascii and story
-        print_game_end()
+        game_print_end()
 
         # todo asks the user if he'd like to start again ?
         # it should be in a loop only for this purpose
@@ -534,4 +661,4 @@ def warrior_king_of_tristram():
 
 
 # entry point into the app
-warrior_king_of_tristram()
+warrior_king_of_tristram = the_game()

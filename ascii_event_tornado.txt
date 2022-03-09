@@ -36,7 +36,8 @@ chance_effect = 1
 affected_stat = HP
 modifier      = -100
 
-# action_func   = apply_teleport
+# action_func = apply_teleport
 
-drops         = 
-drop_text     = 
+drops               = 
+drop_text_success   = 
+drop_text_fail      = 

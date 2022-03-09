@@ -34,7 +34,7 @@ name        = The deceptively friendly Ogre that you think you have seen before 
 
 encounter   = The smiling ogre lazily sits lazily a large haystack whilst eating a pile of meat.
 warn        = 
-winning     = You have somehow penetrated the Ogre's enourmous stomach.8P
+winning     = You have somehow penetrated the Ogre's enourmous stomach.
 losing      = The ogre burps and a noxious gas envelopes you causing you to lose consciousness.
 
 hp          = 10

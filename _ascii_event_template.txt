@@ -38,8 +38,9 @@ affected_stat = HP
 modifier      = 10
 action_func   = apply_<func>
 
-drops         = 8ball:2, rusty coin:8
-drop_text     = You opened the small shining box and received: @@.
+drops               = 8ball:2, rusty coin:8
+drop_text_success   = You opened the small shining box and received: @@.
+drop_text_fail      = You open the small shiny box and discover is empty.
 
 
 

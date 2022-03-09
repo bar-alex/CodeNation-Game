@@ -36,8 +36,8 @@ chance_effect =
 affected_stat = 
 modifier      = 
 
-drops         = 8ball:8, rusty_coin:8
-drop_text     = You opened the small shining box and received a @@.
-
+drops               = 8ball:8, rusty_coin:8
+drop_text_success   = You opened the small shining box and received a @@.
+drop_text_fail      = You rumage around, but you find nothing.
 
 

@@ -35,5 +35,6 @@ chance_effect =
 affected_stat = 
 modifier      = 
 
-drops         = rusty_coin:2, magic_flute:8
-drop_text     = At the bottom of the well you have found a @@
+drops               = rusty_coin:2, magic_flute:8
+drop_text_success   = At the bottom of the well you have found a @@
+drop_text_fail      = You notice something shiny in the ground. \nLooking closely you discover is only a piece of glass.
