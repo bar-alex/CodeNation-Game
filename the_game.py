@@ -115,8 +115,8 @@ def the_game():
     # monster_fight_warn_time  = 5        # time to answer untill waring
     # monster_fight_total_time = 10       # time to answer untill failed
     
-    use_typewritter_effect   = False
-    print_debug_messages     = True
+    use_typewritter_effect   = True
+    print_debug_messages     = False
     #dont_use_msvcrt          = True
     color_for_debug_messages = 35       # 30-black, 31-red, 32-green, 33-yellow, 34-blue, 35-purple, 36-cyan, 37-white
 
@@ -242,7 +242,7 @@ def the_game():
 
     # delay can be changed, can have 3 x delay on space, can have random (1 in 5) 3 x delay while writing the text
     # unsing inkey, i could implement a printall with space/esc (after space clear buffer)
-    def typewriter( text:str, delay=0.01, newline=True, space_breaks=False, random_breaks=True, rush_on_enter_or_space=True ):
+    def typewriter( text:str, delay=0.001, newline=True, space_breaks=False, random_breaks=False, rush_on_enter_or_space=True ):
         from time import sleep
         from random import randint
         should_break = False
@@ -529,6 +529,9 @@ def the_game():
         # print ascii using "print_ascii(text)" and print the story using "print_story(text)" instead of  notmal print
         print_ascii_and_story_from_file( ascii_file_game_start ) 
 
+        input_key('x', "Press enter to continue .. ", remove_prompt = True)
+
+
 
     # will print the game end ascii and the story // difere
     def game_print_end( ):
@@ -543,6 +546,9 @@ def the_game():
             print_ascii_and_story_from_file( ascii_file_game_win ) 
         else: 
             print_ascii_and_story_from_file( ascii_file_game_lose ) 
+
+        input_key('x', "Press enter to continue .. ", remove_prompt = True)
+
 
 
     # prints the text for the encounter, the first things after enters a new map tile
@@ -717,7 +723,7 @@ def the_game():
                     #item_id        = item[0]           # monster/event holds the list of the items ids
                     item_from_loot = [ it for it in loot_items if it['id'] == item_id ]  
                     # should return only one, if not, we have a problem
-                    if len(item_from_loot) != 1:
+                    if len(item_from_loot) != 1 and item['type']!='junk' :
                         print_err(f"searching in loot for id='{item_id}' got {len(item_from_loot)} matches: {item_from_loot} list:{loot_items}")
                     # copy the item
                     drop_item = item_from_loot[0].copy()
@@ -902,7 +908,7 @@ def the_game():
             #-- if the monster dropped something i display the item name // for the fight
             typewriter(f"You search your oponents remains and discover { drop['name'] if drop else 'Nothing.' }")
             # if you have a drop and you have an inventory limit you ask to remove something
-            if drop: game_add_item_to_player( drop )  # will add the drp to plater inventory - this is where i handle inventory size
+            if drop and drop['type']!='junk': game_add_item_to_player( drop )  # will add the drp to plater inventory - this is where i handle inventory size
             # thats it, move on
         
         #input_key(' ',"Press enter to continue .. ")
@@ -934,7 +940,8 @@ def the_game():
                 # if param_event.get('drop_text_success','') : 
                 #     typewriter( param_event['drop_text_success'] )
                 
-                game_add_item_to_player( item_drop )  # will add the drp to plater inventory - this is where i handle inventory size
+                if item_drop['type']!='junk':
+                    game_add_item_to_player( item_drop )  # will add the drp to plater inventory - this is where i handle inventory size
             else:
                 if param_event.get('drop_text_fail','') : 
                     typewriter( param_event['drop_text_fail'] )
@@ -1188,6 +1195,9 @@ def the_game():
         allowed_answers = ''
         
         print()
+
+        typewriter( '\033[1;34mYou have the following options: \033[0m ' )
+
         for option in player_choices:
             #print( '\t'+option['prompt'] )
             typewriter( option['prompt'] )
