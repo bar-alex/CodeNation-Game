@@ -86,8 +86,7 @@ def monster_attack():
     monster_atk = monster['atk'] + dice                                     # Monster attack is calculated by adding the monster's ['atk'] key to the dice we just rolled
     
     dice = dice_roll()    
-    player_dice = dice
-                                                 # Adds dice roll value to variable dice
+    player_dice = dice                                                      # Adds dice roll value to variable dice
     player_def = player_data['def'] + dice                                  # The player's defence is his ['def'] key and the dice roll added together.
     if player_data['armor'] and 'modifier' in player_data['armor']:         # if the player is wearing armor that modifies their defence;
         player_def = player_def + player_data['armor']['modifier']          # - In that case add the player's armor to their defence

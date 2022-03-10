@@ -17,8 +17,8 @@ print(winning)
 
 #with open('ascii_wolf.txt','r', encoding="latin-1") as file:       "unicode_escape"
 
-
-with open('ascii_monster_wolf.txt','r') as file:        # , encoding="unicode_escape"
+file_name = 'ascii_monster_wolf_dest.txt'
+with open(file_name,'r') as file:        # , encoding="unicode_escape"
 #with open('ascii_wolf.txt','r') as file:
     
     for line in file.readlines() :

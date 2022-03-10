@@ -1,17 +1,17 @@
 #############################################################################
 ##                                                                         ##
-##                       .      .       .       .                          ##
-##   .   .       .          .      . .      .         .          .    .    ##
-##          .       .         .    .   .         .         .            .  ##
-##     .   .    .       .         . . .        .        .     .    .       ##
-##  .          .   .       .       . .      .        .  .              .   ##
-##       .  .    .  .       .     . .    .       . .      .   .        .   ##
-##  .   .       .    . .      .    . .   .      .     .          .     .   ##
-##     .            .    .     .   . .  .     .   .               .        ##
-##      .               .  .    .  . . .    .  .                 .         ##
-##                         . .  .  . . .  . .                              ##
-##                             . . . . . .                                 ##
-##                               . . . .                                   ##
+##[34m                       .      .       .       .                          [0m##
+##[34m   .   .       .          .      . .      .         .          .    .    [0m##
+##[34m          .       .         .    .   .         .         .            .  [0m##
+##[34m     .   .    .       .         . . .        .        .     .    .       [0m##
+##[34m  .          .   .       .       . .      .        .  .              .   [0m##
+##[34m       .  .    .  .       .     . .    .       . .      .   .        .   [0m##
+##[34m  .   .       .    . .      .    . .   .      .     .          .     .   [0m##
+##[34m     .            .    .     .   . .  .     .   .               .        [0m##
+##[34m      .               .  .    .  . . .    .  .                 .         [0m##
+##[34m                         . .  .  . . .  . .                              [0m##
+##[34m                             . . . . . .                                 [0m##
+##[34m                               . . . .                                   [0m##
 ##                                I . I                                    ##
 ##                  _______________III_______________                      ##
 ##                 /    .       .       .       .    \                     ##
@@ -25,19 +25,23 @@
 ##                                                                         ##
 #############################################################################
 
+# for color:      [31m     [34m
+# to rest color:  [0m
+# othercolors:    30-black, 31-red, 32-green, 33-yellow, 34-blue, 35-purple, 36-cyan, 37-white
+
 id            = fountain
 name          = Exquisite Fountain
 
 story         = You have arrived on the land of a rich family, there is an attractive water fountain with suspiciously glinting objects.
 action        = Investigate the suspicious objects
-chance_event  = 3 
+chance_event  = 7 
 
 chance_effect = 
 affected_stat = 
 modifier      = 
 
-drops               = 8ball:8, rusty_coin:8
-drop_text_success   = You opened the small shining box and received a @@.
-drop_text_fail      = You rumage around, but you find nothing.
+drops               = 8ball:5, bedroll:1, rusty_coin:8
+drop_text_success   = You opened the small shining box and discovered a '@@'.
+drop_text_fail      = You rummage around, but you find nothing.
 
 

@@ -28,8 +28,8 @@
 #########################################################################################
 
 
-# I've changed how we handle the game_start/game_win/game_loose file, because there is more text involves, 
-# so mimght as well have it properly formated. Everything after "story=" untill the end of file will be printed as is
+# I've changed how we handle the game_start/game_win/game_lose file, because there is more text involved, 
+# so mimght as well have it properly formated. Everything after "story=" until the end of file will be printed as is
 # including empty lines, with the exception of commented line (starting with '#', like this one)
 
 story = 
@@ -39,4 +39,5 @@ the head of each type of monster in the Kingdom, including that of the infamous 
 
 If you complete this task you will become the new King of Tristram. 
 
-You reluctantly leave your village and your friends, but are excited at the thought of this new adventure.
+You reluctantly leave your village and your friends, but you're excited for this new adventure.
+You take a deep breath, and venture into the forest.

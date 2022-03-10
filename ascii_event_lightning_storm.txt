@@ -23,18 +23,17 @@
 ##                                                                    ##
 ########################################################################
 
-
 id            = lightning_storm
 name          = Electrifying Lightning Storm
+chance_event  = 7 
 
 story         = Your journey has been interrupted by a lightning storm. Fortunately there is a well nearby.
 action        = Climb down the well.
-chance_event  = 3 
 
 chance_effect = 
 affected_stat = 
 modifier      = 
 
-drops               = rusty_coin:2, magic_flute:8
-drop_text_success   = At the bottom of the well you have found a @@
-drop_text_fail      = You notice something shiny in the ground. \nLooking closely you discover is only a piece of glass.
+drops               = 8ball:3, bedroll:2, rusty_coin:6
+drop_text_success   = At the bottom of the well you have found a '@@'.
+drop_text_fail      = You notice something shiny on the ground. \nUpon closer inspection you discover that it's only a piece of glass.

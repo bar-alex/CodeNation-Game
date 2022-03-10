@@ -1,0 +1,74 @@
+######################################################################################################
+##                                  :^.                                                             ## 
+##                                 :~7J!                                                            ## 
+##                                .~^^!Y7.                                                          ## 
+##                                !~^^^~?!.                                                         ## 
+##                               ^!~^^^^~?!:                                                        ## 
+##                              .!~^^:^^^7?~:                                                       ## 
+##                              ^~^^: :^^~?!~:                                        .:^7??!.      ## 
+##                             .~^^:  .^^^7?!^.                                    :^7YYY?!~^:      ## 
+##                        :..  :^:.    ^^^!J?!^                                .:~?YYY?!^^::^:      ## 
+##                       :^^^:.^:.     ^^~7YY?!:                            .:^7JYY?!^^^^^^^^:      ## 
+##                       ^:.:^^^.      :^~?YPJ!~. .                      .:^~7JYY?!^^::^^^^^^.      ## 
+##                     ..^.   .:       .~~!77~^^^^^^^^7?JJ?7!~:       .:^~!7JY?7~^^..  .^^^^^.      ## 
+##                      :.             .^^^^^^^~~77???5GGGGGPGPY7:. .:^~!?Y5Y7~^::      ^^^::       ## 
+##                                   .:^^^^~~!7?JJJYYYY55PPPPP5Y7^^^^~7J555?~^^:.       :^^^:       ## 
+##            :!!^                 .:^^^^~!7?JY555555YYYYYYYYYJ?!~^^^^!YPY7~^:.         .^^^.       ## 
+##          .YB##G^               .:^^^~7J5PGBBB##GPPBBBBGGPP5Y??!!~^^:^~!^^:           .^^:::^^^.  ## 
+##          :##BBBY  .?5PJ.      .:^^~?5PB######P!:..~B#####GPGGPY7!~^^^^::.            .^^::::::   ## 
+##      :~^. ?B#BBB!^G##B5.     .::~?5PB##BBBB#5:....^B#B#G!:.:J#BG57~^^^^:             .^:.  .:.   ## 
+##    .JB#BG5!Y###G5B#BB5.     .::7Y5GB##BBBB##~.....Y#B#B!....:B##BPJ~^^^^.                  ..    ## 
+##    :PBB##PPB#BPGB#BBG:     ..^?5PB##########5!~~!5#BB#G.....!##B##GY~^^^:                  :.    ## 
+##     .~?PPP###PP##BBBJ     ..!5PGB##J~!7??JY5G#GB######BJ~^~?G#BBB#BP?^:^^                        ## 
+##   ^?YY55G####GG##BBBP:  ...:5BB##B#5........~J^^~!?J5PG##B####BBBB#B5^^^:.                       ## 
+##  .PBBBBBBBBBBBBP5GBB#G^ ...^BBBBBBB#5:................?Y7?Y5GB####BBP~:::                        ## 
+##   ~???JY55PGPPP?YPGBB#G~.. :BBBBBBBB#P~.....::......:.::....:^!JYGBGG7::.                        ## 
+##          .:75P5555PGBB#B?   YBGGBBBBB#B57^.::::::::::......... .!PGGG7...                        ## 
+##             :75P555PPGBB#5^ .PBGGGBBBBB##G5?!^^:::::.......:^!JPGGPPP?...                        ## 
+##               :75PPP5PPGB#B?.:PBGGGGGBBBBB##BG5YJ?7!!!!7?J5GBBBGPPPPGJ..                         ## 
+##                 .~JPPP5PGBBBP^:JGGGPPGGGGGBBBBB####BBBB#BBBBGGPPPPPG5:..                         ## 
+##                    .!YPP5J?!^^^^!YPGGGPPPPPPGGGGGGGGGGGGPPPPPPPPPGP?:....                        ## 
+##                       ^~^::::^~!777?YPPGGPPPPPPPPPPPPPPPP55PPPPP57:  .....:                      ## 
+##                    ..:^::::~~!!7??YYYJJJJY5PPPPPPPPPPPPPPPP55J7^      .:.:^:                     ## 
+##               .^:........^J555557?Y5PPP5Y?7!777?JJJJJJJ?7!~^:.          ...                      ## 
+##              .JG5:   ...?GBBBB#P!7?JY55YJY5J?!~~^^:::::::.::::::.                                ## 
+##               .:.  !! .JGGBBB##?^~!7??J55?J??77!~~^^^^^^^:77~:^^^:.                              ## 
+##                    :..JPGGBBB#G~^^~?Y5GB#Y!7!!!~!Y57^^^^::?GP?!:::^.                             ## 
+##                      7PPGBBBBBY^!J5PBB###G~~~~^~YPB#5~^^^:?GGP??:  .::.                          ## 
+##                     .5PPGBBBYPP?5GB###BBB#J^^:!YG####G7:^:JGPPJYJ:: ?BY                          ## 
+##                     .5PPGGBBP555GB#BBBBBB#B!:75G##BBB#BJ:^5P55YJ5?!..^:                          ## 
+##                      !GGGGGGBBB#BBBBBBBB#B55YJPB#BBBBBBG?5YY5PYJ55!                              ## 
+##                       !PGGGGGGGGBBBBBBBBBB555YGBBBBGGGPYJ5JYPPJ555P!:::^:                        ## 
+##                        :?PGGPPPPGGGGGGGGGGGGGGGGGPPPPP5555PG5?5PPPPP5PPYY7.                      ## 
+##                          :75GGPPPPPPPPPPPPP555555555555PPP57.:BBGPPPGGGPPP5Y!                    ## 
+##                             ^?PGGPPPPPPPPPPP55555555PPPY7^    Y##BGPPYYPGBB#P                    ## 
+##                               :?PP555555Y55555555Y5PG7.        ^JB#GP5! .:^~:                    ## 
+##                                 ~PP5555^     .J555PG!            :YBBGJ.                         ## 
+##                           .J55Y?!?YYYYJ      .J5YYJ?:^~!7~         :^:                           ## 
+##                            ~5G#BPY!!7?J?~   ?PBBP5J!7?Y5Y:                                       ## 
+##                   .....     .^!777!~!7JY~   !JYYY?!~~~!~:                                        ## 
+##                 .:^7JY?!~:::..:::::::^^^    .^!??~^::::  ..:::::.                                ## 
+##                .^^^7YGPY7~^^^^^^^^::::^:    .^^^^::::::^^^7J?~^^^:.                              ## 
+##                .^^^^^~!~^^^^^::::^^^^^^:.   .^^^^^^^^^^^^^~7!~^^::.                              ## 
+##                 ::::::^^:^^^^^::::^~~~~^    :^^:^^~~^^^^^^:::::::..                              ## 
+##                 ^!777~^^~^^^^^^^:. ::::       . .^~!7??!~~^~~~!!!!.                              ## 
+##                                                        ......::::.                               ## 
+######################################################################################################
+
+# if ascii is too big, I will chop off some of his hat and or shoes.
+
+id          = jackfrost
+name        = Jack Frost
+
+story       = You have encountered a small creature made of snow. He laughs randomly. A faint magical blue aura surrounds him which prevents melting.
+warn        = It didn't take long for him to notice you and he's comming your way.
+winning     = Jack Frost's magical blue aura disappears and he melts leaving a messy pile of clothes on the floor.
+losing      = You take a direct hit from Jack Frost's Icy breath blast. You have been transformed into a frozen dead statue.
+
+hp          = 10
+atk         = 3
+def         = 3
+
+chance      = 2
+score       = 5
+drops       = potion:2, steel_armor:3, steel_sword:3, medusa_head:2, teleporter:2, rusty_coin:8, dusty_lamp:8

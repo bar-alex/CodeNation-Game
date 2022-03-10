@@ -22,12 +22,13 @@ id            = log_cabin
 name          = Abandoned Log Cabin
 
 story         = You have arrived at an abandoned log cabin.
-chance_event  = 3 
+chance_event  = 7 
 action        = Relax inside the abandoned log cabin.
 
 chance_effect = 
 affected_stat = 
 modifier      = 
 
-drops               = bedroll:8
-drop_text_success   = You have found a fresh sleeping bag inside the log cabin & decide to take it with you.
+drops               = 8ball:3, bedroll:8, rusty_coin:8
+drop_text_success   = You have found a usefull '@@' inside the log cabin and decide to take it with you.
+drop_text_fail      = You rumage around the cabin, but with teh exception of some rusty cutlery you didn't discover anything of value.

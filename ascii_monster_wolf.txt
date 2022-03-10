@@ -7,8 +7,8 @@
 ##                            /   /   ;j$j              ##
 ##                        _.-"       d$$$$              ##
 ##                      .' ..       d$$$$;              ##
-##                     /  /P'      d$$$$P. |\           ##
-##                    /   "      .d$$$P' |\^"l          ##
+##                     /  /P'      d$$$$P. [31m|\[0m           ##
+##                    /   "      .d$$$P' [31m|\[0m^"l          ##
 ##                  .'           `T$P^"""""  :          ##
 ##              ._.'      _.'                ;          ##
 ##           `-.-".-'-' ._.       _.-"    .-"           ##
@@ -31,7 +31,7 @@
 id           = mountain_wolf
 name         = Giant Mountain Wolf
 
-encounter    = You \033[31mencounter\033[0m a wolf howling at the moonlight
+story        = You encounter a wolf howling at the moonlight
 warn         = The wolf growls at you as you try to get closer
 winning      = The wolf lets out a piercing cry then dies
 losing       = The wolf tears at your throat and you bleed out in seconds
@@ -40,6 +40,6 @@ hp           = 10
 atk          = 4
 def          = 3
 
-chance_event = 7
+chance       = 7
 score        = 3
 drops        = potion:2, steel_armor:3, steel_sword:3, medusa_head:2, teleporter:2, rusty_coin:8, dusty_lamp:8
