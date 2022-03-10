@@ -176,7 +176,7 @@ def the_game():
     # prints a problem message in red and includes the function where the error hapened
     def print_err( message ):
         text_to_print = f'\033[1;31merr=>{whoami(1)}: '+message+'\033[0m'
-        print(text_to_print)
+        #print(text_to_print)
 
 
     # print a debug message in grey to denugging purposes
