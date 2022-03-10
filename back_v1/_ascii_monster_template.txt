@@ -1,0 +1,39 @@
+####################################################################
+##                  *         *      *         *                  ## 
+##              ***          [31m**********[0m          ***              ## 
+##           *****           **********           *****           ## 
+##         *******           **********           *******         ## 
+##       **********         ************         **********       ## 
+##      ****************************************************      ## 
+##     ******************************************************     ## 
+##    ********************************************************    ## 
+##    ********************************************************    ## 
+##    ********************************************************    ## 
+##     ******************************************************     ## 
+##      ********      ************************      ********      ## 
+##       *******       *     *********      *       *******       ## 
+##         ******             *******              ******         ## 
+##           *****             *****              *****           ## 
+##              ***             ***              ***              ## 
+##                **             *              **                ## 
+####################################################################
+
+# for color:      [31m
+# to rest color:  [0m
+# othercolors:    30-black, 31-red, 32-green, 33-yellow, 34-blue, 35-purple, 36-cyan, 37-white
+
+id        = batman                                         # used in code, one word (could use snake_case)
+name      = The Batman                                     # the name, used in code - monster name
+
+encounter = You notice a strange person blah blah blah     # the encounter description 
+warn      = Luckily he tripped,                            # the warning text you get if you don't take action soon
+winning   = You defeated the beast                         # text display when you killed the monster 
+losing    = The beast killed you                           # text displaied when you were killed
+
+hp        = 10                       # base hp for the monster
+atk       = 3                        # base attack for the monster
+def       = 4                        # base defence fro the monster
+
+chance    = 5                        # chance of encountering the monster (out of 10)
+score     = 3                        # the score you get for defeting him
+drops     = bedroll:2, shuriken:8    # list of loot items it drops with what chance for each to drop (out of 10) - ex: 2 of 10 for shuriken to drop

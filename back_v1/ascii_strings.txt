@@ -1,0 +1,14 @@
+# Print random string when arriving at new map tile.
+# These strings are abut drescribing the area, nothing rekated to events or monsters
+
+encounter = You have arrived at a new area, honey bees are flying back and forth.
+encounter = You have arrived at a new area, harmless snakes are slithering in the grass.
+encounter = You have arrived at a farm, a farm girl is milking a cow. Monsters may be lurking in the fields.
+encounter = You have arrived at a new area, there are many strange flowers, the scent is overpowering.
+encounter = You have arrived at a new area, there are broken branches everywhere it seems you have been lucky to escape a Tornado.
+encounter = You have arrived at a new area, the ground is covered in strange items that may belong to a monster, be careful!
+encounter = You have arrived at a new area, there are animal bones and small scraps of meat, monsters must have been feasting here!
+encounter = You have arrived at a waterfall surrounded by fresh grass and flowers, paradise!
+encounter = You have arrived at a new area, the scent of freshly baked bread & meat pies makes you feel hungry.
+encounter = You have arrived at a new area, the trees are densely packed together, be careful not to get stuck!
+encounter = You have arrived at the entrance to a cave. A foul stench is apparent.

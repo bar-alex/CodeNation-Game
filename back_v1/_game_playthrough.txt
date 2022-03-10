@@ -1,0 +1,76 @@
+- starts the game
+    - print game intro story
+    - get player name
+    - start a new map tile/clearing
+        - update items cooldown
+        - print the story for the clearing/map tile
+        - roll for event or monster
+            - event: roll for what event
+                - action the event
+                    - print event ascii
+                    - print event story
+                    - collect all options for user: event + items + generic // attach function to run for each
+                    - print event options (need to know how many lines? or know that all start with "<no>.")
+                    - if won: print event win text
+                    - if lost: print event lose text
+                    - action/execute the effect / reward / drop
+                    - action/execute the user option menu(list of choices)
+                        - change user stats
+                        - if user hp=0
+                            - if player has lives: reset his HP, ATK and DEF and go out of monster branch (monster moved on)
+                            - if player doesn't have lives
+                                - print game you are dead -game over- ascii
+                                - print game you are dead -game over- text
+                                - print the score and the highscore ? (optional)
+                        - roll for drop item
+                            - if you get weapon/armor replace if its better
+                            - if you get potion add to lives
+                            - if you get loot item
+                                - inventory less than limit then add item to inventory
+                                - if inventory at limit (full) the offer choice on what to drop or abandon new item
+                        - move user to a new map tile/clearing (teleport action)
+            - monster: roll for what monster: if guarantee_flag, roll only for monsters not killed already
+                - action the monster
+                    - print the monster ascii
+                    - print the monster story
+                    - collect all options for user: event + items (actionable before) + generic // attach function to run for each
+                    - print event options (need to know how many lines? or know that all start with "<no>.")
+                        - clear event options and print warning
+                        - print event options
+                    - action option
+                        - teleport
+                        - petrify monster
+                        - start attacking routine
+                            - roll for user attack and monster defense
+                            - compound user attack and monsetr defense
+                            - compare and difference is substracted from monster HP
+                            - if monster is not dead, monster attacks
+                            - if monster HP is 0
+                                - print monster win message
+                                - add score to total
+                                - roll for drop item
+                                    - if you get weapon/armor replace if its better
+                                    - if you get potion add to lives
+                                    - if you get loot item
+                                        - inventory less than limit then add item to inventory
+                                        - if inventory at limit (full) the offer choice on what to drop or abandon new item
+                            - roll for monster attack and player defense
+                            - compound monster attack and player defense
+                            - compare and difference is substracted from player HP
+                            - if player HP > 0, go back to player attacking monster
+                            - is player HP is 0
+                                - print monster lose text 
+                                - if player has lives: reset his HP, ATK and DEF and go out of monster branch (monster moved on)
+                                - if player doesn't have lives
+                                    - print game you are dead ascii
+                                    - print game you are dead text
+                                    - print the score and the highscore ? (optional)
+            - nothing
+                - action for nothing
+                    - text for no encounter - clear tile
+            - collect all options for user: items (actionable after) + generic
+            - action the option
+                - if option sleep - restore health
+                    - if fail, run the monster attack routine, except the monster attacks first
+                    - if success update the HP stat to full
+                - if option is guarantee - set guarantee flag

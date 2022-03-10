@@ -1,31 +1,35 @@
-########################################################################
-##                                   GOD                              ##
-##              *      .            dZZZZZ,       .          *        ##
-##                                 dZZZZ  ZZ,                         ##
-##     *         .         ,AZZZZZZZZZZZ  `ZZ,_          *            ##
-##                    ,ZZZZZZV'      ZZZZ   `Z,`\                     ##
-##                  ,ZZZ    ZZ   .    ZZZZ   `V                       ##
-##        *      ZZZZV'     ZZ         ZZZZ    \_              .      ##
-##.              V   l   .   ZZ        ZZZZZZ          .              ##
-##               l    \       ZZ,     ZZZ  ZZZZZZ,                    ##
-##   .          /            ZZ l    ZZZ    ZZZ `Z,                   ##
-##                          ZZ  l   ZZZ     Z Z, `Z,            *     ##
-##                .        ZZ      ZZZ      Z  Z, `l                  ##
-##                         Z        ZZ      V  `Z   \                 ##
-##                         V        ZZC     l   V                     ##
-##           Z             l        V ZR        l      .              ##
-##            \             \       l  ZA                             ##
-##                            \         C          C                  ##
-##                                  \   K   /    /             K      ##
-##                          A    \   \  |  /  /              /        ##
-##                           \        \\|/ /  /                       ##
-##   __________________________________\|/_________________________   ##
-##                                                                    ##
-########################################################################
+## [33m                                  GOD                              [0m##
+## [33m             *      .            dZZZZZ,       .          *        [0m##
+## [33m                                dZZZZ  ZZ,                         [0m##
+## [33m    *         .         ,AZZZZZZZZZZZ  `ZZ,_          *            [0m##
+## [33m                   ,ZZZZZZV'      ZZZZ   `Z,`\                     [0m##
+## [33m                 ,ZZZ    ZZ   .    ZZZZ   `V                       [0m##
+## [33m       *      ZZZZV'     ZZ         ZZZZ    \_              .      [0m##
+## [33m              V   l   .   ZZ        ZZZZZZ          .              [0m##
+## [33m              l    \       ZZ,     ZZZ  ZZZZZZ,                    [0m##
+## [33m  .          /            ZZ l    ZZZ    ZZZ `Z,                   [0m##
+## [33m                         ZZ  l   ZZZ     Z Z, `Z,            *     [0m##
+## [33m               .        ZZ      ZZZ      Z  Z, `l                  [0m##
+## [33m                        Z        ZZ      V  `Z   \                 [0m##
+## [33m                        V        ZZC     l   V                     [0m##
+## [33m          Z             l        V ZR        l      .              [0m##
+## [33m           \             \       l  ZA                             [0m##
+## [33m                           \         C          C                  [0m##
+## [33m                                 \   K   /    /             K      [0m##
+## [33m                         A    \   \  |  /  /              /        [0m##
+## [33m                          \        \\|/ /  /                       [0m##
+## [33m  __________________________________\|/_________________________   [0m##
+## [33m                                                                   [0m##
+
+
+# for color:      [31m     [34m
+# to rest color:  [0m
+# othercolors:    30-black, 31-red, 32-green, 33-yellow, 34-blue, 35-purple, 36-cyan, 37-white
+
 
 id            = lightning_storm
 name          = Electrifying Lightning Storm
-chance_event  = 7 
+chance_event  = 3 
 
 story         = Your journey has been interrupted by a lightning storm. Fortunately there is a well nearby.
 action        = Climb down the well.

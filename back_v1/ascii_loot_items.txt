@@ -1,0 +1,178 @@
+#========================================  this is an explanation
+# id =                # an id name, used in code, ex: magic_flute
+# name =              # nice name to be displayed at times, like: Magical Flute
+# description =       # description that will be shown, ex: An extremly intricate flute that plays tunes out of this world 
+# type =              # special, used in code, one of these: weapon, armor, potion, loot, junk
+# stat_effect =       # the stat that it will affect, if it affects a stat: HP, ATK, DEF
+# modifier =          # the amount it will increase/decrease the stat with: 10, +3, -1
+# action_func =       # used in code, the special action function that will be called with the item: sleep, teleport
+# action_prompt =     # the text that the user will see and choose to execute the objects effect: Take a moment and play the flute
+# action_stage  =     # the stage when the item can be used in relation with the fight/event: before, after
+# action_chance =     # what chance out of 10 will the effect have to go through: 3
+# action_success =    # text to be displaied when the effect is succesfull: The birds have heard your song and gather around you
+# action_failed =     # a list of funny text to be chosen from when the item fails to do its action - for the 8ball, separate texts by "|"
+# cooldown =          # how often can it be used? once every how many clearings? ex: 3 - can be used again after the third clearing
+#========================================
+
+# list of loot IDs for monsters 
+# magic_flute, potion, steel_armor, steel_sword, medusa_head, teleporter, rusty_coin, dusty_lamp
+# list of loot IDs that are exclusive to events:
+# 8ball, bedroll, magic_flute
+# missing items: Dragon head
+
+# checklist.. have all lootdescriptions been completed?
+# mark [x] for DONE
+
+# magic_flute [x]
+# 8ball [x]
+# potion [x]
+# steel_armour [x]
+# steel_sword [x]
+# medusa_head [x]
+# teleporter [x]
+# bedroll [x]
+# rusty_coin [x]
+# dusty_lamp [x]
+
+
+#========================================  this is an example
+# id             = magic_flute
+# name           = Magical Flute
+# description    = An extremly intricate flute that plays otherworldly melodies. 
+# type           = loot
+# stat_effect    = 
+# modifier       = 
+# action_func    = play_flute
+# action_prompt  = Take a moment and play the flute.
+# action_stage   = after
+# action_success =    # text to be displaied when the effect is succesfull: The birds have heard your song and gather around you   = The birds have heard your song and gather around you.
+# action_chance  = 3
+# action_failed  = Your tongue has stuck to the flute. | You play nothing but discordant notes. | There was an attempt, but you don't want to talk about it.
+# cooldown       = 2
+#========================================
+
+
+#======================================== 
+id             = 
+name           = 
+description    = 
+type           = 
+stat_effect    = 
+modifier       = 
+action_chance  = 
+action_func    = 
+action_prompt  = 
+action_stage   = 
+action_success =    # text to be displaied when the effect is succesfull: The birds have heard your song and gather around you   = 
+action_failed  = 
+cooldown       = 
+
+
+#=======================================================================================================
+#=======================================================================================================
+
+
+#========================================
+id             = 8ball
+name           = Magical 8-ball
+description    = Strange energies converge around this magical 8-ball, you're sure that it holds great power but somehow you feel cheated.
+type           = loot
+stat_effect    = 
+modifier       = 
+action_chance  = 2
+action_func    = game_action_guarantee
+action_stage   = after
+action_prompt  = You rub the 8-ball and make a wish.
+action_success = You fell into a daze and strange images apear in your head. You don't know why, but you feel reassured.
+#action_failed  = You hear a voice in your head but you don't understand it. | That's for magical lamps you dummy, you think to yourself. | You made an attempt but you don't want to talk about it.
+action_failed  = You hear a voice in your head but you don't understand it.
+cooldown       = 2
+
+
+#========================================
+id             = potion
+name           = Angel's Tears
+description    = The vial holds a clear fluid that shines with a blue hue. This will come in handy. 
+type           = potion
+
+
+#========================================
+id             = steel_armor
+name           = Steel Armor
+description    = You feel reassured by the weight of this steel armor. If only it wouldn't squeak so much.
+type           = armor
+stat_effect    = DEF
+modifier       = +3
+
+
+#========================================
+id             = steel_sword
+name           = Steel Sword
+description    = The cold sensastion of this glorified butter knife gives you confidence like no other.
+type           = weapon
+stat_effect    = ATK
+modifier       = +2
+
+
+#========================================
+id             = medusa_head
+name           = Gorgon's Head
+description    = This grotesque symbol of your master's achievements might save your life someday. Only handle with a mirror!
+type           = loot
+stat_effect    = 
+modifier       = 
+action_chance  = 10
+action_func    = game_action_petrify
+action_prompt  = You lift Medusa's head into the air and whistle the monster for attention.
+action_stage   = before
+action_success = The creature's disgusting grimace will spoil the scenery forever.
+action_failed  = It will not fail! (it never fails, chance is 10)
+cooldown       = 3
+
+
+#========================================
+id             = teleporter
+name           = 'Porter Cube
+description    = A strange looking cube-shaped object. It's got some writing on the sides. Strangely enough, you can read it.
+type           = loot
+stat_effect    = 
+modifier       = 
+action_chance  = 8
+action_func    = game_action_teleport
+action_prompt  = Whilst trembling in fear you whisper the incantation inscribed on the sides of the cube.
+action_stage   = before
+action_success = You feel nauseous whilst levitating in a void. A few moments pass and suddenly your vision is filled with a different part of the forest. \nAt least you're in one piece. 
+action_failed  = You bite your tongue while casting and the spell fizzles. You'll have to try again at a later time.
+cooldown       = 2
+
+
+#========================================
+id             = bedroll
+name           = Sleeping Bag
+description    = Fresh sleeping bag. At least it would have been fresh, about 10 years ago.
+type           = loot
+stat_effect    = 
+modifier       = 
+action_chance  = 10
+action_func    = game_action_sleep
+action_prompt  = You roll out your sleeping bag and make yourself confortable. \nYou'll be able to sleep tonight but only if the mosquitos let you.
+action_stage   = after
+#action_success = You are well rested and your health is full. What else could you ask for?
+#action_failed  = You have been woken up by a noise in the bushes. You have been ambushed, get ready!
+cooldown       = 0
+
+
+#========================================
+id            = rusty_coin
+name          = Rusty Coin
+description   = You have collected quite a few of these, if you can find civilization you will be rich.
+type          = junk
+
+
+#========================================
+id            = dusty_lamp
+name          = Old Dusty Lamp
+description   = If you rub it, will a genie come out? You decide not to risk it.
+type          = junk
+
+

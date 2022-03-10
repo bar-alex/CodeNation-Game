@@ -1,0 +1,21 @@
+##
+
+checklist working on monsters and events
+mark as [x] when you have finished checking out and correcting a particular file
+
+fountain [x]
+lightning [x]
+log_cabin [x]
+tornado [x]
+game_loose [x]
+game_start [x]
+game_win [x]
+loot_items [x]
+dragon [x]
+flaming pumpkin [x]
+goblin [x]
+jack frost [x]
+ogre [x]
+orc []
+vampire [x]
+water snake [x]

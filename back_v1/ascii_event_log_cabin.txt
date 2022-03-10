@@ -1,0 +1,34 @@
+###################################################################
+##                                                               ##
+##                                                   /\          ##
+##                              [ ]                 /  \  /\     ##
+##                      ________[_]________      /\/    \/  \    ##
+##             /\      /\        ______    \    /   /\/\  /\/\   ##
+##            /  \    //_\       \    /\    \  /\/\/    \/    \  ##
+##     /\    / /\/\  //___\       \__/  \    \/                  ##
+##    /  \  /\/    \//_____\       \ |[]|     \                  ##
+##   /\/\/\/       //_______\       \|__|      \                 ##
+##  /      \      /XXXXXXXXXX\                  \                ##
+##          \    /_I_II  I__I_\__________________\               ##
+##                 I_I|  I__I_____[]_|_[]_____I                  ##
+##                 I_II  I__I_____[]_|_[]_____I                  ##
+##                 I II__I  I     XXXXXXX     I                  ##
+##              ~~~~~"   "~~~~~~~~~~~~~~~~~~~~~~~~               ##
+##                                                               ##
+###################################################################
+
+
+id            = log_cabin
+name          = Abandoned Log Cabin
+
+story         = You have arrived at an abandoned log cabin.
+chance_event  = 7 
+action        = Relax inside the abandoned log cabin.
+
+chance_effect = 
+affected_stat = 
+modifier      = 
+
+drops               = 8ball:3, bedroll:8, rusty_coin:8
+drop_text_success   = You have found a usefull '@@' inside the log cabin and decide to take it with you.
+drop_text_fail      = You rumage around the cabin, but with teh exception of some rusty cutlery you didn't discover anything of value.

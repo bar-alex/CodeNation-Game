@@ -1,7 +1,22 @@
 
+def input_key( allowed_chars:str = ' ', prompt_text = 'What is your choice?: '  ):
+    result = '@'
+    full_string = '0'+allowed_chars
+    while full_string.find( result ) < 0:
+        result = input( '\r'+prompt_text )
+        result = result.strip()[:1]
+    return result
 
-situation = 'events'
-print(situation in ['monster','event'])
+print(" type 1,2 or 3: ", end='')
+result = input_key('123')
+
+if result == 0: print(f'game up: {result}')
+else: print(f'good: {result}')
+
+
+
+# situation = 'events'
+# print(situation in ['monster','event'])
 
 
 # print(  'miau'[:2] )

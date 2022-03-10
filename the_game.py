@@ -110,19 +110,19 @@ def the_game():
     #chance_encounter_none = 2          # 2 out of 2 to have nothing special in the encounter
 
     player_max_hp            = 30       # set hp value for player - used in resets and poption
-    player_inventory_limit   = 0        # no limit for now
+    player_inventory_limit   = 3        # no limit for now
 
-    monster_fight_warn_time  = 5        # time to answer untill waring
-    monster_fight_total_time = 10       # time to answer untill failed
+    # monster_fight_warn_time  = 5        # time to answer untill waring
+    # monster_fight_total_time = 10       # time to answer untill failed
     
-    use_typewritter_effect   = True
+    use_typewritter_effect   = False
     print_debug_messages     = True
-    dont_use_msvcrt          = True
+    #dont_use_msvcrt          = True
     color_for_debug_messages = 35       # 30-black, 31-red, 32-green, 33-yellow, 34-blue, 35-purple, 36-cyan, 37-white
 
     # the player record - hods everything about the player
     player_data = {
-        'name'              : "",
+        'name'              : "no name for now",
         
         'hp'                : player_max_hp,
         'atk'               : 5,
@@ -155,6 +155,17 @@ def the_game():
     # action_functions is down because it has to be after the functions
 
 
+    # # will return 'win', 'linux', 'macos'
+    # def curent_platform():
+    #     from sys import platform
+    #     if platform == "linux" or platform == "linux2":
+    #         return 'linux'
+    #     elif platform == "darwin":
+    #         return 'mac'
+    #     elif platform == "win32":
+    #         return 'win'
+
+
     # useful in debug, tells the name of the calling function
     def whoami( lvl=0 ):
         import sys
@@ -182,18 +193,32 @@ def the_game():
         clear()
 
 
-    # reads a keypress from the buffer if theres one there, otherwise returns 0
-    def inkey():
-        import msvcrt
-        if not msvcrt.kbhit(): return 0         # nothing in beyboard buffer to be read
-        key = msvcrt.getch()
-        if ord(key) == 0: key = msvcrt.getch()  # special chars
-        if ord(key) == 3: exit()                # because getch prevents normal ctrl+c
-        return ord(key)
+    # # reads a keypress from the buffer if theres one there, otherwise returns 0
+    # def inkey():
+    #     import msvcrt
+    #     if not msvcrt.kbhit(): return 0         # nothing in beyboard buffer to be read
+    #     key = msvcrt.getch()
+    #     if ord(key) == 0: key = msvcrt.getch()  # special chars
+    #     if ord(key) == 3: exit()                # because getch prevents normal ctrl+c
+    #     return ord(key)
 
     # returns a key but waits the user to press it -- not to be used in loops
-    def input_key():
-        result = input()
+    # user mur return one of the chars in the allowed_chars or '0'
+    def input_key( allowed_chars = ' ', prompt_text = 'What is your choice? (0 - cancel/give up) : ', remove_prompt = False  ):
+        result = '@'
+        full_string = '0'+allowed_chars
+        while full_string.find( result ) < 0:
+            try:
+                result = input( '\r'+prompt_text )
+                result = result.strip()[:1]
+            except EOFError: 
+                result = '0'
+            result = 'x' if not result else result
+        # leave no trace
+        if remove_prompt: print( '\033[1A\r'+' '*len(prompt_text)+'\r', end='' )
+        return result
+
+
 
     # play a beeping sound, if list is provided must be a list of tuples/list of (tone,duration)
     # they will be played in succession
@@ -225,8 +250,8 @@ def the_game():
         if not use_typewritter_effect: rush_through = True      # apply global game setting
         for char in text:
             print(char, end='', flush=True)
-            if rush_on_enter_or_space and inkey() in [32,13]: 
-                rush_through = True
+            # if rush_on_enter_or_space and inkey() in [32,13]: 
+            #     rush_through = True
             if not rush_through:
                 sleep(delay)
                 if random_breaks:
@@ -249,33 +274,41 @@ def the_game():
         return result
 
 
+
     # answer must be from answer_list, will return 'failed' if no answer was given
-    def get_answer(answer_list, answer_time=0, warn_time=0, warn_text='', print_the_answer = True, prompt_text=''):
-        print_dbg(f" ~ answer_list='{answer_list}', answer_time={answer_time}, warn_time={warn_time}")
-        tick = 0.1
-        tick_answer = answer_time/tick
-        tick_warn = warn_time/tick
-        tick_count = 0
-        typewriter( prompt_text, newline = False)   
-        from time import sleep 
-        while answer_time==0 or (answer_time!=0 and tick_count<tick_answer):
-            sleep(0.1)
-            tick_count += 1
-            answer = inkey()    
-            #if o got allowed answer the return char
-            if chr(answer) in answer_list:
-                if print_the_answer: 
-                    print( chr(answer) )    # needs to jump
-                return chr(answer)
-            elif warn_time and warn_text and tick_count == tick_warn:
-                print("\r"+" "*50)      # delay=0.01
-                typewriter(warn_text)
-                typewriter( prompt_text, newline = False)   # display promp again
-            elif answer == 27:      # escape was pressed
-                print( '<ESC>', end='' )
-                return 'failed'
-            elif answer_time and tick_count == tick_answer:
-                return 'failed'
+    def get_answer(answer_list, prompt_text):
+        print_dbg(f" ~ answer_list='{answer_list}', warn_time={prompt_text}")
+        #-- 
+        answer = input_key(answer_list, prompt_text)
+        return answer
+
+    # # answer must be from answer_list, will return 'failed' if no answer was given
+    # def get_answer(answer_list, answer_time=0, warn_time=0, warn_text='', print_the_answer = True, prompt_text=''):
+    #     print_dbg(f" ~ answer_list='{answer_list}', answer_time={answer_time}, warn_time={warn_time}")
+    #     tick = 0.1
+    #     tick_answer = answer_time/tick
+    #     tick_warn = warn_time/tick
+    #     tick_count = 0
+    #     typewriter( prompt_text, newline = False)   
+    #     from time import sleep 
+    #     while answer_time==0 or (answer_time!=0 and tick_count<tick_answer):
+    #         sleep(0.1)
+    #         tick_count += 1
+    #         answer = inkey()    
+    #         #if o got allowed answer the return char
+    #         if chr(answer) in answer_list:
+    #             if print_the_answer: 
+    #                 print( chr(answer) )    # needs to jump
+    #             return chr(answer)
+    #         elif warn_time and warn_text and tick_count == tick_warn:
+    #             print("\r"+" "*50)      # delay=0.01
+    #             typewriter(warn_text)
+    #             typewriter( prompt_text, newline = False)   # display promp again
+    #         elif answer == 27:      # escape was pressed
+    #             print( '<ESC>', end='' )
+    #             return 'failed'
+    #         elif answer_time and tick_count == tick_answer:
+    #             return 'failed'
 
 
     # will scan all the files that start with a specified string, like "ascii_monster_"
@@ -379,7 +412,7 @@ def the_game():
 
     # reads the ascii_loot_items.txt and build a list of dictionaries for every item, with its properties
     def process_ascii_loot(file_name,dest_list):
-        print_dbg()
+        print_dbg(f" ~ file_name = '<file_name>'")
         with open(file_name,'r') as file:
             # will go line by line, when it encounters 'id' (its a new object) it will add the 'item_read' dict to the 'dest_list' 
             # if item_read['id'] its not empty, then creates a new 'item_read' and adds the 'id' property to it
@@ -420,7 +453,7 @@ def the_game():
 
     # will lload all the strings from ascii_strings.txt into encounters
     def process_ascii_strings( file_name ):
-        print_dbg()
+        print_dbg(f" ~ file_name = '<file_name>'")
         # open the file
         with open(file_name,'r') as file:
             # read from the file line by line in a for loop
@@ -572,12 +605,12 @@ def the_game():
 
     ## the game starts, initializes the player
     ## on restart it won't ask for name anymore     //# todo: the restart game feature
-    def game_player_reset( player_name = 'Player' ):
+    def game_player_reset( ):
         print_dbg()
 
         # reset player data
         player_data = {
-            'name'              : player_name,
+            'name'              : "no name for now",
             
             'hp'                : player_max_hp,
             'atk'               : 5,
@@ -601,21 +634,33 @@ def the_game():
     # will spawn a monster from the list of monsters
     def game_spawn_monster():
         print_dbg()
+        import random
 
         new_monster = {}
+        # repeats untill i got what i need
         while not new_monster:
+            # trying to make a more random random
+            new_monster_list = []
+            
             for mon in monsters: 
                 #-- if its guarantee, must be a monster that player hasn't killed before
                 if player_data['flag_guarantee'] and isinstance(player_data['killed_monsters'],dict) \
                 and player_data['killed_monsters'].get(mon['name'],0) : 
                     continue
+
                 #-- get the chance of spawning
                 mon_chance = mon.get('chance',5)    # if not defined, 50/50
+
                 if chance_it( mon_chance ):
-                    new_monster = mon.copy()
-                    player_data['flag_guarantee'] = False
-                    break
-        
+                    new_monster_list.append( mon.copy() )
+                    #new_monster = mon.copy()
+
+            #-- if i have any in list, i pick one of them at random
+            if len(new_monster_list) > 0:
+                new_monster = random.choice( new_monster_list )
+                player_data['flag_guarantee'] = False
+                break
+
         if not new_monster or not isinstance(new_monster, dict): 
             print_err(f"using random.chance() on monsters[] (len={len(monsters)}) didn't get a dict={new_monster}")
         
@@ -625,15 +670,23 @@ def the_game():
     # will spawn a new event that will be returned
     def game_spawn_event():
         print_dbg()
+        import random
 
         #-- gets an event from the list of events base on 'chance_event'
         new_event = {}
         while not new_event:    # isinstance(new_event, dict):
+
+            new_events_list = []
+
             for ev in events:
-                ev_chance = ev['chance_event'] if 'chance_event' in ev and ev['chance_event'] else 5
+                ev_chance = ev.get('chance_event',5)
                 if chance_it( ev_chance ):
-                    new_event = ev.copy()   # a copy of the event
-                    break
+                    new_events_list.append( ev.copy() )
+            
+            if len(new_events_list) > 0:
+                new_event = random.choice( new_events_list )
+                break
+
 
         if not new_event or not isinstance(new_event,dict): 
             print_err(f"using random.chance() on events[] (len={len(events)}) didn't get a dict={new_event}")
@@ -644,7 +697,7 @@ def the_game():
 
     # will read the list of drops from the monster/event and randomly spawn one for the player
     def game_spawn_loot_item( monster_event ):
-        print_dbg(f" ~ monster_event={monster_event}") 
+        print_dbg()  # print_dbg(f" ~ monster_event={monster_event}") 
         #-- sanity check, param must be dict
         if not isinstance(monster_event,dict): 
             print_err(f'parameter monster_event doesnt seem to be dict = {monster_event}')
@@ -691,43 +744,53 @@ def the_game():
 
     # will add the item to player's inventory, this is where i check the size of the inventory    
     def game_add_item_to_player( drop_item ):
-        print_dbg(f" ~ drop_item={drop_item}") 
+        print_dbg()     # print_dbg(f" ~ drop_item={drop_item}") 
 
         # theres a limit on the inventory, and the item list is up to the inventory
         if drop_item['type'] == 'loot':
 
-            if player_inventory_limit          \
-            and isinstance(player_data['items'],list)    \
-            and len(player_data['items'])==player_inventory_limit:
+            player_inv_list = player_data['items']      # player_inv_list[idx]['name']
+            # if its already in inventory just discard it
+            if isinstance(player_inv_list,list): 
+                if len( [ it for it in player_inv_list if it['id'] == drop_item['id'] ] )>0:
+                    discard_text = f"You realize you already have this item. You don't wanna break the space-time continuum, so you throw it away."
+                    typewriter(discard_text)
+                    return 
+
+            # has an invetory limit, player_data['items'] has total = invetory limit
+            if player_inventory_limit  and isinstance(player_inv_list,list)    \
+            and len(player_inv_list)==player_inventory_limit:
+
                 # player will be asked to remove something or abandon this drop
-                item_list = [ str(item) for item in player_data['items'] ]                  # ['potion','coin','head']
+                item_list = [ str( it['name'] ) for it in player_inv_list ]                     # ['potion','coin','head']
                 item_list = [ str(i+1)+'.'+item_list[i]+'\n' for i in range(len(item_list)) ]    # ['1.potion','2.coin','3.head']
                 text_inv  = ''.join( item_list )
 
-                answerlist = '0'.join( [str(i+1) for i in range(len(item_list))] )       # '0123456..'
+                answerlist = '0'.join( [ str(i+1) for i in range(len(item_list)) ] )       # '0123456..'
 
-                typewriter('Your inventory is full. Thes erase the items: ')
+                typewriter('Your inventory is full. These are the items: ')
                 typewriter(text_inv)
-                typewriter('Choose which to remove, or 0 to abandon this one: ')
+                #typewriter('Choose which to remove, or 0 to abandon this one: ')
                 
-                answer = get_answer(answerlist,)
-                if answer == 'failed': answer = 0     # he chose escape, default to abandon
+                prompt_text = 'Choose which to remove, or 0 to abandon this one: '
+                answer = int( get_answer(answerlist,prompt_text) )
+                #if answer == 'failed': answer = 0     # he chose escape, default to abandon
 
                 # he discarded an item
                 if answer > 0:
                     # player data[item] is a list of dictionaries, to access the name of 3nd one: player_data['items'][2]['name']
-                    typewriter(f"You chose to discard: {player_data['items'][answer-1]['name']}")
-                    player_data['items'].pop( answer-1 )        # pop the item off using the order of the list (answer-1)
+                    typewriter(f"You chose to discard: {player_inv_list[ answer-1 ]['name']}")
+                    player_inv_list.pop( answer-1 )        # pop the item off using the order of the list (answer-1)
                 else:
                     typewriter(f"You discarded: { drop_item['name'] }")
 
             # if the list doesn't exist, we create it
-            if not isinstance(player_data['items'],list): 
+            if not isinstance(player_inv_list,list): 
                 player_data['items'] = []
                 #player_data['items'].append( drop_item )
             # if theres room in the inventory
-            elif not player_inventory_limit or len(player_data['items'])<player_inventory_limit:
-                player_data['items'].append( drop_item )    # adds the new item
+            elif not player_inventory_limit or len(player_inv_list)<player_inventory_limit:
+                player_inv_list.append( drop_item )    # adds the new item
 
         elif drop_item['type'] == 'potion':
             player_data['lives'] += 1
@@ -737,6 +800,7 @@ def the_game():
             if not isinstance( player_data['weapon'], dict ) \
             or not player_data['weapon'].get('modifier','') \
             or player_data['weapon']['modifier'] < drop_item['modifier']:
+
                 player_data['weapon'] = drop_item
                 typewriter(f"You pick up the '{ drop_item['name'] }' and attach it to you belt. \nIt's swinging and makes you loose your balance every now and then.")
 
@@ -744,6 +808,7 @@ def the_game():
             if not isinstance( player_data['armor'], dict ) \
             or not player_data['armor'].get('modifier','') \
             or player_data['armor']['modifier'] < drop_item['modifier']:
+
                 player_data['armor'] = drop_item
                 typewriter(f"You equip the '{ drop_item['name'] }'. It's heavy and makes you clumsy but you feel reasured by it's sturdiness.")
 
@@ -761,9 +826,9 @@ def the_game():
     # if player died tries to revive him
     # updates player HP
     # if monster died adds him to kill_list
-    def game_action_fight( monster, player_attacks_first=True ):
-        print_dbg(f" ~ monster={monster}")
-    
+    def game_action_fight( monster ):       # , player_attacks_first=True
+        print_dbg()  # print_dbg(f" ~ monster={monster}")
+        
         # compute the atack and the defence
         player_atk = player_data['atk'] + player_data['weapon'].get('modifier',0)
         #   player_data['weapon']['modifier'] if isinstance( player_data['weapon'], dict ) and  else 0            
@@ -776,8 +841,12 @@ def the_game():
         text_battle = f"\nYou (Hp: {player_data['hp']} / Atk: {player_atk} / Def: {player_def}) face the monster (Hp: {monster['hp']} / Atk: {monster_atk} / Def: {monster_def} ) in combat.\n"
         typewriter( text_battle )
         
+        round = 0
         # while player and moster are still alive
         while monster['hp'] > 0 and player_data['hp']>0:
+            round += 1
+            text_battle = f':: Round {round} ::'
+            typewriter(text_battle)
             #player turn
             roll_player     = dice_roll()
             atk_player      = player_atk + roll_player
@@ -789,6 +858,7 @@ def the_game():
             monster['hp']   = monster['hp'] - hp_hit if monster['hp'] >= hp_hit else 0
             text_battle    += f"Monster takes a hit of {hp_hit}. \tMonster's HP is {monster['hp']} \n"
             typewriter(text_battle)
+            #sleep(0.5)
             # if monster dies, exit loop
             if monster['hp'] == 0: break
             # monster attacks
@@ -802,6 +872,10 @@ def the_game():
             player_data['hp'] = player_data['hp'] - hp_hit if player_data['hp'] >= hp_hit else 0
             text_battle    += f"You take a hit of {hp_hit}. \t\tYour HP is {player_data['hp']} \n"
             typewriter(text_battle)
+            #sleep(0.5)
+            input_key('x', "Press enter to continue .. ", remove_prompt = True)
+            # sleep a bit
+            
 
         # print message for you losing or winning
         # if you died, try to revive - get the choices of moving on, or game over
@@ -830,12 +904,15 @@ def the_game():
             # if you have a drop and you have an inventory limit you ask to remove something
             if drop: game_add_item_to_player( drop )  # will add the drp to plater inventory - this is where i handle inventory size
             # thats it, move on
+        
+        #input_key(' ',"Press enter to continue .. ")
+        input_key('x', "Press enter to continue .. ", remove_prompt = True)
 
 
 
     # actions the option from the event
     def game_action_event( param_event ):
-        print_dbg(f" ~ event={param_event}")
+        print_dbg()     # print_dbg(f" ~ event={param_event}")
 
         #-- if it's an effect, applies the effect 
         if param_event.get('affected_stat','') :    # if affected stat is not empty
@@ -883,24 +960,24 @@ def the_game():
 
         status_text = \
             f"=== Player stats:" \
-            + f"\n= health    : ({player_data['hp']}/{ player_max_hp })" \
-            + f"\n= Atack     : {player_data['atk']}" \
-            + f"\n= Defense   : {player_data['def']}" \
-            + f"\n= Weapon    : {player_data['weapon'].get('name','None')}" \
-            + f"\n= Armor     : {player_data['armor'].get('name','None')}" \
-            + f"\n= Potions   : {player_data['lives']}"
+            + f"\n=  health    : ({player_data['hp']}/{ player_max_hp })" \
+            + f"\n=  Atack     : {player_data['atk']}" \
+            + f"\n=  Defense   : {player_data['def']}" \
+            + f"\n=  Weapon    : {player_data['weapon'].get('name','None')}" \
+            + f"\n=  Armor     : {player_data['armor'].get('name','None')}" \
+            + f"\n=  Potions   : {player_data['lives']}"
         
         status_text += f"\n=== Items in the bag:"
         if len(player_data['items'])==0:
-            status_text += f"\n= None"
+            status_text += f"\n=  None"
         else:
             for it in player_data['items']:
                 item_name = it['name']
-                status_text +=   f"\n= {item_name}"
+                status_text +=   f"\n=  {item_name}"
 
         status_text += f"\n=== Monsters Killed:"
         if len(player_data['killed_monsters'])==0:
-            status_text += f"\n= None"
+            status_text += f"\n=  None"
         else:
             for mo, k in enumerate(player_data['killed_monsters']):
                 #mon_id      = player_data['killed_monsters'][mo]['name']
@@ -914,6 +991,8 @@ def the_game():
 
         typewriter( status_text+'\n' )
 
+        #input_key(' ',"Press enter to continue .. ")
+        input_key('x', "Press enter to continue .. ", remove_prompt = True)
 
 
     # will just print messages, and set a flag_teleporting 
@@ -931,7 +1010,7 @@ def the_game():
 
     # this is to petrify the monster
     def game_action_petrify( monster, item ):
-        print_dbg(f" ~ monster_event={monster}")
+        print_dbg()     # print_dbg(f" ~ monster_event={monster}")
         # get the item that has the petrify effect
         monster['hp'] = 0
         monster['petrified'] = True
@@ -958,7 +1037,7 @@ def the_game():
 
     # to execute the item's action
     def game_action_item( item, monster_event ):
-        print_dbg(f" ~ item={item}, monster_event={monster_event}")
+        print_dbg()     # print_dbg(f" ~ item={item}, monster_event={monster_event}")
 
         action_chance = item.get('action_chance',10)    # if 'action_chance' in item else 10
         action_func   = item.get('action_func','')      # if 'action_func' in item else ''
@@ -975,11 +1054,12 @@ def the_game():
             # not aplicable for the sleep mechanic
             if action_func != 'game_action_sleep': 
                 typewriter( text_failed ) 
-
+                print()
         else:       # it will happen
             # not aplicable for the sleep mechanic
             if action_func != 'game_action_sleep': 
                 typewriter( text_success )  
+                print()
             # couoldn't get eval() to work so i'm testing for each case and run it here
             action_func = action_func.lower()
             if False: None
@@ -1002,7 +1082,7 @@ def the_game():
 
     # is executed from game_player_show_choices() when the user makes a choice // it runs a specific function
     def game_choice_action( action_func,  monster_event={}, func_param={} ):
-        print_dbg(f" ~ action_func={action_func}, func_param={func_param}, monster_event={monster_event}")
+        print_dbg(f" ~ action_func={action_func}")  #, func_param={func_param}") #, monster_event={monster_event}")
         # test for each function that can be used and run the // tried using eval() but couldn't make it work for function inside another function
         if False: None
         elif action_func == 'game_action_fight':                # starts the fight loop with the monster
@@ -1028,7 +1108,7 @@ def the_game():
     # moster_event: the actual mosnter / event the player is dealing with atm (dict)
     # stage: before, after // the 'before' with monster will develop into a warning, then a fight
     def game_player_show_choices( situation, monster_event={}, stage='' ):
-        print_dbg(f" ~ situation={situation}, stage={stage}, monster_event={monster_event}")
+        print_dbg(f" ~ situation={situation}, stage={stage} ")  #, monster_event={monster_event}")
         
         # dbg: sanity check
         if situation in ['monster','event'] and not monster_event:
@@ -1106,31 +1186,34 @@ def the_game():
 
         # display the choices for the user to select
         allowed_answers = ''
+        
+        print()
         for option in player_choices:
             #print( '\t'+option['prompt'] )
             typewriter( option['prompt'] )
             allowed_answers += option['key']
 
-        # gets the timed values and warning text for the get_answer()
-        if situation == 'monster' and stage == 'before': 
-            answer_time = monster_fight_total_time
-            warn_time   = monster_fight_warn_time
-            if 'warn' in monster_event and monster_event['warn']:
-                warn_text   = monster_event['warn']
-            else:
-                warn_text   = "The creature noticed you and is hurrying towards you. \nYou should really do something, or you're toast"
-        else:
-            answer_time, warn_time, warn_text = 0, 0, ''
+        # # gets the timed values and warning text for the get_answer()
+        # if situation == 'monster' and stage == 'before': 
+        #     answer_time = monster_fight_total_time
+        #     warn_time   = monster_fight_warn_time
+        #     if 'warn' in monster_event and monster_event['warn']:
+        #         warn_text   = monster_event['warn']
+        #     else:
+        #         warn_text   = "The creature noticed you and is hurrying towards you. \nYou should really do something, or you're toast"
+        # else:
+        #     answer_time, warn_time, warn_text = 0, 0, ''
 
         # ask for an answer, then get answer
-        prompt_text = '\033[1;35mWhat do you choose? :\033[0m '
+        prompt_text = '\033[1;34mWhat do you choose? (0-Cancel): \033[0m '
         #typewriter( prompt_text, newline = False)
-        answer = get_answer( allowed_answers, answer_time, warn_time, warn_text, prompt_text = prompt_text )
+        #answer = get_answer( allowed_answers, answer_time, warn_time, warn_text, prompt_text = prompt_text )
+        answer = get_answer( allowed_answers, prompt_text )
         print()     # add a newline
 
         # if the player didn't aswer in time and it got shreded
         # update its hp with 0 and will be handled later on
-        if answer == 'failed': 
+        if answer == '0':   #  'failed': 
             # for monster fight display you got killed message if any -- message from the monster or general
             if situation == 'monster':
                 # the message is from the monster record
@@ -1144,7 +1227,7 @@ def the_game():
                 player_data['hp'] = 0
                 # check if you can revive him, if no end the game
                 print()
-                typewriter( "You .. there wasn't even a fight to lose! Your HP is 0." )
+                typewriter( "You .. there wasn't even a fight to lose, your HP is 0." )
                 
                 # can you revive? 
                 if player_data['lives'] > 0:
@@ -1156,8 +1239,8 @@ def the_game():
                     typewriter( 'After leaving you for dead, the monster went away into the forest.' )
                     print()
 
-                else:   # you're really dead
-                    # losing message form monster
+                else:   # you're really dead, no revivals
+                    # losing message got form monster
                     typewriter( losing_text )     # as in message for loosing against the monster
                     player_data['flag_leaving'] = True  # doesn't need to go through show_choices('after') bit
 
@@ -1171,8 +1254,8 @@ def the_game():
                 print_err(f"we should have at least an option here, \noption = {option}, answer = {answer}, player_choices = \n{player_choices}")
 
             # the function to be called for the chosen option
-            funct_to_call = option['func_call']
-            funct_param   = option['param']
+            funct_to_call = option.get('func_call','')
+            funct_param   = option.get('param',None)
 
             if funct_to_call:
                 game_choice_action( funct_to_call,  monster_event , funct_param )
@@ -1187,7 +1270,7 @@ def the_game():
 
 
     # the player encounters a monster
-    def game_encounter_monster( monster_attack_first = False ):
+    def game_encounter_monster( ):  #  monster_attack_first = False
         print_dbg()
         #-- spawn the monster
         new_monster = game_spawn_monster()
@@ -1315,7 +1398,7 @@ def the_game():
         player_name = ''       # not necesarly
 
         # reste player data - the plaer record with items, stats and score
-        game_player_reset( player_name )
+        game_player_reset()
 
         # print game start ascii and story
         game_print_start()

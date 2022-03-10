@@ -1,0 +1,39 @@
+########################################################################
+##                                   GOD                              ##
+##              *      .            dZZZZZ,       .          *        ##
+##                                 dZZZZ  ZZ,                         ##
+##     *         .         ,AZZZZZZZZZZZ  `ZZ,_          *            ##
+##                    ,ZZZZZZV'      ZZZZ   `Z,`\                     ##
+##                  ,ZZZ    ZZ   .    ZZZZ   `V                       ##
+##        *      ZZZZV'     ZZ         ZZZZ    \_              .      ##
+##.              V   l   .   ZZ        ZZZZZZ          .              ##
+##               l    \       ZZ,     ZZZ  ZZZZZZ,                    ##
+##   .          /            ZZ l    ZZZ    ZZZ `Z,                   ##
+##                          ZZ  l   ZZZ     Z Z, `Z,            *     ##
+##                .        ZZ      ZZZ      Z  Z, `l                  ##
+##                         Z        ZZ      V  `Z   \                 ##
+##                         V        ZZC     l   V                     ##
+##           Z             l        V ZR        l      .              ##
+##            \             \       l  ZA                             ##
+##                            \         C          C                  ##
+##                                  \   K   /    /             K      ##
+##                          A    \   \  |  /  /              /        ##
+##                           \        \\|/ /  /                       ##
+##   __________________________________\|/_________________________   ##
+##                                                                    ##
+########################################################################
+
+id            = lightning_storm
+name          = Electrifying Lightning Storm
+chance_event  = 7 
+
+story         = Your journey has been interrupted by a lightning storm. Fortunately there is a well nearby.
+action        = Climb down the well.
+
+chance_effect = 
+affected_stat = 
+modifier      = 
+
+drops               = 8ball:3, bedroll:2, rusty_coin:6
+drop_text_success   = At the bottom of the well you have found a '@@'.
+drop_text_fail      = You notice something shiny on the ground. \nUpon closer inspection you discover that it's only a piece of glass.

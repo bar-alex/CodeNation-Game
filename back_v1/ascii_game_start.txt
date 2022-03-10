@@ -1,0 +1,43 @@
+#########################################################################################
+##      .......::::::::::::)..           .......................(::::::........        ##
+##         .:::::;;;;;;;;):::::::.... .           .......:::::::::::::<......          ##
+##             <  >>>                   ,.                                             ##
+##     .::..  ;   I;L\  /L\.  ..::..   /iL.           |         ..::::::::::::..       ##
+##           ;    II;L\/LLLL;         / I;L\    \     |     / /\_                      ##
+##                II;..LLLLLL\    _._/ I;:.L\     \   |   / _/J; \                     ##
+##         :     IIIIi;..LLLLL\__/   IIII:..L\____  \###/  /JJI:  \                    ##
+##       ,;     ILIi;;;:...:LLL;\      IIIII;.LLLLL\#####/JJ II;   \                   ##
+##      ;     I LLii;;;.:.. :LLL;\     III;;;::LLLLL\###/JJ IIII;   \_.                ##
+##     :     IIILiii;;::.... :LLL;|      ;;I;;::.:LLLLLL:;IJ IIIII;:   \__.            ##
+##              IIIII IIii;;::;..;\          ;;:::...LLLL;IJIII;;    :::   \           ##
+##   :    ;    IIIIIIIIIii;;::.;..      _==|      ;..  :;IJIII;:::    ::    \          ##
+##       ;    ::::::::::::;;::..;  _==|   )__)  |                            \         ##
+##    '  '"  "  ""'""'""  ""'"  '"    )_)  )___) ))  ""''"   ""'"  "'" "'"'"'  "'""    ##
+##           '""   ""^^       ^~   )___) )____))_)   ~~         ""^^^""  '  "  "~"     ##
+##   ' ^^            ^        _    )____)_____))__)\      ~^~~^           ^^"          ##
+##        '^^          ^~      \---__|____/|___|___-\\--        "~"~         "~"       ##
+##      ''    '^          ~"~   \   oo oo oo oo     /      ~"      '~       ""~"       ##
+##           ____   ^^^"~   ~~^^^^^^^^^^^^^^^^^^^^^^    ^~^            ^~^^^           ##
+##         /  o   \     ""'"  __          __ "'"''     '   ''~     ~""~"`    ""''      ##
+##       < ____     \"'"    /    \   "' /    \       _          _    "~    _           ##
+##             |     |     |  __  |    |  __  |    /   \      /   \       / |          ##
+##       '''   |_____|  '  |__||__| '' |__||__| ' |_____| '' |_____| ""  /_/           ##
+##            '''     ~^^^^      '"""^^'''''^        '''''''""        '''''^^""        ##
+##      ''          '^^           ~^^~          ~^ '      ~~      '  ^   ^^^^^^^^      ##
+##                                                                                     ##
+#########################################################################################
+
+
+# I've changed how we handle the game_start/game_win/game_lose file, because there is more text involved, 
+# so mimght as well have it properly formated. Everything after "story=" until the end of file will be printed as is
+# including empty lines, with the exception of commented line (starting with '#', like this one)
+
+story = 
+The First Warrior King of Tristram is very old and close to death. 
+Having no male heirs, he has instructed all warriors in Tristram Kingdom to prove their strength by bringing back 
+the head of each type of monster in the Kingdom, including that of the infamous black dragon Drogo The Terrible. 
+
+If you complete this task you will become the new King of Tristram. 
+
+You reluctantly leave your village and your friends, but you're excited for this new adventure.
+You take a deep breath, and venture into the forest.

@@ -28,12 +28,6 @@
 ##                                                      ##
 ##########################################################
 
-
-# for color:      [31m         [36m
-# to rest color:  [0m
-# othercolors:    30-black, 31-red, 32-green, 33-yellow, 34-blue, 35-purple, 36-cyan, 37-white
-
-
 id           = mountain_wolf
 name         = Giant Mountain Wolf
 
