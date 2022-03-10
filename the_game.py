@@ -277,6 +277,8 @@ def the_game():
 
 
 
+
+
     # answer must be from answer_list, will return 'failed' if no answer was given
     def get_answer(answer_list, prompt_text):
         print_dbg(f" ~ answer_list='{answer_list}', warn_time={prompt_text}")
