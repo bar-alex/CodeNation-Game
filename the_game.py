@@ -105,8 +105,8 @@ def the_game():
     ascii_file_game_win      = 'ascii_game_win.txt'
     ascii_file_game_lose     = 'ascii_game_lose.txt'
 
-    chance_encounter_monster = 7        # 7 out of 10 to fight a monster
-    chance_encounter_event   = 6        # 5 out of 10 to have an event
+    chance_encounter_monster = 5        # 7 out of 10 to fight a monster
+    chance_encounter_event   = 4        # 5 out of 10 to have an event
     #chance_encounter_none = 2          # 2 out of 2 to have nothing special in the encounter
 
     player_max_hp            = 30       # set hp value for player - used in resets and poption
@@ -116,7 +116,8 @@ def the_game():
     monster_fight_total_time = 10       # time to answer untill failed
     
     use_typewritter_effect   = True
-    print_debug_messages     = False
+    print_debug_messages     = True
+    dont_use_msvcrt          = True
     color_for_debug_messages = 35       # 30-black, 31-red, 32-green, 33-yellow, 34-blue, 35-purple, 36-cyan, 37-white
 
     # the player record - hods everything about the player
@@ -190,25 +191,28 @@ def the_game():
         if ord(key) == 3: exit()                # because getch prevents normal ctrl+c
         return ord(key)
 
+    # returns a key but waits the user to press it -- not to be used in loops
+    def input_key():
+        result = input()
 
     # play a beeping sound, if list is provided must be a list of tuples/list of (tone,duration)
     # they will be played in succession
-    def beep( duration = 100, frequency = 2500):
-        # Set Frequency To 2500 Hertz
-        # Set Duration To 1000 ms == 1 second
-        import winsound
-        winsound.Beep(frequency, duration)
+    # def beep( duration = 100, frequency = 2500):
+    #     # Set Frequency To 2500 Hertz
+    #     # Set Duration To 1000 ms == 1 second
+    #     import winsound
+    #     winsound.Beep(frequency, duration)
 
 
     # will play the list of bees provided, can be stoped with space/enter, like the typewritter
     # list_of_beeps must be a list of (tone,duraction)
-    def beep_from_list( list_of_beeps = [], stop_on_enter_space = True ):
-        # will use beep to play 
-        for beep_pair in list_of_beeps:
-            tone     = beep_pair[0]
-            duration = beep_pair[1]
-            beep( duration, tone )
-            if stop_on_enter_space and inkey() in [32,13]: break
+    # def beep_from_list( list_of_beeps = [], stop_on_enter_space = True ):
+    #     # will use beep to play 
+    #     for beep_pair in list_of_beeps:
+    #         tone     = beep_pair[0]
+    #         duration = beep_pair[1]
+    #         beep( duration, tone )
+    #         if stop_on_enter_space and inkey() in [32,13]: break
 
 
     # delay can be changed, can have 3 x delay on space, can have random (1 in 5) 3 x delay while writing the text
@@ -534,7 +538,7 @@ def the_game():
                 exit()
         # check theres at least a monster and an event file
         from os import listdir, getcwd
-        from os.path import isfile, join
+        #from os.path import isfile, join
         curent_dir = getcwd()
         if not [f for f in listdir(curent_dir) if f[:len(ascii_file_stem_monster)].lower()==ascii_file_stem_monster] \
             or not [f for f in listdir(curent_dir) if f[:len(ascii_file_stem_event)].lower()==ascii_file_stem_event]:
@@ -1193,7 +1197,11 @@ def the_game():
         #-- print message for the event
         print_story( '\033[1m'+new_monster['name']+'\033[0m' )
         print()
-        print_story( new_monster['story'] )
+        
+        if not new_monster.get('story',''): 
+            print_err(f"monster doesn't seem to have story={new_monster}")
+
+        print_story( new_monster.get('story','') )
         #-- player options before
         game_player_show_choices( 'monster', new_monster, 'before' )
         #-- if its flag_teleporting he chose to teleport away
@@ -1272,9 +1280,14 @@ def the_game():
         #game_encounter_monster()
         #return 
         # will chance what will happen next
-        if chance_it(chance_encounter_monster):
+        chance_monster = chance_it(chance_encounter_monster)
+        chance_event   = chance_it(chance_encounter_event)
+        
+        print(f'chnace for monster: {chance_monster}, chance for event: {chance_event}')
+
+        if chance_monster:
              game_encounter_monster()
-        elif chance_it(chance_encounter_event):
+        elif chance_event:
              game_encounter_event()
         else: 
              game_encounter_none()

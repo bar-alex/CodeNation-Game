@@ -8,16 +8,17 @@
 #\033[31m
 #\033[0m
 
-print("This is my \033[31mchurch\033[0m. ")
+# print("This is my \033[31mchurch\033[0m. ")
 
-print('The wolf \033[31mgrowls\033[0m at you as you try to get closer')
-winning = 'The wolf lets out a \033[34mpiercing\033[0m cry, then falls to the ground'
-print(winning)
+# print('The wolf \033[31mgrowls\033[0m at you as you try to get closer')
+# winning = 'The wolf lets out a \033[34mpiercing\033[0m cry, then falls to the ground'
+# print(winning)
 
 
 #with open('ascii_wolf.txt','r', encoding="latin-1") as file:       "unicode_escape"
 
-file_name = 'ascii_monster_wolf_dest.txt'
+file_name = 'ascii_event_fountain.txt'
+#file_name = 'ascii_monster_wolf.txt'
 with open(file_name,'r') as file:        # , encoding="unicode_escape"
 #with open('ascii_wolf.txt','r') as file:
     
