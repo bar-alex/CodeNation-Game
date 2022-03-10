@@ -58,8 +58,8 @@ losing    = The Muscular Orc swings his giant hammer and knocks your unconscious
 
 hp        = 10
 atk       = 5
-def       = 4
+def       = 3
 
-chance    = 6
+chance    = 3
 score     = 5
-drops     = potion:2, steel_armor:3, steel_sword:3, medusa_head:2, teleporter:2, rusty_coin:8, dusty_lamp:8
+drops     = potion:2, steel_armor:3, steel_sword:3, medusa_head:2, teleporter:2, rusty_coin:8

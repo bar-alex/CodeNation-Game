@@ -29,7 +29,7 @@
 
 id            = lightning_storm
 name          = Electrifying Lightning Storm
-chance_event  = 3 
+chance_event  = 2 
 
 story         = Your journey has been interrupted by a lightning storm. Fortunately there is a well nearby.
 action        = Climb down the well.

@@ -33,7 +33,7 @@ id            = tornado
 name          = Seriously Badass Tornado
 
 story         = You have been whipped up high into the heavens above by a random Tornado.\nYou have landed on the edge of a cliff. Unfortunately the cliff edge is unable to support your weight and you plunge to your death.
-chance_event  = 1 
+chance_event  = 4 
 action        = 
 
 chance_effect = 1

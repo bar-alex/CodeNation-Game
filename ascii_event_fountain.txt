@@ -34,7 +34,7 @@ name          = Exquisite Fountain
 
 story         = You have arrived on the land of a rich family, there is an attractive water fountain with suspiciously glinting objects.
 action        = Investigate the suspicious objects
-chance_event  = 3 
+chance_event  = 1 
 
 chance_effect = 
 affected_stat = 

@@ -112,10 +112,10 @@ def the_game():
     player_max_hp            = 30       # set hp value for player - used in resets and poption
     player_inventory_limit   = 3        # no limit for now
 
-    # monster_fight_warn_time  = 5        # time to answer untill waring
-    # monster_fight_total_time = 10       # time to answer untill failed
+    # monster_fight_warn_time  = 5        # time to answer until waring
+    # monster_fight_total_time = 10       # time to answer until failed
     
-    use_typewritter_effect   = True
+    use_typewritter_effect   = False
     print_debug_messages     = False
     #dont_use_msvcrt          = True
     color_for_debug_messages = 35       # 30-black, 31-red, 32-green, 33-yellow, 34-blue, 35-purple, 36-cyan, 37-white
@@ -139,6 +139,7 @@ def the_game():
         'flag_guarantee'    : False,  # when True, next monster will be one you don't have
         'flag_teleporting'  : False,  # if set to True it will teleport away from the 
         'flag_leaving'      : False,  # will be set to True to leave the loof of choices
+        'flag_quiting_game'  : False,  # when set to True will quite the game
     }
 
     monsters        = []     # list of dictionaries (dicts)
@@ -206,14 +207,15 @@ def the_game():
     # user mur return one of the chars in the allowed_chars or '0'
     def input_key( allowed_chars = ' ', prompt_text = 'What is your choice? (0 - cancel/give up) : ', remove_prompt = False  ):
         result = '@'
-        full_string = '0'+allowed_chars
+        full_string = '0'+allowed_chars.upper()
         while full_string.find( result ) < 0:
             try:
                 result = input( '\r'+prompt_text )
                 result = result.strip()[:1]
+                result = result.upper()
             except EOFError: 
                 result = '0'
-            result = 'x' if not result else result
+            result = 'X' if not result else result
         # leave no trace
         if remove_prompt: print( '\033[1A\r'+' '*len(prompt_text)+'\r', end='' )
         return result
@@ -529,7 +531,7 @@ def the_game():
         # print ascii using "print_ascii(text)" and print the story using "print_story(text)" instead of  notmal print
         print_ascii_and_story_from_file( ascii_file_game_start ) 
 
-        input_key('x', "Press enter to continue .. ", remove_prompt = True)
+        input_key('x', "Press <ENTER> to continue .. ", remove_prompt = True)
 
 
 
@@ -547,7 +549,7 @@ def the_game():
         else: 
             print_ascii_and_story_from_file( ascii_file_game_lose ) 
 
-        input_key('x', "Press enter to continue .. ", remove_prompt = True)
+        input_key('x', "Press <ENTER> to continue .. ", remove_prompt = True)
 
 
 
@@ -643,7 +645,7 @@ def the_game():
         import random
 
         new_monster = {}
-        # repeats untill i got what i need
+        # repeats until i got what i need
         while not new_monster:
             # trying to make a more random random
             new_monster_list = []
@@ -723,7 +725,7 @@ def the_game():
                     #item_id        = item[0]           # monster/event holds the list of the items ids
                     item_from_loot = [ it for it in loot_items if it['id'] == item_id ]  
                     # should return only one, if not, we have a problem
-                    if len(item_from_loot) != 1 and item['type']!='junk' :
+                    if len(item_from_loot) != 1:        # and item[]['type']!='junk' 
                         print_err(f"searching in loot for id='{item_id}' got {len(item_from_loot)} matches: {item_from_loot} list:{loot_items}")
                     # copy the item
                     drop_item = item_from_loot[0].copy()
@@ -879,7 +881,7 @@ def the_game():
             text_battle    += f"You take a hit of {hp_hit}. \t\tYour HP is {player_data['hp']} \n"
             typewriter(text_battle)
             #sleep(0.5)
-            input_key('x', "Press enter to continue .. ", remove_prompt = True)
+            input_key('x', "Press <ENTER> to continue .. ", remove_prompt = True)
             # sleep a bit
             
 
@@ -890,7 +892,7 @@ def the_game():
             # can you revive? 
             if player_data['lives'] > 0:
                 player_data['lives'] -= 1
-                typewriter( 'Luckly, you managet to sip a potion of restoration before you died.' )
+                typewriter( 'Luckily, you managed to sip a potion of restoration before you died.' )
                 player_data['hp'] = player_max_hp
 
             else:   # you're really dead
@@ -906,13 +908,13 @@ def the_game():
             #-- drop item 
             drop = game_spawn_loot_item( monster )
             #-- if the monster dropped something i display the item name // for the fight
-            typewriter(f"You search your oponents remains and discover { drop['name'] if drop else 'Nothing.' }")
+            typewriter(f"You search your opponents remains and discover { drop['name'] if drop else 'Nothing.' }")
             # if you have a drop and you have an inventory limit you ask to remove something
-            if drop and drop['type']!='junk': game_add_item_to_player( drop )  # will add the drp to plater inventory - this is where i handle inventory size
+            if drop and drop.get('type','junk')!='junk': game_add_item_to_player( drop )  # will add the drp to plater inventory - this is where i handle inventory size
             # thats it, move on
         
-        #input_key(' ',"Press enter to continue .. ")
-        input_key('x', "Press enter to continue .. ", remove_prompt = True)
+        #input_key(' ',"Press <ENTER> to continue .. ")
+        input_key('x', "Press <ENTER> to continue .. ", remove_prompt = True)
 
 
 
@@ -940,7 +942,7 @@ def the_game():
                 # if param_event.get('drop_text_success','') : 
                 #     typewriter( param_event['drop_text_success'] )
                 
-                if item_drop['type']!='junk':
+                if item_drop.get('type','junk')!='junk':
                     game_add_item_to_player( item_drop )  # will add the drp to plater inventory - this is where i handle inventory size
             else:
                 if param_event.get('drop_text_fail','') : 
@@ -990,6 +992,7 @@ def the_game():
                 #mon_id      = player_data['killed_monsters'][mo]['name']
                 #mon_name    = [ mon['name'] for mon in monsters if mon['id'] == mon_id ]
                 #mon_count   = player_data['killed_monsters'][mon_id]
+                
                 status_text += f"\n= {k} : {player_data['killed_monsters'][k]}"
 
         status_text += f"\n= Monsters remaining: { len(monsters) - len(player_data['killed_monsters']) }"
@@ -998,8 +1001,8 @@ def the_game():
 
         typewriter( status_text+'\n' )
 
-        #input_key(' ',"Press enter to continue .. ")
-        input_key('x', "Press enter to continue .. ", remove_prompt = True)
+        #input_key(' ',"Press <ENTER> to continue .. ")
+        input_key('x', "Press <ENTER> to continue .. ", remove_prompt = True)
 
 
     # will just print messages, and set a flag_teleporting 
@@ -1029,16 +1032,22 @@ def the_game():
     def game_action_sleep( item ):
         print_dbg()
 
+        player_data['hp'] = player_max_hp
+        
         text_action_success = item.get('action_success','')
-        text_action_failed  = item.get('action_failed','')
+        typewriter( text_action_success )
 
-        if chance_it(5): # 50/50
-            player_data['hp'] = player_max_hp
-            typewriter( text_action_success )
-        else: 
-            typewriter( text_action_failed )
-            monster = game_spawn_monster()
-            game_action_fight( monster, False )
+
+        # text_action_success = item.get('action_success','')
+        # text_action_failed  = item.get('action_failed','')
+
+        # if chance_it(5): # 50/50
+        #     player_data['hp'] = player_max_hp
+        #     typewriter( text_action_success )
+        # else: 
+        #     typewriter( text_action_failed )
+        #     monster = game_spawn_monster()
+        #     game_action_fight( monster, False )
 
 
 
@@ -1196,7 +1205,7 @@ def the_game():
         
         print()
 
-        typewriter( '\033[1;34mYou have the following options: \033[0m ' )
+        typewriter( '\033[1;34mYou have the following options. Please pick one of the numbers: \033[0m ' )
 
         for option in player_choices:
             #print( '\t'+option['prompt'] )
@@ -1218,20 +1227,29 @@ def the_game():
         prompt_text = '\033[1;34mWhat do you choose? (0-Cancel): \033[0m '
         #typewriter( prompt_text, newline = False)
         #answer = get_answer( allowed_answers, answer_time, warn_time, warn_text, prompt_text = prompt_text )
+
         answer = get_answer( allowed_answers, prompt_text )
         print()     # add a newline
 
         # if the player didn't aswer in time and it got shreded
         # update its hp with 0 and will be handled later on
         if answer == '0':   #  'failed': 
+
+            prompt_text = '\033[1;32mDo you want to give up on your adventure? (Y/N): \033[0m '
+            print()
+            ans_new = get_answer( 'YN', prompt_text )
+            if ans_new == 'Y':
+                player_data['flag_quiting_game'] = True
+                return
+
             # for monster fight display you got killed message if any -- message from the monster or general
-            if situation == 'monster':
+            if situation == 'monster' and monster_event['hp'] > 0:
                 # the message is from the monster record
                 if monster_event.get('losing','') \
                 and monster_event['losing']:
                     losing_text = monster_event['losing']
                 else: 
-                    losing_text = "The fiend attacks you relentlesly untill you succumb from your wounds."
+                    losing_text = "The fiend attacks you relentlessly until you succumb to your wounds."
 
                 # the player hp goes to 0
                 player_data['hp'] = 0
@@ -1244,7 +1262,7 @@ def the_game():
                     player_data['lives'] -= 1
                     player_data['hp'] = player_max_hp
                     print()
-                    typewriter( f"Luckly, you managet to sip a potion of restoration before you died. Your HP is {player_data['lives']}" )
+                    typewriter( f"Luckly, you managed to sip a potion of restoration before you died. Your HP is {player_data['lives']}" )
                     print()
                     typewriter( 'After leaving you for dead, the monster went away into the forest.' )
                     print()
@@ -1253,6 +1271,16 @@ def the_game():
                     # losing message got form monster
                     typewriter( losing_text )     # as in message for loosing against the monster
                     player_data['flag_leaving'] = True  # doesn't need to go through show_choices('after') bit
+
+            # # might want to leave the game
+            # else:
+            #     prompt_text = '\033[1;32mDo you want to give up on your adventure? (Y/N): \033[0m '
+            #     print()
+            #     ans_new = get_answer( 'YN', prompt_text )
+            #     if ans_new == 'Y':
+            #         player_data['flag_quiting_game'] = True
+            #         return
+
 
         # now we handle the choices
         else: 
@@ -1264,8 +1292,13 @@ def the_game():
                 print_err(f"we should have at least an option here, \noption = {option}, answer = {answer}, player_choices = \n{player_choices}")
 
             # the function to be called for the chosen option
-            funct_to_call = option.get('func_call','')
-            funct_param   = option.get('param',None)
+            if option:
+                funct_to_call = option.get('func_call','')
+                funct_param   = option.get('param',None)
+            else:
+                funct_to_call = ''
+                funct_param   = ''
+
 
             if funct_to_call:
                 game_choice_action( funct_to_call,  monster_event , funct_param )
@@ -1303,8 +1336,9 @@ def the_game():
             return
         #-- player options after
         player_data['flag_leaving'] = False
-        # loop over the choices untill he decides to leave or he's dead or he won
-        while not player_data['flag_leaving'] and player_can_do_new_tile():
+        # loop over the choices until he decides to leave or he's dead or he won
+        while   not player_data['flag_leaving'] and not player_data['flag_quiting_game'] \
+                and player_can_do_new_tile():
             # nothng to do, empty clearing, show choices to user
             game_player_show_choices( 'monster', new_monster, 'after' )
 
@@ -1326,8 +1360,8 @@ def the_game():
         
         # it will stay in a loop until the choice was made to leave
         player_data['flag_leaving'] = False
-        # loop over the choices untill he decides to leave
-        while not player_data['flag_leaving']:
+        # loop over the choices until he decides to leave
+        while not player_data['flag_leaving'] and not player_data['flag_quiting_game']:
             game_player_show_choices( 'event', new_event )
 
 
@@ -1340,8 +1374,8 @@ def the_game():
         print()
         # it will stay in a loop until the choice was made to leave
         player_data['flag_leaving'] = False
-        # loop over the choices untill he decides to leave
-        while not player_data['flag_leaving']:
+        # loop over the choices until he decides to leave
+        while not player_data['flag_leaving'] and not player_data['flag_quiting_game']:
             # nothng to do, empty clearing, show choices to user
             game_player_show_choices( 'none' )
 
@@ -1376,7 +1410,7 @@ def the_game():
         chance_monster = chance_it(chance_encounter_monster)
         chance_event   = chance_it(chance_encounter_event)
         
-        print(f'chnace for monster: {chance_monster}, chance for event: {chance_event}')
+        #print(f'chnace for monster: {chance_monster}, chance for event: {chance_event}')
 
         if chance_monster:
              game_encounter_monster()
@@ -1405,7 +1439,7 @@ def the_game():
         print_dbg()
 
         # todo: get player name
-        player_name = ''       # not necesarly
+        player_name = ''       # not necesary realy, maybe later
 
         # reste player data - the plaer record with items, stats and score
         game_player_reset()
@@ -1414,7 +1448,7 @@ def the_game():
         game_print_start()
         
         # throw tiles at the player in a loop
-        while player_can_do_new_tile():
+        while player_can_do_new_tile() and not player_data['flag_quiting_game']:
             game_move_new_tile()
             # debug: kill player
             #player_data['hp'] = 0

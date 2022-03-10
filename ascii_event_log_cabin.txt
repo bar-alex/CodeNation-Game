@@ -34,5 +34,5 @@ affected_stat =
 modifier      = 
 
 drops               = 8ball:3, bedroll:8, rusty_coin:8
-drop_text_success   = You have found a usefull '@@' inside the log cabin and decide to take it with you.
+drop_text_success   = You have found a useful '@@' inside the log cabin and decide to take it with you.
 drop_text_fail      = You rumage around the cabin, but with teh exception of some rusty cutlery you didn't discover anything of value.

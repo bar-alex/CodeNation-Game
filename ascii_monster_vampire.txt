@@ -48,8 +48,8 @@ losing      = The Vampire's fangs sink deep into your neck, your blood is rapidl
 
 hp          = 10                         
 atk         = 5                    
-def         = 7                         
+def         = 3                         
 
-chance      = 3                     
+chance      = 4                     
 score       = 5                        
-drops       = potion:2, steel_armor:3, steel_sword:3, medusa_head:2, teleporter:2, rusty_coin:8, dusty_lamp:8
+drops       = potion:2, steel_armor:3, steel_sword:3, medusa_head:2, teleporter:2, rusty_coin:8
