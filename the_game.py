@@ -276,15 +276,13 @@ def the_game():
         return result
 
 
-
-
-
     # answer must be from answer_list, will return 'failed' if no answer was given
     def get_answer(answer_list, prompt_text):
         print_dbg(f" ~ answer_list='{answer_list}', warn_time={prompt_text}")
         #-- 
         answer = input_key(answer_list, prompt_text)
         return answer
+
 
     # # answer must be from answer_list, will return 'failed' if no answer was given
     # def get_answer(answer_list, answer_time=0, warn_time=0, warn_text='', print_the_answer = True, prompt_text=''):
@@ -547,8 +545,10 @@ def the_game():
         player_won = player_still_alive and player_killed_all
 
         if player_won: 
+            print()
             print_ascii_and_story_from_file( ascii_file_game_win ) 
         else: 
+            print()
             print_ascii_and_story_from_file( ascii_file_game_lose ) 
 
         input_key('x', "Press <ENTER> to continue .. ", remove_prompt = True)
@@ -640,11 +640,22 @@ def the_game():
         }
 
 
+    # checks if player has the 8ball
+    def plpayer_has_8ball():
+        for it in player_data['items']:
+            #print(it)
+            if it['name'] == 'Magical 8-ball':
+                return True
+        return False
+
 
     # will spawn a monster from the list of monsters
     def game_spawn_monster():
         print_dbg()
         import random
+
+        # make it easy, if it has an 8ball - make it a garantee you get a new monster
+        local_guarantee = plpayer_has_8ball()
 
         new_monster = {}
         # repeats until i got what i need
@@ -654,8 +665,9 @@ def the_game():
             
             for mon in monsters: 
                 #-- if its guarantee, must be a monster that player hasn't killed before
-                if player_data['flag_guarantee'] and isinstance(player_data['killed_monsters'],dict) \
-                and player_data['killed_monsters'].get(mon['name'],0) : 
+                if (player_data['flag_guarantee'] or local_guarantee) \
+                    and isinstance(player_data['killed_monsters'],dict) \
+                    and player_data['killed_monsters'].get(mon['name'],0) : 
                     continue
 
                 #-- get the chance of spawning
@@ -722,6 +734,11 @@ def the_game():
                 #chance = monster_event['drops'][1] if isinstance(monster_event['drops'][1],int) else 10
                 item_id = item[0]
                 chance  = item[1] if len(item)==2 else 5
+
+                # -- in case you alteady have armor / weapon stop getting them ? 
+                # for it in loot_items:
+                #     if it['type']
+                # if loot_items
 
                 if chance_it(chance) :
                     #item_id        = item[0]           # monster/event holds the list of the items ids
@@ -866,7 +883,7 @@ def the_game():
             text_battle     = f"You roll {roll_player}. \t\t\tYou attack monster with {atk_player}\n"
             text_battle    += f"Monster rolls {roll_monster}. \t\tHe defends with {def_monster}\n"
             monster['hp']   = monster['hp'] - hp_hit if monster['hp'] >= hp_hit else 0
-            text_battle    += f"Monster takes a hit of {hp_hit}. \tMonster's HP is {monster['hp']} \n"
+            text_battle    += f"Monster takes a hit of {hp_hit}. \tMonster's HP is [33m{monster['hp']}[0m \n"
             typewriter(text_battle)
             #sleep(0.5)
             # if monster dies, exit loop
@@ -880,7 +897,7 @@ def the_game():
             text_battle     = f"Monster rolls {roll_monster}. \t\tHe attacks you with {atk_monster}\n"
             text_battle    += f"You roll {roll_player}. \t\t\tYou defend with {def_player}\n"
             player_data['hp'] = player_data['hp'] - hp_hit if player_data['hp'] >= hp_hit else 0
-            text_battle    += f"You take a hit of {hp_hit}. \t\tYour HP is {player_data['hp']} \n"
+            text_battle    += f"You take a hit of {hp_hit}. \t\tYour HP is [33m{player_data['hp']}[0m \n"
             typewriter(text_battle)
             #sleep(0.5)
             input_key('x', "Press <ENTER> to continue .. ", remove_prompt = True)
@@ -910,7 +927,7 @@ def the_game():
             #-- drop item 
             drop = game_spawn_loot_item( monster )
             #-- if the monster dropped something i display the item name // for the fight
-            typewriter(f"You search your opponents remains and discover { drop['name'] if drop else 'Nothing.' }")
+            typewriter(f"You search your opponents remains and discover [36m{ drop['name'] if drop else 'Nothing.' }[0m")
             # if you have a drop and you have an inventory limit you ask to remove something
             if drop and drop.get('type','junk')!='junk': game_add_item_to_player( drop )  # will add the drp to plater inventory - this is where i handle inventory size
             # thats it, move on
@@ -1051,6 +1068,16 @@ def the_game():
         #     monster = game_spawn_monster()
         #     game_action_fight( monster, False )
 
+
+    # will revive the player with the potion
+    def player_revive_with_potion():
+        player_data['lives'] -= 1
+        player_data['hp'] = player_max_hp
+        print()
+        typewriter( f"Luckly, you managed to sip a potion of restoration before you died. You have {player_data['lives']} potions left" )
+        print()
+        typewriter( 'After leaving you for dead, the monster went away into the forest.' )
+        print()
 
 
     # to execute the item's action
@@ -1261,13 +1288,7 @@ def the_game():
                 
                 # can you revive? 
                 if player_data['lives'] > 0:
-                    player_data['lives'] -= 1
-                    player_data['hp'] = player_max_hp
-                    print()
-                    typewriter( f"Luckly, you managed to sip a potion of restoration before you died. Your HP is {player_data['lives']}" )
-                    print()
-                    typewriter( 'After leaving you for dead, the monster went away into the forest.' )
-                    print()
+                    player_revive_with_potion()
 
                 else:   # you're really dead, no revivals
                     # losing message got form monster
@@ -1287,7 +1308,10 @@ def the_game():
         # now we handle the choices
         else: 
             # get the dictionary from the list of options that has the key == answer
-            option = next((item for item in player_choices if item["key"] == answer), None)
+            option = next((it for it in player_choices if it["key"] == answer), None)
+
+            # debug
+            #print(f"{whoami()} option chosen: {option}")
 
             # dbg-sanity check: we shoudl have at least an option
             if option == None or not option: 
@@ -1340,7 +1364,7 @@ def the_game():
         player_data['flag_leaving'] = False
         # loop over the choices until he decides to leave or he's dead or he won
         while   not player_data['flag_leaving'] and not player_data['flag_quiting_game'] \
-                and player_can_do_new_tile():
+                and not check_player_won() and player_can_do_new_tile():
             # nothng to do, empty clearing, show choices to user
             game_player_show_choices( 'monster', new_monster, 'after' )
 
@@ -1358,12 +1382,17 @@ def the_game():
         print()
         print_story( new_event['story'] )
         print()
-        #-- player show choices
-        
+        #-- action the tornado -- player gets killed
+        if new_event['id']=='tornado':
+            player_data['hp'] = 0
+            if player_data['lives']>0:
+                player_revive_with_potion()
+            
         # it will stay in a loop until the choice was made to leave
         player_data['flag_leaving'] = False
         # loop over the choices until he decides to leave
-        while not player_data['flag_leaving'] and not player_data['flag_quiting_game']:
+        while not player_data['flag_leaving'] and not player_data['flag_quiting_game'] \
+        and player_data['hp'] > 0:
             game_player_show_choices( 'event', new_event )
 
 
@@ -1436,6 +1465,13 @@ def the_game():
         return player_still_alive or player_killed_all
 
 
+    # checks if all the monsters are dead so it wins the game
+    def check_player_won():
+        result = ( len(monsters) - len(player_data['killed_monsters']) ) == 0
+        #print( f"check_player_won wil return {result}, len(monsters)={len(monsters)}, len(player_data['killed_monsters'])={len(player_data['killed_monsters'])}" )
+        return result
+
+
     # starts the game, prints the story and get on with the next tile in a loop
     def game_start():
         print_dbg()
@@ -1450,7 +1486,9 @@ def the_game():
         game_print_start()
         
         # throw tiles at the player in a loop
-        while player_can_do_new_tile() and not player_data['flag_quiting_game']:
+        while player_can_do_new_tile() and not player_data['flag_quiting_game'] \
+        and not check_player_won():
+
             game_move_new_tile()
             # debug: kill player
             #player_data['hp'] = 0
